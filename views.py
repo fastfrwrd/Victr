@@ -8,6 +8,6 @@ def home(request):
     html = "<html><body>It is now %s.</body></html>" % now
     return HttpResponse(html)
 
-def hack_new(request):
+def project_new(request):
     return render_to_response('root.html', context_instance=RequestContext(request))
 
