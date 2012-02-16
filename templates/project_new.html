@@ -1,0 +1,95 @@
+{% extends "root.html" %}
+
+{% block page_id %}project_new{% endblock %}
+
+{% block content %}
+
+    <h2>Submit a Project <small>just fill out the form!</small></h2>
+
+    <h3>Project Information</h3>
+    <div class="row">
+        <div class="span3">
+            <p>
+                Tell us a little bit about your project. I bet it's so cool! What up girrrl, this is Section Awesome. Raw denim you probably haven't heard of them jean shorts Austin.
+            </p>
+        </div>
+        <div class="span9">
+            <form class="well form-horizontal">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="project_title">Title</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="project_title" placeholder="be creative.."/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="project_desc">Description</label>
+                        <div class="controls">
+                            <textarea class="input-xxlarge" id="project_desc" placeholder="details.."></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="project_tags">Tags</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="project_tags" placeholder="press enter to add"/>
+                            <ul id="project_tags_list"></ul>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="project_site_url">Site URL</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="project_site_url" placeholder="http://example.com"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="project_source_url">Source URL</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="project_source_url" placeholder="https://github.com/fastfrwrd/Victr"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="project_other_urls">Other URLs</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="project_other_urls" placeholder="press enter to add"/>
+                            <ul id="project_other_urls_list"></ul>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <h3>Participants</h3>
+    <div class="row">
+        <div class="span3">
+            <p>
+                Who are your team members? Please register your teammates before you enter this information.
+            </p>
+        </div>
+        <div class="span9">
+            <form class="well form-horizontal">
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label" for="p">Name or Email</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="project_other_urls" placeholder="press enter to add"/>
+                            <ul id="project_other_urls_list"></ul>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span9 offset3">
+            <form class="form-horizontal">
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="reset" class="btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

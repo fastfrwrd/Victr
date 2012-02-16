@@ -9,5 +9,5 @@ def home(request):
     return HttpResponse(html)
 
 def project_new(request):
-    return render_to_response('root.html', context_instance=RequestContext(request))
+    return render_to_response('project_new.html', context_instance=RequestContext(request))
 
