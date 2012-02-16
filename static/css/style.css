@@ -6,6 +6,6 @@
 #project_new #project_desc {
     height: 100px
 }
-#project_new #project_tags_list, #project_new #project_other_urls_list, #project_new #project_other_urls_list {
+#project_new .tag_list {
     min-height: 30px
 }
