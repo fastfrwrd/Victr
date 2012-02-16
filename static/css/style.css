@@ -1,0 +1,11 @@
+/* Victr styles here */
+
+#project_new .form-horizontal .form-actions {
+    padding-left: 180px;
+}
+#project_new #project_desc {
+    height: 100px
+}
+#project_new .tag_list {
+    min-height: 30px
+}
