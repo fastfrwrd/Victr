@@ -1,3 +1,33 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+
+class Disciplines(models.Model):
+    skill = models.TextField()
+    
+class Event(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField() #this should be a WYSIWYG Field
+    creator = models.ForeignKey(User)
+    rsvp = models.URLField(blank=True)
+
+class Project(models.Model):
+    collaborators = models.ManyToManyField(User)
+    mainUrl = models.URLField()
+    name = models.CharField(max_length=50)
+    screenshot = models.ImageField(upload_to="images") #this should be images/<event_id>/screenshots
+    description = models.TextField(blank=True)
+    tech = models.ManyToManyField(Disciplines, blank=True)
+    
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    company = models.CharField(blank=True, max_length=40)
+    bio = models.TextField(blank=True)
+    skills = models.ManyToManyField(Disciplines, blank=True)
+    
+class Rank(models.Model):
+    project = models.ForeignKey(Project)
+    rank = models.IntegerField(blank=True)
+
+#class Schedule(models.Model):
