@@ -18,7 +18,7 @@ Victr.project_new = function() {
     self.widgets.tagger(self.$page);
     $('#submit').click(function(){
 
-        $(this).prop('disabled', true)
+        //$(this).prop('disabled', true)
 
         var data = {};
         self.$page.find('[name]').each(function() {
