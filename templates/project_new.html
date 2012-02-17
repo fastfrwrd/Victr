@@ -80,6 +80,7 @@
         <div class="span9 offset3">
             <form class="form-horizontal">
                 <div class="form-actions">
+                    {% csrf_token %}
                     <button type="button" id="submit" class="btn btn-primary"><i class="icon-gift icon-white"></i><i class="icon-refresh icon-white"></i> Submit Project</button>
                     <button type="button" id="reset" class="btn">Restart</button>
                 </div>
