@@ -37,6 +37,7 @@ h2 {
     color: white;
     padding: 4px 8px;
     display: block !important;
+    text-shadow: none;
 } 
 
 /* impress */
@@ -61,7 +62,7 @@ h2 {
        font-size: 15px;
     }
 
-/* projects */
+/* project_view */
 .project header {
     margin-bottom: 0.5em;
 }

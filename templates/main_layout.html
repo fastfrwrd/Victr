@@ -19,28 +19,7 @@
 <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
 {% endblock %}
 
-{% block nav %}
-<nav class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <a class="brand" href="/">Victr</a>
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <span class="navbar-text pull-right"><a class="btn-navbar btn login" href="/login"><i class="icon-home icon-white"></i> Login</a></span>
-      <div class="nav-collapse">
-        <ul class="nav">
-          <li><a href="/events"><i class="icon-calendar icon-white"></i> Hack Days</a></li>
-          <li><a href="/hacks"><i class="icon-gift icon-white"></i> Hacks</a></li>
-          <li><a href="/people"><i class="icon-user icon-white"></i> People</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</nav>
-{% endblock %}
+{% block nav %}{% include "nav.html" %}{% endblock %}
 
 {% block container %}
 <div class="container" id="{% block page_id %}{% endblock %}">
