@@ -15,14 +15,51 @@ Victr.init = function() {
 
 Victr.project_new = function() {
     var self = this;
+    self.widgets.tagger(self.$page);
+    $('#submit').click(function(){
 
-    var $inputs = $('.tagger');
+        $(this).prop('disabled', true)
 
-    $inputs.keyup(function(e) {
-        if (e.which != 13) return;
-        var $me = $(this);
-        var val = $me.val();
-        $me.siblings('.tag_list').append('<li><i class="icon-tag"></i>'+val+'</li>');
-        $me.val('');
+        var data = {};
+        self.$page.find('[name]').each(function() {
+            var $input = $(this),
+                _val = $input.val();
+            if (_val.length)
+                data[$input.attr('name')] = _val;
+        })
+        $.extend(data, self.widgets.tagger_data);
+
+        $.post( 'new', data, function( result ) {
+            console.log(result);
+        });
+    })
+}
+
+
+Victr.widgets = {};
+
+Victr.widgets.tagger = function($page) {
+    var self = this;
+    self.tagger_data = {};
+
+    var $fields = $page.find("[data-role='tagger']");
+
+    $fields.each(function() {
+        var $field = $(this),
+            _id =  $field.find('input').attr('id');
+        $field.addClass('tagger').append('<ul id="'+_id+'_list"></ul>')
+        self.tagger_data[_id] = [];
     });
+
+    $fields.on('keyup', 'input', function(e) {
+        if (e.which != 13) return;
+        var _icon = $(e.delegateTarget).data('icon'),
+            $input = $(this),
+            _val = $.trim($input.val());
+        if (_val.length == 0) return;
+        $input.siblings('ul').append('<li><i class="icon-remove"></i><i class="icon-'+_icon+'"></i>'+_val+'</li>');
+        self.tagger_data[$input.attr('id')].push(_val);
+        $input.val('');
+    })
+
 }

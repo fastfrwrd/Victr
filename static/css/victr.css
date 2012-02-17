@@ -2,6 +2,9 @@
 
 /* media queries */
 @media (max-width: 480px) {
+    h2 small {
+        display: block;
+    }
     #project_new .form-horizontal .form-actions {
         padding-left: 19px;
     }
@@ -23,19 +26,12 @@
 }
 
 /* main styles */
-body {
-    padding-top: 60px;
-    padding-bottom: 40px;
-}
 
 h2 {
     margin-bottom: 20px;
 }
 
 /* layout styles */
-.sidebar-nav {
-    padding: 9px 0;
-}
 
 .navbar a.login {
     color: white;
@@ -151,16 +147,86 @@ h2 {
     height: 100px
 }
 
-#project_new .tag_list {
+#project_new #reset {
+    margin-left: 30px
+}
+
+/* general form styles */
+#submit  .icon-refresh {
+    display:none;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-duration: 2s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    -o-transition: rotate(3600deg);
+}
+#submit[disabled] :not(.icon-refresh) {
+    display:none
+}
+#submit[disabled] .icon-refresh {
+    display:inline-block;
+    -webkit-animation-name: spin;
+    -moz-animation-name: spin;
+    -ms-animation-name: spin;
+}
+
+
+
+/* Victr Widgets */
+.tagger ul {
     min-height: 30px;
     list-style:none;
     margin-left: 7px;
     margin-top: 10px;
 }
-    #project_new .tag_list li {
+    .tagger ul li {
         margin-right:15px;
         display:inline-block
     }
-        #project_new .tag_list li i {
-            margin-right:5px
+        .tagger ul li i {
+            margin-right:5px;
         }
+        .tagger ul li i.icon-remove {
+            display:none;
+        }
+        .tagger ul li:hover i.icon-remove {
+            display:inline-block;
+        }
+        .tagger ul li:hover i:not(.icon-remove) {
+            display:none;
+        }
+
+
+
+
+
+/* Animations */
+@-webkit-keyframes spin{
+ 	from {
+	 	-webkit-transform: rotate(0deg)
+	}
+	to {
+		-webkit-transform:rotate(360deg)
+	}
+}
+@-moz-keyframes spin{
+ 	from {
+	 	-moz-transform: rotate(0deg)
+	}
+	to {
+		-moz-transform:rotate(360deg)
+	}
+}
+@-ms-keyframes spin{
+ 	from {
+	 	-ms-transform: rotate(0deg)
+	}
+	to {
+		-ms-transform:rotate(360deg)
+	}
+}
