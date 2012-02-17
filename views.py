@@ -5,16 +5,16 @@ from django.utils import simplejson as json
 from django.core.urlresolvers import reverse
 from victr.models import *
 
-def home(request):
-    return render_to_response('root.html', context_instance=RequestContext(request))
+def home(request, default_template="root.html"):
+    return render_to_response(default_template, context_instance=RequestContext(request))
 
-def project_view(request, slug):
-    return render_to_response('project_view.html', context_instance=RequestContext(request))
+def project_view(request, slug, default_template="project/view.html"):
+    return render_to_response(default_template, context_instance=RequestContext(request))
 
-def project_new(request):
+def project_new(request, default_template="project/new.html"):
 
     if request.method == 'GET':
-        return render_to_response('project_new.html', context_instance=RequestContext(request))
+        return render_to_response(default_template, context_instance=RequestContext(request))
 
     if request.method == 'POST':
         post = request.POST
@@ -26,5 +26,5 @@ def project_new(request):
 
     return HttpResponseNotAllowed()
 
-def impress_present(request):
-    return render_to_response('impress_present.html', context_instance=RequestContext(request))
+def impress_present(request, default_template="impress_present.html"):
+    return render_to_response(default_template, context_instance=RequestContext(request))
