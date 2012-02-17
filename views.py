@@ -10,4 +10,3 @@ def home(request):
 
 def project_new(request):
     return render_to_response('project_new.html', context_instance=RequestContext(request))
-
