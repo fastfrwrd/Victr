@@ -22,16 +22,14 @@ Victr.project_new = function() {
 
         var data = {};
         self.$page.find('[name]').each(function() {
-            var $input = $(this),
-                _val = $input.val();
-            if (_val.length)
-                data[$input.attr('name')] = _val;
+            var $input = $(this);
+            data[$input.attr('name')] = $input.val();
         })
         $.extend(data, self.widgets.tagger_data);
 
         $.post( 'new', data, function( result ) {
-            console.log(result);
-        });
+            window.location.pathname = result.location;
+        }, 'json');
     })
 }
 
