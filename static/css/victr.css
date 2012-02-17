@@ -1,11 +1,38 @@
 /* CUSTOM CSS */
 
+/* media queries */
+@media (max-width: 480px) {
+    #project_new .form-horizontal .form-actions {
+        padding-left: 19px;
+    }
+}
+@media (max-width: 768px) {
+    #project_new #project_desc {
+        width: 270px
+    }
+}
+@media (min-width: 768px) and (max-width: 980px) {
+    #project_new #project_desc {
+        width: 320px;
+    }
+}
+@media (min-width: 980px) and (max-width: 1200px) {
+    #project_new #project_desc {
+        width: 480px;
+    }
+}
+
 /* main styles */
 body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
 
+h2 {
+    margin-bottom: 20px;
+}
+
+/* layout styles */
 .sidebar-nav {
     padding: 9px 0;
 }
@@ -113,4 +140,17 @@ body {
     background-image: linear-gradient(#E69E2F, #CC6E0E);
     background-repeat: no-repeat;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E69E2F', endColorstr='#CC6E0E', GradientType=0);
+}
+
+/* new project styles */
+#project_new .form-horizontal .form-actions {
+    padding-left: 180px;
+}
+
+#project_new #project_desc {
+    height: 100px
+}
+
+#project_new .tag_list {
+    min-height: 30px
 }
