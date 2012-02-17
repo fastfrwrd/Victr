@@ -35,6 +35,13 @@ Victr.project_new = function() {
     })
 }
 
+Victr.impress_present = function() {
+    $('a').click(function(e) {
+        window.open($(this).attr('href'), '_blank');
+        return false;
+    });
+}
+
 
 Victr.widgets = {};
 
