@@ -60,7 +60,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
     <script src="{{ STATIC_URL }}js/victr.js"></script>
-    {% block js %}{% endblock %}
+    {% block script %}{% endblock %}
+    <script>
+        $(function() {
+            Victr.init();
+        })
+    </script>
 
   </body>
 </html>
