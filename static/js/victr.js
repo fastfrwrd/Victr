@@ -16,5 +16,13 @@ Victr.init = function() {
 Victr.project_new = function() {
     var self = this;
 
-    console.log('project_new', this, arguments);
+    var $inputs = $('.tagger');
+
+    $inputs.keyup(function(e) {
+        if (e.which != 13) return;
+        var $me = $(this);
+        var val = $me.val();
+        $me.siblings('.tag_list').append('<li><i class="icon-tag"></i>'+val+'</li>');
+        $me.val('');
+    });
 }

@@ -152,5 +152,15 @@ h2 {
 }
 
 #project_new .tag_list {
-    min-height: 30px
+    min-height: 30px;
+    list-style:none;
+    margin-left: 7px;
+    margin-top: 10px;
 }
+    #project_new .tag_list li {
+        margin-right:15px;
+        display:inline-block
+    }
+        #project_new .tag_list li i {
+            margin-right:5px
+        }
