@@ -2,20 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{sitename}} - {% block title %}{% endblock %}</title>
+    <title>{{ sitename }} - {{ title }}</title>
     <meta name="description" content="{% block page-description %}{% endblock %}">
     <meta name="author" content="Victr (http://www.github.com/fastfrwrd/Victr)">
-    {% block included_css %}{% endblock %}
+    <link href="{{ STATIC_URL }}css/victr.css" rel="stylesheet">
+    {% block css %}
+    {% endblock %}
   </head>
 
   <body>
     
     {% block nav %}
     {% endblock %}
-
+    
     {% block container %}
     {% endblock %}
     
-    {% block included_scripts %}{% endblock %}
+    {% block js %}
+    {% endblock %}
+    
   </body>
 </html>
