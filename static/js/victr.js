@@ -90,21 +90,15 @@ Victr.widgets.auth = function() {
 
     //populate top login
     $('#auth a.dropdown-toggle').on('click', function() {
-        if(!$.trim( $('.login-wrapper').html() ).length) {
-            $.get(Victr.base + 'login', function(html) {
-                var login = $(html).find('.main').html(); //replace when the time comes!
-                $('.login-wrapper').html(login);
-            });
-        }
-    });
-    
-    //populate auth modal
-    $('#auth a.register').on('click', function() {
-        console.log('hey');
-        if(!$('.register-wrapper').html()) {
-            $.get(Victr.base + 'register', function(html) {
-                var register = $(html).find('.main').html(); //replace when the time comes!
-                $('.register-wrapper').html(register);
+        if(!$.trim( $('.login-wrapper').html() )) {
+            $('.login-wrapper').load(Victr.base + 'login .main form', function() {
+                //populate auth modal
+                $('#auth a.register').live('click', function() {
+                    console.log('hey');
+                    if(!$.trim( $('.register-wrapper').html() )) {
+                        $('.register-wrapper').load(Victr.base + 'register .main form');
+                    }
+                });
             });
         }
     });

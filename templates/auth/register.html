@@ -1,4 +1,5 @@
-<form action="/register" method="post">{% csrf_token %}
+{% load victr_tags %}
+<form action="{% victr_base %}register/" method="post">{% csrf_token %}
   {% for field in registration_form %}
   <div class="field-wrapper">
     <div class="label-tag">{{ field.label_tag }}</div>
