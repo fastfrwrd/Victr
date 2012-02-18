@@ -34,12 +34,9 @@
                             <div class="controls" data-role="tagger" data-icon="tag">
                                 <input type="text" class="input-xlarge" id="project_tags" name="project_tags" placeholder="press enter to add"/>
                                 <ul id="project_tags_list">
-                                    {% for tag in project.tags %}
+                                    {% for tag in project.tags.all %}
                                     <li class="label label-info">
-                                        <i class="icon-remove icon-white"></i>
-                                        <i class="icon-white icon-tag"></i>
-                                        {{ tag }}
-                                        <input type="hidden" name="project_tags[]" value="{{ tag }}" />
+                                        <i class="icon-remove icon-white"></i><i class="icon-white icon-tag"></i>{{ tag.name }}<input type="hidden" name="project_tags[]" value="{{ tag.name }}" />
                                     </li>
                                     {% endfor %}
                                 </ul>
@@ -56,12 +53,9 @@
                             <div class="controls" data-role="tagger" data-icon="star">
                                 <input type="text" class="input-xlarge" id="project_other_urls" name="project_other_urls" placeholder="press enter to add"/>
                                 <ul id="project_other_urls_list">
-                                    {% for url in project.other_urls %}
+                                    {% for url in project.other_urls.all %}
                                     <li class="label label-info">
-                                        <i class="icon-remove icon-white"></i>
-                                        <i class="icon-white icon-tag"></i>
-                                        {{ url }}
-                                        <input type="hidden" name="project_tags[]" value="{{ url }}" />
+                                        <i class="icon-remove icon-white"></i><i class="icon-white icon-tag"></i>{{ url.text }}<input type="hidden" name="project_tags[]" value="{{ url.text }}" />
                                     </li>
                                     {% endfor %}
                                 </ul>
@@ -86,12 +80,9 @@
                             <div class="controls" data-role="tagger" data-icon="user">
                                 <input type="email" class="input-xlarge" id="project_names" name="project_names" placeholder="press enter to add"/>
                                 <ul id="project_names_list">
-                                    {% for person in project.people %}
+                                    {% for person in project.people.all %}
                                     <li class="label label-info">
-                                        <i class="icon-remove icon-white"></i>
-                                        <i class="icon-white icon-tag"></i>
-                                        {{ person }}
-                                        <input type="hidden" name="project_tags[]" value="{{ person }}" />
+                                        <i class="icon-remove icon-white"></i><i class="icon-white icon-tag"></i>{{ person.name }}<input type="hidden" name="project_tags[]" value="{{ person.name }}" />
                                     </li>
                                     {% endfor %}
                                 </ul>

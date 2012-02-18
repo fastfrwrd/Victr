@@ -1,0 +1,13 @@
+{% extends "main_layout.html" %}
+
+{% block page_id %}project_all{% endblock %}
+
+{% block content %}
+    <ul class="span12">
+        {% for project in projects %}
+        <li class="well">
+            {{ project.name }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
