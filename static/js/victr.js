@@ -1,4 +1,4 @@
-if (typeof(Victr) == 'undefined'){var Victr = {}}
+if (typeof(Victr) == 'undefined'){var Victr = {};Victr.widgets = {};}
 
 
 Victr.init = function() {
@@ -9,7 +9,8 @@ Victr.init = function() {
     self.$page = $('#'+this.page_id);
 
     // kick off this page's js
-    self[self.page_id]();
+    if (self.hasOwnProperty(self.page_id))
+        self[self.page_id]();
 
 }
 
@@ -18,7 +19,7 @@ Victr.project_new = function() {
     self.widgets.tagger(self.$page);
     $('#submit').click(function(){
 
-        //$(this).prop('disabled', true)
+        $(this).prop('disabled', true)
 
         var data = {};
         self.$page.find('[name]').each(function() {
@@ -41,7 +42,7 @@ Victr.impress_present = function() {
 }
 
 
-Victr.widgets = {};
+
 
 Victr.widgets.tagger = function($page) {
     var self = this;
@@ -60,11 +61,24 @@ Victr.widgets.tagger = function($page) {
         if (e.which != 13) return;
         var _icon = $(e.delegateTarget).data('icon'),
             $input = $(this),
+            _id = $input.attr('id'),
             _val = $.trim($input.val());
         if (_val.length == 0) return;
-        $input.siblings('ul').append('<li><i class="icon-remove"></i><i class="icon-'+_icon+'"></i>'+_val+'</li>');
-        self.tagger_data[$input.attr('id')].push(_val);
+        $input.siblings('ul').append('<li class="label label-info"><i class="icon-remove icon-white"></i><i class="icon-white icon-'+_icon+'"></i>'+_val+'</li>');
+        self.tagger_data[_id].push(_val);
         $input.val('');
+    });
+
+    $fields.on('click', "li", function(e) { var
+        $li = $(this),
+        _val = $li.text(),
+        _id = $li.parent().siblings("input").attr('id');
+
+        self.tagger_data[_id] = $.grep(self.tagger_data[_id], function(value) {
+            return value != _val;
+        });
+
+        $li.remove();
     })
 
 }
