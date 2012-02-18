@@ -10,7 +10,7 @@ Victr.init = function() {
     // kick off this page's js
     if (self.hasOwnProperty(self.page_id))
         self[self.page_id]();
-
+    
 }
 
 Victr.project_new = function() {
@@ -84,6 +84,12 @@ Victr.widgets.tagger = function($page) {
 
 }
 
+Victr.widgets.login = function() {
+    $('.dropdown-toggle').dropdown();
+    $('.dropdown input').bind('click', function (e) {
+        e.stopPropagation();
+    });
+}
 
 
 Victr.utils.escape = function(str) {

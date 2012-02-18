@@ -11,18 +11,38 @@
     text-shadow: none;
 } 
 
-/* general styles */
-.huge {
-    font-size: 60px;
-    line-height: 66px;
-    margin-bottom: 6px;
+.navbar #auth {
+    width:250px;
 }
 
+    .navbar #auth a {
+        text-align: right;
+    }
+
+    .navbar #auth input {
+        margin: 5px;
+        width: 90%;
+    }
+    
+    .navbar #auth button {
+        margin: 0 0 5px 5px;
+    }
+
+/* general styles */
+
 /* event styles */
-.event .tweet-list .tweet {
-    color: #999;
-    font: Georgia;
+
+.event .tweets ul {
+    margin-left: 0px;
+    list-style: none;
 }
+
+    .event .tweets ul li {
+        color: #676767;
+        font-family: georgia, serif;
+        font-style: italic;
+        margin: 5px 0;
+    }
 
 /* impress */
 
