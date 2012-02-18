@@ -91,10 +91,12 @@ Victr.widgets.auth = function() {
     //populate top login
     $('#auth a.dropdown-toggle').on('click', function() {
         if(!$.trim( $('.login-wrapper').html() )) {
-            $('.login-wrapper').load(Victr.base + 'login .main form', function() {
-                //populate auth modal
-                $('#auth a.register').live('click', function() {
-                    console.log('hey');
+        $('.login-wrapper').load(Victr.base + 'login .main form', function() {
+                //activate and populate auth modal
+                $(this).find('a.register').attr({ 
+                    'data-toggle': 'modal',
+                    'data-target': '#register'
+                }).on('click', function() {
                     if(!$.trim( $('.register-wrapper').html() )) {
                         $('.register-wrapper').load(Victr.base + 'register .main form');
                     }
