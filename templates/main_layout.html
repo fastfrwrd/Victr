@@ -22,7 +22,7 @@
 {% block nav %}{% include "nav.html" %}{% endblock %}
 
 {% block container %}
-<div class="container main" id="{% block page_id %}{% endblock %}">
+<div class="container main {% block page_class %}{% endblock %}" id="{% block page_id %}{% endblock %}">
     
   {% block header %}
   {% endblock %}
