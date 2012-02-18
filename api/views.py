@@ -13,7 +13,7 @@ def discipline_search(request, slug):
     if request.method == 'GET':
     
         objs = Discipline.objects.filter(name__icontains=slug)
-        objs = [ str(d) for d in objs ]
+        objs = [ {'name':str(d)} for d in objs ]
         return HttpResponse(json.dumps(objs))
 
     return HttpResponseNotAllowed(['GET'])
