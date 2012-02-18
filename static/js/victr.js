@@ -5,7 +5,7 @@ Victr.init = function() {
     var self = this;
 
     // grab the current page
-    self.page_id = $('.container').attr('id');
+    self.page_id = $('.main').attr('id');
     self.$page = $('#'+this.page_id);
 
     // kick off this page's js
