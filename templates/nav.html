@@ -14,29 +14,23 @@
           <li><a href="/people"><i class="icon-user icon-white"></i> People</a></li>
         </ul>
       </div>
-      <ul class="nav pull-right">
+      <ul id="auth-wrapper" class="nav pull-right">
         <li id="auth" class="dropdown">
-          {% if user.is_authenticated %}
-          <span class="navbar-text"><a class="btn-navbar btn login dropdown-toggle" data-toggle="dropdown" href="#auth"><i class="icon-home icon-white"></i> Paul Marbach</a></span>
-          <ul class="dropdown-menu">
-              <li><a href="{{ STATIC_URL }}/user/projects">My Projects</a></li>
-              <li><a href="{{ STATIC_URL }}/user/edit">Account</a></li>
-              <li class="divider"></li>
-              <li><a href="{{ STATIC_URL }}/logout">Logout</a></li>
-          </ul>
-          {% else %}
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#auth"><i class="icon-home icon-white"></i> Login <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li>
-              <input type="text"  class="no-close" placeholder="username@email.com">
-              <input type="password" class="no-close" placeholder="password">
-            </li>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <button class="btn register">Register</a>
-          </div>
-          {% endif %}
+          {% include "auth/login.html" %}
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<div id="register" class="modal fade">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Victr - register</h3>
+  </div>
+  <div class="modal-body">
+    {% include "auth/register.html" %}
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary btn-large">Register</button>
+  </div>
+</div>
