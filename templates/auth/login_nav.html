@@ -1,0 +1,16 @@
+{% if user.is_authenticated %}
+<span class="navbar-text"><a class="btn-navbar btn login dropdown-toggle" data-target="#auth" data-toggle="dropdown" href=""><i class="icon-home icon-white"></i> Paul Marbach</a></span>
+<ul class="dropdown-menu">
+    <li><a href="user/projects">My Projects</a></li>
+    <li><a href="user/edit">Account</a></li>
+    <li class="divider"></li>
+    <li><a href="logout">Logout</a></li>
+</ul>
+{% else %}
+<a class="dropdown-toggle" data-toggle="dropdown" href="#auth"><i class="icon-home icon-white"></i> Login <b class="caret"></b></a>
+<ul class="dropdown-menu">
+  <li>
+    {% include "auth/login.html" %}
+  </li>
+</div>
+{% endif %}
