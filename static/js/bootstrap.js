@@ -596,10 +596,9 @@
   function clearMenus(e) {
     var _parent = $(d).parent('li')
     if (e != undefined) {
-      var srcEl = e.srcElement
-        , isInput = $(srcEl).hasClass('no-close')
+      var srcEl = e.srcElement || e.target
         , insideParent = _parent.has(srcEl).length > 0
-      if (isInput && insideParent) return
+      if (insideParent) return
     }
     _parent.removeClass('open')
   }

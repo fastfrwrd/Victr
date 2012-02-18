@@ -90,6 +90,7 @@ Victr.widgets.login = function() {
     $('.dropdown input').bind('click', function (e) {
         e.stopPropagation();
     });
+}
 
 Victr.widgets.autocomplete = function($page) {
     var self = this;
