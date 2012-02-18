@@ -18,7 +18,6 @@ class Project(models.Model):
     collaborators = models.ManyToManyField(User, blank=True)
     mainUrl = models.URLField()
     name = models.CharField(max_length=50)
-    screenshot = models.ImageField(upload_to="images", blank=True) #this should be images/<event_id>/screenshots
     description = models.TextField(blank=True)
     tech = models.ManyToManyField(Disciplines, blank=True)
 

@@ -25,12 +25,6 @@
     }
 }
 
-/* main styles */
-
-h2 {
-    margin-bottom: 20px;
-}
-
 /* layout styles */
 
 .navbar a.login {
@@ -39,6 +33,19 @@ h2 {
     display: block !important;
     text-shadow: none;
 } 
+
+/* general styles */
+.huge {
+    font-size: 60px;
+    line-height: 66px;
+    margin-bottom: 6px;
+}
+
+/* event styles */
+.event .tweet-list .tweet {
+    color: #999;
+    font: Georgia;
+}
 
 /* impress */
 
@@ -176,6 +183,10 @@ h2 {
 
 #project_new #reset {
     margin-left: 30px
+}
+
+#project_new h2 {
+    margin-bottom: 20px;
 }
 
 /* general form styles */
