@@ -94,17 +94,24 @@ Victr.widgets.auth = function() {
 }
 
 Victr.widgets.autocomplete = function($page) {
-    var self = this;
-
+    var self = this,
+        cache = {};
+    
     var $fields = $page.find("[data-type]");
     $fields.each(function() {
-        $input = $(this).find('input');
+        $field = $(this);
+        var $input = $field.find('input'),
+            type = $field.data('type');
+        cache[type] = {};
         $input.typeahead({
             source: function(typeahead, query) {
                 if (!query) return;
+                var data = cache[type][query];
+                if (data) return data;
                 return $.ajax({
-                    url: '/api/discipline/search/'+query,
+                    url: '/api/'+type+'/search/'+query,
                     success: function(data) {
+                        cache[type][query] = data;
                         return typeahead.process(data);
                     },
                     dataType: 'json'
