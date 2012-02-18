@@ -22,11 +22,12 @@ def register(request, default_template="auth/register_page.html"):
                 registration_form.save()    #user registered
             except : #IntegrityError as detail :
                 print "username already registered we need to handle that gracefully"
-                return render_to_response("register.html", locals(), context_instance=RequestContext(request))
+                messages = { 'error' : "Error: the email address %s is already registered." % (registration_form.cleaned_data['email'],) }
+                return render_to_response(default_template, locals(), context_instance=RequestContext(request, { 'messages' : messages }))
             current_user = auth.authenticate(username=registration_form.cleaned_data['email'],
                                              password=registration_form.cleaned_data['password'])
             auth.login(request, current_user)
-            return redirect('/vip')
+            return redirect(join(reverse('victr.views.home'), 'vip'))
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def login(request, default_template="auth/login_page.html"):
@@ -37,11 +38,10 @@ def login(request, default_template="auth/login_page.html"):
     """
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-@login_required
 def logout(request):
     auth.logout(request)
     # add a message object to display as a notification of logout on the top part of the page
-    return HttpResponseRedirect(reverse('victr.views.home'), {})
+    return redirect(reverse('victr.views.home'))
 
 @login_required
 def vip(request):

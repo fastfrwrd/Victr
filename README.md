@@ -11,7 +11,9 @@ _coming soon to a GitHub Near you_
 ## Manual configs: ##
 
 #### settings.py: ####
-    LOGIN_URL = '/login/'
+    LOGIN_URL = '/victr/login/'
+    LOGOUT_URL = '/victr/logout/'
+    LOGIN_REDIRECT_URL = '/victr/'
 _this can be whatever you want, we think login makes sense if you're installing Victr at your root URL_
 
     INSTALLED_APPS = (

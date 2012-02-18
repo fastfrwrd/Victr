@@ -3,5 +3,11 @@
 {% block page_id %}auth_register_page{% endblock %}
 
 {% block content %}
-{% include "auth/register.html" %}
+<h3>Register</h3>
+<section class="row">
+  <div class="span3">Registration is required for at least one team member for submission.</div>
+  <div class="well span8">
+  {% include "auth/register.html" %}
+  </div>
+</section>
 {% endblock %}

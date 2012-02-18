@@ -3,5 +3,11 @@
 {% block page_id %}auth_login_page{% endblock %}
 
 {% block content %}
-{% include "auth/login.html" %}
+<h3>Register</h3>
+<section class="row">
+  <div class="span3">Login to your Victr account to create and manage your projects.</div>
+  <div class="well span8">
+  {% include "auth/login.html" %}
+  </div>
+</section>
 {% endblock %}

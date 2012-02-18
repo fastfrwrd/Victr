@@ -7,6 +7,10 @@
     width:250px;
 }
 
+    .navbar #auth .dropdown-menu {
+        background-color: whiteSmoke;
+    }
+    
     .navbar #auth a {
         text-align: right;
     }
@@ -24,6 +28,11 @@
         padding: 6px 15px 5px;
         display: inline;
     }
+    
+    .navbar #auth .form-actions,
+    .navbar #auth form {
+        margin-bottom: 0px;
+    }
 
 #auth_login_page a.register {
     position: relative;
@@ -34,7 +43,7 @@
 
 }
 
-    #register.modal .submit-field {
+    #register.modal .form-actions {
         display: none;
     }
 

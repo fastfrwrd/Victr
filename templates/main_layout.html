@@ -24,6 +24,8 @@
 
 {% block container %}
 <div class="container main {% block page_class %}{% endblock %}" id="{% block page_id %}{% endblock %}">
+
+  {% block messages %}{% include "messages.html" %}{% endblock %}
     
   {% block header %}
   {% endblock %}
