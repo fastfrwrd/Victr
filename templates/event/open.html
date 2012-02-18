@@ -1,0 +1,27 @@
+{% extends "main_layout.html" %}
+
+{% block page_id %}event_open{% endblock %}
+
+{% block page_title %}Victr - {{ event.name }}{% endblock %}
+
+{% block header %}
+<div class="event">
+
+    <header>
+        <h1 class="huge">{{ event.name }}</h1>
+        <h2 class="big">sponsored by Optaros</h2>
+        <p>June 18-19, 2012 - Bucharest, Austin, and Boston</p>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <section class="description well">
+        description here
+    </section>
+    
+    <section class="projects">
+        <article>I'm a project</article>
+    </section>
+
+</div>
+{% endblock %}

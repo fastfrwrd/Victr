@@ -9,8 +9,8 @@ class Disciplines(models.Model):
     
 class Event(models.Model):
     name = models.CharField(max_length=50)
-    description = models.TextField() #this should be a WYSIWYG Field
-    creator = models.ForeignKey(User)
+    description = models.TextField(blank=True) #this should be a WYSIWYG Field
+    creator = models.ForeignKey(User, blank=True)
     rsvp = models.URLField(blank=True)
 
 class Project(models.Model):

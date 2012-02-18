@@ -5,9 +5,6 @@ from django.utils import simplejson as json
 from django.core.urlresolvers import reverse
 from victr.models import *
 
-def home(request, default_template="root.html"):
-    return render_to_response(default_template, context_instance=RequestContext(request))
-
 def project_view(request, slug, default_template="project/view.html"):
     return render_to_response(default_template, context_instance=RequestContext(request))
 
@@ -25,6 +22,3 @@ def project_new(request, default_template="project/new.html"):
         return HttpResponse(json.dumps(data))
 
     return HttpResponseNotAllowed()
-
-def impress_present(request, default_template="impress_present.html"):
-    return render_to_response(default_template, context_instance=RequestContext(request))
