@@ -28,7 +28,7 @@ Victr.project_new = function() {
         })
         $.extend(data, self.widgets.tagger_data);
 
-        $.post( 'new', data, function( result ) {
+        $.post( '/api/project/', data, function( result ) {
             window.location.pathname = result.location;
         }, 'json');
     })

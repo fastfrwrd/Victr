@@ -6,8 +6,8 @@
 <div class="project">
     <header>
         <div class="container-fluid">
-            <h1 class="pull-left">Hack Name</h1>
-            <a class="btn btn-primary pull-left" href="http://www.optaros.com">view hack <i class="icon-arrow-right icon-white"></i></a>
+            <h1 class="pull-left">{{ project.name }}</h1>
+            <a class="btn btn-primary pull-left" href="{{ project.mainUrl }}">view hack <i class="icon-arrow-right icon-white"></i></a>
         </div>
     </header>
 {% endblock %}
@@ -22,9 +22,8 @@
         <div class="field"><span class="label">github:</span><a class="btn btn-small btn-success" href="https://github.com/twitter/bootstrap/">browse code</a></div>
     </section>
     <article class="description">
-        <h3>About Hack Name</h3>
-        <p>Incididunt VHS truffaut cray. Before they sold out post-ironic mlkshk laborum yr. Tofu occupy delectus, biodiesel culpa cupidatat food truck ad master cleanse photo booth terry richardson artisan fingerstache stumptown mollit. Tattooed mustache pour-over odd future readymade cred. Etsy fingerstache vegan ad. Eiusmod aliqua street art, direct trade aute laboris nostrud thundercats. Anim ethical put a bird on it, fanny pack keytar sriracha laboris hella street art ullamco seitan laborum brunch cupidatat.</p>
-        <p>Veniam ex semiotics, whatever commodo wayfarers proident non tempor narwhal. Veniam non polaroid, craft beer banh mi thundercats odd future. Officia fixie voluptate, nostrud lomo pickled cillum. Aute consequat vegan id. Direct trade shoreditch hoodie, vero locavore yr terry richardson tempor truffaut deserunt placeat aliquip seitan whatever ennui. Leggings biodiesel salvia shoreditch, thundercats umami wes anderson. Blog officia placeat bushwick, voluptate labore yr craft beer pork belly wayfarers tofu reprehenderit aliquip nesciunt locavore.</p>
+        <h3>About {{ project.name }}</h3>
+        <p>{{ project.description }}</p>
     </article>
 </div>
 {% endblock %}
