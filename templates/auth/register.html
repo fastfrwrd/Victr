@@ -3,7 +3,11 @@
   <div class="field-wrapper">
     <div class="label-tag">{{ field.label_tag }}</div>
     <div class="field">{{ field }}</div>
-    {{ field.errors }}
+    {% if field.errors %}
+      <div class="alert alert-error">
+        {{ field.errors }}
+      </div>
+    {% endif %}
   </div>
   {% endfor %}
   <div class="field-wrapper submit-field">

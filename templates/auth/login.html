@@ -1,3 +1,4 @@
+{% load victr_tags %}
 <form action="/login" method="post">{% csrf_token %}
   {% for field in login_form %}
   <div class="field-wrapper">
@@ -8,6 +9,6 @@
   {% endfor %}
   <div class="field-wrapper submit-field">
     <button type="submit" class="btn btn-primary">Login</button>
-    <a href="/register" data-toggle="modal" data-target="#register" class="btn register">Register</a>
+    <a href="{% victr_base %}register" data-toggle="modal" data-target="#register" class="btn register">Register</a>
   </div>
 </form>

@@ -2,15 +2,7 @@
 
 
 
-/* layout styles */
-
-.navbar a.login {
-    color: white;
-    padding: 4px 8px;
-    display: block !important;
-    text-shadow: none;
-} 
-
+/* auth styles */
 .navbar #auth {
     width:250px;
 }
@@ -33,6 +25,11 @@
         display: inline;
     }
 
+#auth_login_page a.register {
+    position: relative;
+    top: 1px;
+}
+
 #register.modal {
 
 }
@@ -43,8 +40,8 @@
 
 /* general styles */
 
-/* event styles */
 
+/* event styles */
 .event .tweets ul {
     margin-left: 0px;
     list-style: none;
@@ -58,7 +55,6 @@
     }
 
 /* impress */
-
 #impress #first-slide {
     font-family: 'Open Sans', Arial, sans-serif;
 }
@@ -124,7 +120,6 @@
         max-width: 30%;
         max-height: 30%;
     }
-
 
 /* awards */
 .award {

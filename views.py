@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.utils import simplejson as json
@@ -9,7 +9,11 @@ from django.contrib import auth
 from victr.models import *
 from victr.forms import RegistrationForm
 
-def register(request):
+def home(request, default_template="event/open.html"):
+    event = Event(name="Event name here")
+    return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event }))
+
+def register(request, default_template="auth/register_page.html"):
     registration_form = RegistrationForm()
     if request.method == 'POST' :
         registration_form = RegistrationForm(request.POST)
@@ -23,19 +27,21 @@ def register(request):
                                              password=registration_form.cleaned_data['password'])
             auth.login(request, current_user)
             return redirect('/vip')
-    return render_to_response("auth/register_page.html", locals(), context_instance=RequestContext(request))
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-def login(request):
+def login(request, default_template="auth/login_page.html"):
     """
     temporary placement of login view function.
     username handling code goes here
     ?next get variable handling can also go here
     """
-    return HttpResponse("Login Please", {})
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
+@login_required
 def logout(request):
     auth.logout(request)
-    return HttpResponse("Logged out.", {})
+    # add a message object to display as a notification of logout on the top part of the page
+    return HttpResponseRedirect(reverse('victr.views.home'), {})
 
 @login_required
 def vip(request):

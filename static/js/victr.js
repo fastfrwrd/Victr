@@ -30,7 +30,6 @@ Victr.impress_present = function() {
     });
 }
 
-
 /* WiDgEtS oMg! */
 
 Victr.widgets.form = function($form) {
@@ -88,6 +87,29 @@ Victr.widgets.tagger = function($page) {
 
 //handles customizations of dropdown and modal from Bootstrap.
 Victr.widgets.auth = function() {
+
+    //populate top login
+    $('#auth a.dropdown-toggle').on('click', function() {
+        if(!$.trim( $('.login-wrapper').html() ).length) {
+            $.get(Victr.base + 'login', function(html) {
+                var login = $(html).find('.main').html(); //replace when the time comes!
+                $('.login-wrapper').html(login);
+            });
+        }
+    });
+    
+    //populate auth modal
+    $('#auth a.register').on('click', function() {
+        console.log('hey');
+        if(!$('.register-wrapper').html()) {
+            $.get(Victr.base + 'register', function(html) {
+                var register = $(html).find('.main').html(); //replace when the time comes!
+                $('.register-wrapper').html(register);
+            });
+        }
+    });
+    
+    //submit from the modal
     $('.modal-footer *:submit').click(function(e) {
         $(this).closest('.modal').find('form').submit();
     });

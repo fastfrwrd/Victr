@@ -29,6 +29,7 @@ class Project(models.Model):
     main_url = models.URLField()
     # other_urls
     collaborators = models.ManyToManyField(User, blank=True)
+    screenshot = models.ImageField(upload_to="images/screenshot")
 
     def save(self):
         if not self.id:
