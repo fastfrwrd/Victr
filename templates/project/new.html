@@ -1,11 +1,12 @@
 {% extends "main_layout.html" %}
 
 {% block page_id %}project_new{% endblock %}
+{% block page_class %}project_form{% endblock %}
 
 {% block content %}
 
     <h2>Submit a Project <small>just fill out the form!</small></h2>
-    <form action="" method="POST">
+    <form action="/project" method="POST">
 
         <h3>Project Information</h3>
         <section class="row">
@@ -38,12 +39,6 @@
                             <label class="control-label" for="project_site_url">Site URL</label>
                             <div class="controls">
                                 <input type="text" class="input-xlarge" id="project_site_url" name="project_site_url" placeholder="http://example.com"/>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="project_source_url">Source URL</label>
-                            <div class="controls">
-                                <input type="text" class="input-xlarge" id="project_source_url" name="project_source_url" placeholder="https://github.com/fastfrwrd/Victr"/>
                             </div>
                         </div>
                         <div class="control-group">

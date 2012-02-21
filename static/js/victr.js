@@ -19,6 +19,7 @@ Victr.project_new = function() {
     self.widgets.form($form);
     self.widgets.tagger(self.$page);
 }
+Victr.project_edit = Victr.project_new;
 
 Victr.impress_present = function() {
     $('a').click(function(e) {
@@ -52,8 +53,12 @@ Victr.widgets.tagger = function($page) {
 
     $fields.each(function() {
         var $field = $(this),
-            _id =  $field.find('input').attr('id');
-        $field.addClass('tagger').append('<ul id="'+_id+'_list"></ul>')
+            _id =  $field.find('input').attr('id'),
+            $ul = $field.find('#'+_id+'_list');
+        if (!$ul.length) {
+            $field.append('<ul id="'+_id+'_list"></ul>')
+        }
+        $field.addClass('tagger');
     });
 
     $fields
