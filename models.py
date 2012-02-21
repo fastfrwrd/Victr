@@ -26,9 +26,11 @@ class Project(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     tags = models.ManyToManyField(Discipline, blank=True)
-    mainUrl = models.URLField()
+    main_url = models.URLField()
+    # other_urls
     collaborators = models.ManyToManyField(User, blank=True)
     screenshot = models.ImageField(upload_to="images", blank=True) #this should be images/<event_id>/screenshots
+
     def save(self):
         if not self.id:
             self.slug = SlugifyUniquely(self.name, self.__class__)

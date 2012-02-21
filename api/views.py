@@ -35,7 +35,7 @@
 ##    # create this model
 ##    if request.method == 'POST':
 ##        post = request.POST
-##        proj = Project(name=post['project_title'], mainUrl=post['project_site_url'], description=post['project_desc'])
+##        proj = Project(name=post['project_title'], main_url=post['project_site_url'], description=post['project_desc'])
 ##        proj.save()
 ##        data = { 'location': reverse('view', args=(proj.slug,)) }
 ##        return HttpResponse(json.dumps(data))
@@ -51,7 +51,7 @@
 ##    if request.method == 'PUT':
 ##        put = request.PUT
 ##        proj.name = put['project_title']
-##        proj.mainUrl = put['project_site_url']
+##        proj.main_url = put['project_site_url']
 ##        proj.description = put['project_desc']
 ##        proj.save()
 ##        data = { 'location': reverse('view', args=(proj.slug,)) }

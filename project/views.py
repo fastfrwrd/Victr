@@ -13,7 +13,7 @@ def default(request):
         proj = Project()
         proj.name = post['project_title']
         proj.description = post['project_desc']
-        proj.mainUrl = post['project_site_url']
+        proj.main_url = post['project_site_url']
         proj.save()
         proj.tags.clear()
         for tag in post.getlist('project_tags[]'):
@@ -29,14 +29,6 @@ def default(request):
         return redirect('project', slug=proj.slug)
 
     return HttpResponseNotAllowed(['POST'])
-
-
-def all(request, default_template="project/all.html"):
-
-    if request.method == 'GET':
-        pass
-
-    return HttpResponseNotAllowed(['GET'])
 
 
 def project(request, slug, default_template="project/view.html"):
@@ -85,5 +77,14 @@ def new(request, default_template="project/new.html"):
 
     if request.method == 'GET':
         return render_to_response(default_template, context_instance=RequestContext(request))
+
+    return HttpResponseNotAllowed(['GET'])
+
+
+def all(request, default_template="project/all.html"):
+
+    if request.method == 'GET':
+        proj = Project.objects.all()
+        print proj.count()
 
     return HttpResponseNotAllowed(['GET'])
