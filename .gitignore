@@ -33,6 +33,11 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
+#emacs meta files
+#######################
+*\~
+\#*#
+
 # best ignore those Django things #
 ##########################
 *.pyc

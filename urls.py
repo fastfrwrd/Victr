@@ -5,4 +5,5 @@ urlpatterns = patterns('victr.views',
     #url(r'^api/', include('victr.api.urls')),
     url(r'^project/', include('victr.project.urls')),
     url(r'^impress/', include('victr.impress.urls')),
+    (r'login/$', 'victr.views.login')                        
 )
