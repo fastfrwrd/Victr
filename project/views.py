@@ -1,9 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.http import HttpResponse, HttpResponseNotAllowed
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.utils import simplejson as json
-from django.core.urlresolvers import reverse
 from victr.models import *
+
+
 
 def all(request, default_template="project/all.html"):
 
@@ -28,4 +29,14 @@ def edit(request, slug, default_template="project/edit.html"):
 
 def new(request, default_template="project/new.html"):
 
-    return render_to_response(default_template, context_instance=RequestContext(request))
+    # create this model
+    if request.method == 'POST':
+        post = request.POST
+        proj = Project(name=post['project_title'], mainUrl=post['project_site_url'], description=post['project_desc'])
+        proj.save()
+        return redirect('view', slug=proj.slug)
+
+    if request.method == 'GET':
+        return render_to_response(default_template, context_instance=RequestContext(request))
+
+    return HttpResponseNotAllowed(['GET','POST'])

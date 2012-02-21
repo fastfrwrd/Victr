@@ -1,29 +1,6 @@
 /* CUSTOM CSS */
 
-/* media queries */
-@media (max-width: 480px) {
-    h2 small {
-        display: block;
-    }
-    #project_new .form-horizontal .form-actions {
-        padding-left: 19px;
-    }
-}
-@media (max-width: 768px) {
-    #project_new #project_desc {
-        width: 270px
-    }
-}
-@media (min-width: 768px) and (max-width: 980px) {
-    #project_new #project_desc {
-        width: 320px;
-    }
-}
-@media (min-width: 980px) and (max-width: 1200px) {
-    #project_new #project_desc {
-        width: 480px;
-    }
-}
+
 
 /* main styles */
 
@@ -218,6 +195,7 @@ h2 {
     }
     .tagger ul li:hover {
         background-color: #B94A48;
+        cursor:pointer;
     }
         .tagger ul li i {
             margin-right:5px;
@@ -256,4 +234,30 @@ h2 {
 	to {
 		-ms-transform:rotate(360deg)
 	}
+}
+
+
+/* media queries */
+@media (max-width: 480px) {
+    h2 small {
+        display: block;
+    }
+    #project_new .form-horizontal .form-actions {
+        padding-left: 19px;
+    }
+}
+@media (max-width: 768px) {
+    #project_new #project_desc {
+        width: 270px
+    }
+}
+@media (min-width: 768px) and (max-width: 980px) {
+    #project_new #project_desc {
+        width: 320px;
+    }
+}
+@media (min-width: 980px) and (max-width: 1200px) {
+    #project_new #project_desc {
+        width: 480px;
+    }
 }

@@ -15,13 +15,12 @@ class Event(models.Model):
 
 class Project(models.Model):
     slug = models.SlugField()
-    collaborators = models.ManyToManyField(User, blank=True)
-    mainUrl = models.URLField()
     name = models.CharField(max_length=50)
-    screenshot = models.ImageField(upload_to="images", blank=True) #this should be images/<event_id>/screenshots
     description = models.TextField(blank=True)
+    mainUrl = models.URLField()
+    collaborators = models.ManyToManyField(User, blank=True)
+    screenshot = models.ImageField(upload_to="images", blank=True) #this should be images/<event_id>/screenshots
     tech = models.ManyToManyField(Disciplines, blank=True)
-
     def save(self):
         if not self.id:
             self.slug = SlugifyUniquely(self.name, self.__class__)
