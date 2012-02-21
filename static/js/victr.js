@@ -18,6 +18,7 @@ Victr.project_new = function() {
         $form = self.$page.find('form');
     self.widgets.form($form);
     self.widgets.tagger(self.$page);
+    self.widgets.autocomplete(self.$page);
 }
 Victr.project_edit = Victr.project_new;
 
@@ -84,6 +85,15 @@ Victr.widgets.tagger = function($page) {
 
 }
 
+Victr.widgets.autocomplete = function($page) {
+    var self = this;
+
+    var $fields = $page.find("[data-autocomplete='true']");
+
+//    $fields.each(function() {
+//
+//    })
+}
 
 
 Victr.utils.escape = function(str) {
