@@ -61,7 +61,7 @@ Victr.widgets.tagger = function($page) {
         }
         $field.addClass('tagger');
     });
-
+    
     $fields
     .on('keyup', 'input', function(e) {
         if (e.which != 13) return;
@@ -95,11 +95,29 @@ Victr.widgets.login = function() {
 Victr.widgets.autocomplete = function($page) {
     var self = this;
 
-    var $fields = $page.find("[data-autocomplete='true']");
-    //can we use Bootstrap's Lookahead?
-//    $fields.each(function() {
-//
-//    })
+    var $fields = $page.find("[data-type]");
+    $fields.each(function() {
+        $input = $(this).find('input');
+        $input.typeahead({
+            source: function(typeahead, query) {
+                if (!query) return;
+                return $.ajax({
+                    url: '/api/discipline/search/'+query,
+                    success: function(data) {
+                        return typeahead.process(data);
+                    },
+                    dataType: 'json'
+                })
+            },
+            property: 'name',
+            onselect: function() {
+                var e = $.Event('keyup');
+                e.which = 13;
+                e.delegateTarget = e.target = $input.get(0);
+                $fields.trigger(e);
+            }
+        })
+    })
 }
 
 
