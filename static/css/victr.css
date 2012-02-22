@@ -27,6 +27,19 @@
     .navbar #auth button {
         margin: 0 0 5px 5px;
     }
+    
+    .navbar #auth a.register {
+        padding: 6px 15px 5px;
+        display: inline;
+    }
+
+#register.modal {
+
+}
+
+    #register.modal .submit-field {
+        display: none;
+    }
 
 /* general styles */
 

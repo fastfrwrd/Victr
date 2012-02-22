@@ -11,6 +11,7 @@ Victr.init = function() {
     if (self.hasOwnProperty(self.page_id))
         self[self.page_id]();
     
+    Victr.widgets.auth();
 }
 
 Victr.project_new = function() {
@@ -85,10 +86,10 @@ Victr.widgets.tagger = function($page) {
 
 }
 
-Victr.widgets.login = function() {
-    $('.dropdown-toggle').dropdown();
-    $('.dropdown input').bind('click', function (e) {
-        e.stopPropagation();
+//handles customizations of dropdown and modal from Bootstrap.
+Victr.widgets.auth = function() {
+    $('.modal-footer *:submit').click(function(e) {
+        $(this).closest('.modal').find('form').submit();
     });
 }
 

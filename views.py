@@ -23,7 +23,7 @@ def register(request):
                                              password=registration_form.cleaned_data['password'])
             auth.login(request, current_user)
             return redirect('/vip')
-    return render_to_response("register.html", locals(), context_instance=RequestContext(request))
+    return render_to_response("auth/register_page.html", locals(), context_instance=RequestContext(request))
 
 def login(request):
     """
