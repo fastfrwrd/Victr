@@ -84,7 +84,9 @@ def new(request, default_template="project/new.html"):
 def all(request, default_template="project/all.html"):
 
     if request.method == 'GET':
-        proj = Project.objects.all()
-        print proj.count()
+        projs = Project.objects.all()
+        data = {}
+        data['projects'] = projs
+        return render_to_response(default_template, context_instance=RequestContext(request, data))
 
     return HttpResponseNotAllowed(['GET'])

@@ -1,11 +1,24 @@
-#from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed
 #from django.shortcuts import render_to_response
 #from django.template import RequestContext
-#from django.utils import simplejson as json
-#from django.core import serializers
+from django.utils import simplejson as json
+from django.core import serializers
 #from django.core.urlresolvers import reverse
 #from django.db.models.loading import get_model
-#from victr.models import *
+from victr.models import *
+
+
+def discipline_search(request, slug):
+    
+    if request.method == 'GET':
+    
+        objs = Discipline.objects.filter(name__icontains=slug)
+        objs = [ str(d) for d in objs ]
+        return HttpResponse(json.dumps(objs))
+
+    return HttpResponseNotAllowed(['GET'])
+
+
 #
 #MODELS = {
 #    'project' : 'Project'
