@@ -29,7 +29,7 @@ class Project(models.Model):
     main_url = models.URLField()
     # other_urls
     collaborators = models.ManyToManyField(User, blank=True)
-    screenshot = models.ImageField(upload_to="images", blank=True) #this should be images/<event_id>/screenshots
+    tech = models.ManyToManyField(Disciplines, blank=True)
 
     def save(self):
         if not self.id:
