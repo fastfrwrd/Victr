@@ -4,8 +4,16 @@ from victr.util import *
 
 # Create your models here.
 
-class Disciplines(models.Model):
-    skill = models.TextField()
+class Discipline(models.Model):
+    name = models.CharField(max_length=40)
+
+    def save(self):
+        if not self.id:
+            self.name = SlugifyUniquely(self.name, self.__class__, 'name')
+        super(self.__class__, self).save()
+
+    def __str__(self):
+        return self.name
     
 class Event(models.Model):
     name = models.CharField(max_length=50)
@@ -17,10 +25,12 @@ class Project(models.Model):
     slug = models.SlugField()
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
-    mainUrl = models.URLField()
+    tags = models.ManyToManyField(Discipline, blank=True)
+    main_url = models.URLField()
+    # other_urls
     collaborators = models.ManyToManyField(User, blank=True)
-    screenshot = models.ImageField(upload_to="images", blank=True) #this should be images/<event_id>/screenshots
     tech = models.ManyToManyField(Disciplines, blank=True)
+
     def save(self):
         if not self.id:
             self.slug = SlugifyUniquely(self.name, self.__class__)
@@ -30,9 +40,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     company = models.CharField(blank=True, max_length=40)
     bio = models.TextField(blank=True)
-    skills = models.ManyToManyField(Disciplines, blank=True)
-    def __unicode__(self) :
-        return str(self.user)
+    skills = models.ManyToManyField(Discipline, blank=True)
     
 class Rank(models.Model):
     project = models.ForeignKey(Project)

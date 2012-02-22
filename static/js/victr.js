@@ -10,7 +10,7 @@ Victr.init = function() {
     // kick off this page's js
     if (self.hasOwnProperty(self.page_id))
         self[self.page_id]();
-
+    
 }
 
 Victr.project_new = function() {
@@ -18,6 +18,7 @@ Victr.project_new = function() {
         $form = self.$page.find('form');
     self.widgets.form($form);
     self.widgets.tagger(self.$page);
+    self.widgets.autocomplete(self.$page);
 }
 Victr.project_edit = Victr.project_new;
 
@@ -84,6 +85,21 @@ Victr.widgets.tagger = function($page) {
 
 }
 
+Victr.widgets.login = function() {
+    $('.dropdown-toggle').dropdown();
+    $('.dropdown input').bind('click', function (e) {
+        e.stopPropagation();
+    });
+
+Victr.widgets.autocomplete = function($page) {
+    var self = this;
+
+    var $fields = $page.find("[data-autocomplete='true']");
+    //can we use Bootstrap's Lookahead?
+//    $fields.each(function() {
+//
+//    })
+}
 
 
 Victr.utils.escape = function(str) {

@@ -1,11 +1,24 @@
-#from django.http import HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponse, HttpResponseNotAllowed
 #from django.shortcuts import render_to_response
 #from django.template import RequestContext
-#from django.utils import simplejson as json
-#from django.core import serializers
+from django.utils import simplejson as json
+from django.core import serializers
 #from django.core.urlresolvers import reverse
 #from django.db.models.loading import get_model
-#from victr.models import *
+from victr.models import *
+
+
+def discipline_search(request, slug):
+    
+    if request.method == 'GET':
+    
+        objs = Discipline.objects.filter(name__icontains=slug)
+        objs = [ str(d) for d in objs ]
+        return HttpResponse(json.dumps(objs))
+
+    return HttpResponseNotAllowed(['GET'])
+
+
 #
 #MODELS = {
 #    'project' : 'Project'
@@ -35,7 +48,7 @@
 ##    # create this model
 ##    if request.method == 'POST':
 ##        post = request.POST
-##        proj = Project(name=post['project_title'], mainUrl=post['project_site_url'], description=post['project_desc'])
+##        proj = Project(name=post['project_title'], main_url=post['project_site_url'], description=post['project_desc'])
 ##        proj.save()
 ##        data = { 'location': reverse('view', args=(proj.slug,)) }
 ##        return HttpResponse(json.dumps(data))
@@ -51,7 +64,7 @@
 ##    if request.method == 'PUT':
 ##        put = request.PUT
 ##        proj.name = put['project_title']
-##        proj.mainUrl = put['project_site_url']
+##        proj.main_url = put['project_site_url']
 ##        proj.description = put['project_desc']
 ##        proj.save()
 ##        data = { 'location': reverse('view', args=(proj.slug,)) }
