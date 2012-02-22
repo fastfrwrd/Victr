@@ -268,8 +268,13 @@
 }
 
 
-/* media queries */
-@media (max-width: 480px) {
+/* media queries - need to stay at bottom */
+@media only screen and (max-width: 320px) {
+    .project_form input, .project_form textarea {
+        width: 230px
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
     h2 small {
         display: block;
     }
@@ -277,17 +282,17 @@
         padding-left: 19px;
     }
 }
-@media (max-width: 768px) {
+@media only screen and (min-width: 480px) and (max-width: 768px) {
     .project_form #project_desc {
         width: 270px
     }
 }
-@media (min-width: 768px) and (max-width: 980px) {
+@media only screen and (min-width: 768px) and (max-width: 980px) {
     .project_form #project_desc {
         width: 320px;
     }
 }
-@media (min-width: 980px) and (max-width: 1200px) {
+@media only screen and (min-width: 980px) and (max-width: 1200px) {
     .project_form #project_desc {
         width: 480px;
     }
