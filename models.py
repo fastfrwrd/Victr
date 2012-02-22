@@ -29,7 +29,6 @@ class Project(models.Model):
     main_url = models.URLField()
     # other_urls
     collaborators = models.ManyToManyField(User, blank=True)
-    tech = models.ManyToManyField(Disciplines, blank=True)
 
     def save(self):
         if not self.id:
