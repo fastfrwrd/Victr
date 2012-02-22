@@ -41,6 +41,8 @@ class UserProfile(models.Model):
     company = models.CharField(blank=True, max_length=40)
     bio = models.TextField(blank=True)
     skills = models.ManyToManyField(Discipline, blank=True)
+    def __unicode__(self) :
+        return str(self.user)
     
 class Rank(models.Model):
     project = models.ForeignKey(Project)
