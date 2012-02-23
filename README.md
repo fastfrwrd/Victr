@@ -15,11 +15,12 @@ _coming soon to a GitHub Near you_
 3.  clone Victr into the apps folder
 4.  add the following to settings.py:
 
-    import os
-    import sys
+        import os
+        import sys
 
-    PROJECT_ROOT = os.path.dirname(__file__)
-    sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+        PROJECT_ROOT = os.path.dirname(__file__)
+        sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+    
 5.  folow the Manual configs below
 
 ## Manual configs: ##
