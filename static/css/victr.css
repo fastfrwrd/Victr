@@ -121,6 +121,14 @@
     background-image: linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
 }
 
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  background-color: #6F5099;
+}
+
 .hero-unit h1 , .hero-unit  h2, .hero-unit p {
     color:#ffffff;
 }
