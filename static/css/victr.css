@@ -18,7 +18,13 @@
     color:#000000;
     position:relative;
     top:11px;
+    text-shadow: none;
 }
+
+.dropdown.open .dropdown-toggle {
+    color: #522A87;
+    font-weight: bold;
+}   
 
 .navbar .brand {
     padding-top:0px;
@@ -43,16 +49,10 @@
         margin: 0 0 5px 5px;
     }
     
-    .navbar #auth .btn-primary {
-    background-color: #006DCC;
-    background-image: -moz-linear-gradient(center top , #C6B4DE, #9C7BC7, #6F5099);
-    background-repeat: repeat-x;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-}
-    
     .navbar #auth .dropdown-menu {
         background-color: whiteSmoke;
         width:300px;
+        margin-top: 8px;
     }
     
     .navbar #auth input {
@@ -97,12 +97,28 @@
 /* general styles */
 .hero-unit {
     background: -moz-linear-gradient(center top , #522A87, #6F5099) repeat scroll 0 0 transparent;
+    background-image: -ms-linear-gradient(center top , #522A87, #6F5099);
+    background-image: -webkit-gradient(linear, top, bottom, from(#522A87), to(#6F5099));
+    background-image: -webkit-linear-gradient(top, #522A87, #6F5099);
+    background-image: -o-linear-gradient(top, #522A87, #6F5099);
+    background-image: linear-gradient(top, #522A87, #6F5099);
+
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
     margin-bottom: 30px;                                                                  
     padding: 90px;
     margin-top:-20px; /*pulls the unit up to the nav without screwing with the other pages*/
+}
+
+.btn-primary {
+    background-color: #6F5099;
+    background-image: -moz-linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
+    background-image: -ms-linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
+    background-image: -webkit-gradient(linear, top, bottom, from(#C6B4DE), color-stop(50%,#9C7BC7), to(#6F5099));
+    background-image: -webkit-linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
+    background-image: -o-linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
+    background-image: linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
 }
 
 .hero-unit h1 , .hero-unit  h2, .hero-unit p {
