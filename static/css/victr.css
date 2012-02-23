@@ -3,6 +3,29 @@
  */
 
 /* auth styles */
+.navbar-inner {
+    background-color: #FFFFFF;
+    background-repeat: repeat-x;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 -1px 0 rgba(0, 0, 0, 0.5) inset;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top:10px;
+    background-image: none;
+}
+
+.navbar .nav > li > a {
+    color:#000000;
+    position:relative;
+    top:11px;
+}
+
+.navbar .brand {
+    padding-top:0px;
+}
+.navbar .nav > li > a:hover {
+    color:#858585;
+}
 .navbar #auth {
 
 }
@@ -19,6 +42,13 @@
     .navbar #auth button {
         margin: 0 0 5px 5px;
     }
+    
+    .navbar #auth .btn-primary {
+    background-color: #006DCC;
+    background-image: -moz-linear-gradient(center top , #C6B4DE, #9C7BC7, #6F5099);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
     
     .navbar #auth .dropdown-menu {
         background-color: whiteSmoke;
@@ -61,7 +91,19 @@
     }
 
 /* general styles */
+.hero-unit {
+    background: -moz-linear-gradient(center top , #522A87, #6F5099) repeat scroll 0 0 transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    margin-bottom: 30px;                                                                  
+    padding: 90px;
+    margin-top:-20px; /*pulls the unit up to the nav without screwing with the other pages*/
+}
 
+.hero-unit h1 , .hero-unit  h2, .hero-unit p {
+    color:#ffffff;
+}
 
 /* event styles */
 .event .tweets ul {
