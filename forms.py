@@ -10,10 +10,10 @@ class RegistrationForm(ModelForm):
     It seems that the reason we have fields specified below as attributes is because
     this form has to gather information for both auth.User and victr.UserProfile
     """
-    first_name = forms.fields.CharField(max_length=25)
-    last_name = forms.fields.CharField(max_length=25)
-    email = forms.EmailField(max_length=100)
-    password = forms.fields.CharField(max_length=50, widget=forms.PasswordInput)
+    first_name = forms.fields.CharField(max_length=25, widget=forms.TextInput(attrs={'placeholder':'Victr'}))
+    last_name = forms.fields.CharField(max_length=25, widget=forms.TextInput(attrs={'placeholder':'Appleseed'}))
+    email = forms.EmailField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'victr@email.com'}))
+    password = forms.fields.CharField(max_length=50, widget=forms.PasswordInput(attrs={'placeholder':'password'}))
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
     class Meta:
@@ -34,3 +34,20 @@ class RegistrationForm(ModelForm):
             print "self.instance: " + str(self.instance)
             ModelForm.save(self)
             print "should have just saved\n"
+
+class LoginForm(ModelForm):
+    """
+    Attributes defined here are found in LoginForm.fields
+    It seems that the reason we have fields specified below as attributes is because
+    this form has to gather information for both auth.User and victr.UserProfile
+    """
+    email = forms.EmailField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'victr@email.com'}))
+    password = forms.fields.CharField(max_length=50, widget=forms.PasswordInput(attrs={'placeholder':'password'}))
+    def __init__(self, *args, **kwargs):
+        super(ModelForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = UserProfile
+        """
+        exclude = ('')
+        """
+        fields = ['email']

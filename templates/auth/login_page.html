@@ -7,11 +7,13 @@
 <h2>Login</h2>
 <section class="row">
   <div class="span3">
-  <p>Login to your Victr account to create and manage your projects.</p>
-  <p>Don't remember your password? <a href="{% victr_base %}reset">Reset your password</a> and get back in the action.</p>
+    <p>Login to your Victr account to create and manage your projects.</p>
+    <p>Don't remember your password? <a href="{% victr_base %}reset">Reset your password</a> and get back in the action.</p>
   </div>
-  <div class="well span8">
-  {% include "auth/login.html" %}
+  <div class="span9">
+    <div class="well form-horizontal">
+    {% include "auth/login.html" %}
+    </div>
   </div>
 </section>
 {% endblock %}

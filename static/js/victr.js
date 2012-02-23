@@ -10,7 +10,6 @@ Victr.init = function() {
     // kick off this page's js
     if (self.hasOwnProperty(self.page_id)) {
         self[self.page_id]();
-        console.log('hm?');
     }
     
     Victr.widgets.auth();

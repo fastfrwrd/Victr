@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from victr.models import *
-from victr.forms import RegistrationForm
+from victr.forms import RegistrationForm, LoginForm
 
 def home(request, default_template="event/open.html"):
     event = Event(name="Event name here")
@@ -30,11 +30,7 @@ def register(request, default_template="auth/register_page.html"):
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def login(request, default_template="auth/login_page.html"):
-    """
-    temporary placement of login view function.
-    username handling code goes here
-    ?next get variable handling can also go here
-    """
+    form = LoginForm()
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def logout(request):

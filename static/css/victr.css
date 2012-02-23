@@ -6,27 +6,31 @@
 .navbar #auth {
     width:250px;
 }
-
-    .navbar #auth .dropdown-menu {
-        background-color: whiteSmoke;
-    }
     
     .navbar #auth a {
         text-align: right;
     }
-
-    .navbar #auth input {
-        margin: 5px;
-        width: 90%;
-    }
+    
+        .navbar #auth a.register {
+            padding: 6px 15px 5px;
+            display: inline;
+        }
     
     .navbar #auth button {
         margin: 0 0 5px 5px;
     }
     
-    .navbar #auth a.register {
-        padding: 6px 15px 5px;
-        display: inline;
+    .navbar #auth .dropdown-menu {
+        background-color: whiteSmoke;
+    }
+    
+    .navbar #auth input {
+        margin: 5px;
+        width: 90%;
+    }
+    
+    .navbar #auth label {
+        display: none;
     }
     
     .navbar #auth .form-actions,

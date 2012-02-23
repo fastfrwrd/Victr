@@ -73,6 +73,7 @@
     _parent.removeClass('open')
   }
 
+
   $(function () {
     $('html').bind("click", clearMenus)
     $('body').dropdown( '[data-dropdown] a.menu, [data-dropdown] .dropdown-toggle' )
@@ -101,8 +102,10 @@
    * =================================== */
 
   $(function () {
+    $('html, body').unbind('click.dropdown.data-api')
     $('html').on('click.dropdown.data-api', clearMenus)
     $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
   })
+
 
 }( window.jQuery )
