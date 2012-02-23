@@ -1,5 +1,5 @@
 /* ===================================================
- * bootstrap-transition.js v2.0.0
+ * bootstrap-transition.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#transitions
  * ===================================================
  * Copyright 2012 Twitter, Inc.
@@ -47,10 +47,9 @@
     })()
 
   })
-  
-}( window.jQuery )
-/* ==========================================================
- * bootstrap-alert.js v2.0.0
+
+}( window.jQuery );/* ==========================================================
+ * bootstrap-alert.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#alerts
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
@@ -102,11 +101,14 @@
 
       $parent.length || ($parent = $this.hasClass('alert') ? $this : $this.parent())
 
-      $parent.removeClass('in')
+      $parent
+        .trigger('close')
+        .removeClass('in')
 
       function removeElement() {
-        $parent.remove()
-        $parent.trigger('closed')
+        $parent
+          .trigger('closed')
+          .remove()
       }
 
       $.support.transition && $parent.hasClass('fade') ?
@@ -139,9 +141,8 @@
     $('body').on('click.alert.data-api', dismiss, Alert.prototype.close)
   })
 
-}( window.jQuery )
-/* ============================================================
- * bootstrap-button.js v2.0.0
+}( window.jQuery );/* ============================================================
+ * bootstrap-button.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#buttons
  * ============================================================
  * Copyright 2012 Twitter, Inc.
@@ -233,13 +234,14 @@
 
   $(function () {
     $('body').on('click.button.data-api', '[data-toggle^=button]', function ( e ) {
-      $(e.target).button('toggle')
+      var $btn = $(e.target)
+      if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn')
+      $btn.button('toggle')
     })
   })
 
-}( window.jQuery )
-/* ==========================================================
- * bootstrap-carousel.js v2.0.0
+}( window.jQuery );/* ==========================================================
+ * bootstrap-carousel.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#carousel
  * ==========================================================
  * Copyright 2012 Twitter, Inc.
@@ -301,6 +303,7 @@
 
   , pause: function () {
       clearInterval(this.interval)
+      this.interval = null
       return this
     }
 
@@ -321,6 +324,8 @@
         , direction = type == 'next' ? 'left' : 'right'
         , fallback  = type == 'next' ? 'first' : 'last'
         , that = this
+
+      if (!$next.length) return
 
       this.sliding = true
 
@@ -391,9 +396,8 @@
     })
   })
 
-}( window.jQuery )
-/* =============================================================
- * bootstrap-collapse.js v2.0.0
+}( window.jQuery );/* =============================================================
+ * bootstrap-collapse.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#collapse
  * =============================================================
  * Copyright 2012 Twitter, Inc.
@@ -527,9 +531,8 @@
     })
   })
 
-}( window.jQuery )
-/* ============================================================
- * bootstrap-dropdown.js v2.0.0
+}( window.jQuery );/* ============================================================
+ * bootstrap-dropdown.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#dropdowns
  * ============================================================
  * Copyright 2012 Twitter, Inc.
@@ -591,36 +594,20 @@
 
   }
 
-  var d = 'a.menu, .dropdown-toggle'
-
-  function clearMenus(e) {
-    var _parent = $(d).parent('li')
-    if (e != undefined) {
-      var srcEl = e.srcElement || e.target
-        , insideParent = _parent.has(srcEl).length > 0
-      if (insideParent) return
-    }
-    _parent.removeClass('open')
+  function clearMenus() {
+    $(toggle).parent().removeClass('open')
   }
 
-  $(function () {
-    $('html').bind("click", clearMenus)
-    $('body').dropdown( '[data-dropdown] a.menu, [data-dropdown] .dropdown-toggle' )
-  })
 
   /* DROPDOWN PLUGIN DEFINITION
    * ========================== */
 
-  $.fn.dropdown = function ( selector ) {
+  $.fn.dropdown = function ( option ) {
     return this.each(function () {
-      $(this).delegate(selector || d, 'click', function (e) {
-        var li = $(this).parent('li')
-          , isActive = li.hasClass('open')
-
-        clearMenus(e)
-        !isActive && li.toggleClass('open')
-        return false
-      })
+      var $this = $(this)
+        , data = $this.data('dropdown')
+      if (!data) $this.data('dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
     })
   }
 
@@ -635,9 +622,8 @@
     $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
   })
 
-}( window.jQuery )
-/* =========================================================
- * bootstrap-modal.js v2.0.0
+}( window.jQuery );/* =========================================================
+ * bootstrap-modal.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#modals
  * =========================================================
  * Copyright 2012 Twitter, Inc.
@@ -664,7 +650,7 @@
   * ====================== */
 
   var Modal = function ( content, options ) {
-    this.options = $.extend({}, $.fn.modal.defaults, options)
+    this.options = options
     this.$element = $(content)
       .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this))
   }
@@ -815,16 +801,17 @@
     return this.each(function () {
       var $this = $(this)
         , data = $this.data('modal')
-        , options = typeof option == 'object' && option
+        , options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option)
       if (!data) $this.data('modal', (data = new Modal(this, options)))
       if (typeof option == 'string') data[option]()
-      else data.show()
+      else if (options.show) data.show()
     })
   }
 
   $.fn.modal.defaults = {
       backdrop: true
     , keyboard: true
+    , show: true
   }
 
   $.fn.modal.Constructor = Modal
@@ -844,9 +831,8 @@
     })
   })
 
-}( window.jQuery )
-/* ===========================================================
- * bootstrap-tooltip.js v2.0.0
+}( window.jQuery );/* ===========================================================
+ * bootstrap-tooltip.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ===========================================================
@@ -1114,9 +1100,8 @@
   , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
   }
 
-}( window.jQuery )
-/* ===========================================================
- * bootstrap-popover.js v2.0.0
+}( window.jQuery );/* ===========================================================
+ * bootstrap-popover.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#popovers
  * ===========================================================
  * Copyright 2012 Twitter, Inc.
@@ -1209,9 +1194,8 @@
   , template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
   })
 
-}( window.jQuery )
-/* =============================================================
- * bootstrap-scrollspy.js v2.0.0
+}( window.jQuery );/* =============================================================
+ * bootstrap-scrollspy.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#scrollspy
  * =============================================================
  * Copyright 2012 Twitter, Inc.
@@ -1334,9 +1318,8 @@
     })
   })
 
-}( window.jQuery )
-/* ========================================================
- * bootstrap-tab.js v2.0.0
+}( window.jQuery );/* ========================================================
+ * bootstrap-tab.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#tabs
  * ========================================================
  * Copyright 2012 Twitter, Inc.
@@ -1464,9 +1447,8 @@
     })
   })
 
-}( window.jQuery )
-/* =============================================================
- * bootstrap-typeahead.js v2.0.0
+}( window.jQuery );/* =============================================================
+ * bootstrap-typeahead.js v2.0.1
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
  * =============================================================
  * Copyright 2012 Twitter, Inc.
@@ -1735,4 +1717,4 @@
     })
   })
 
-}( window.jQuery )
+}( window.jQuery );
