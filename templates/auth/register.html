@@ -1,18 +1,9 @@
-{% load victr_tags %}
+{% extends "form_layout.html" %}
 
-<form class="form-horizontal" action="{% victr_base %}register/" method="post">{% csrf_token %}
-  {% for field in registration_form %}
-  <div class="control-group{% if field.errors %} error{% endif %}">
-    <div class="control-group">
-      {{ field.label_tag }}<!-- add class "control-label" -->
-      <div class="controls">
-        {{ field }}<!-- add class "input-xlarge" -->
-        {{ field.errors }}<!-- add class "help-inline" -->
-      </div>
-    </div>
-  </div>
-  {% endfor %}
-  <div class="form-actions">
-    <div class="label-tag"><input class="btn btn-primary" type="submit" value="Submit" /></div>
-  </div>
-</form>
+{% block action %}register{% endblock %}
+{% block method %}POST{% endblock %}
+{% csrf_token %}
+
+{% block form_actions %}
+<div class="label-tag"><input class="btn btn-primary" type="submit" value="Submit" /></div>
+{% endblock %}

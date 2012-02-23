@@ -14,18 +14,17 @@ def home(request, default_template="event/open.html"):
     return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event }))
 
 def register(request, default_template="auth/register_page.html"):
-    registration_form = RegistrationForm()
+    form = RegistrationForm()
     if request.method == 'POST' :
-        registration_form = RegistrationForm(request.POST)
-        if registration_form.is_valid() :
+        form = RegistrationForm(request.POST)
+        if form.is_valid() :
             try :
-                registration_form.save()    #user registered
+                form.save()    #user registered
             except : #IntegrityError as detail :
-                print "username already registered we need to handle that gracefully"
-                messages = { 'error' : "Error: the email address %s is already registered." % (registration_form.cleaned_data['email'],) }
+                messages = { 'error' : "Whoops! The email address %s is already registered. Try logging in or resetting your password." % (form.cleaned_data['email'],) }
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request, { 'messages' : messages }))
-            current_user = auth.authenticate(username=registration_form.cleaned_data['email'],
-                                             password=registration_form.cleaned_data['password'])
+            current_user = auth.authenticate(username=form.cleaned_data['email'],
+                                             password=form.cleaned_data['password'])
             auth.login(request, current_user)
             return redirect(''.join(reverse('victr.views.home'), 'vip'))
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
