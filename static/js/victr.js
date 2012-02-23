@@ -8,8 +8,10 @@ Victr.init = function() {
     self.$page = $('#'+this.page_id);
 
     // kick off this page's js
-    if (self.hasOwnProperty(self.page_id))
+    if (self.hasOwnProperty(self.page_id)) {
         self[self.page_id]();
+        console.log('hm?');
+    }
     
     Victr.widgets.auth();
 }

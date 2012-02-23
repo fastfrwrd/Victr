@@ -27,7 +27,7 @@ def register(request, default_template="auth/register_page.html"):
             current_user = auth.authenticate(username=registration_form.cleaned_data['email'],
                                              password=registration_form.cleaned_data['password'])
             auth.login(request, current_user)
-            return redirect(join(reverse('victr.views.home'), 'vip'))
+            return redirect(''.join(reverse('victr.views.home'), 'vip'))
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def login(request, default_template="auth/login_page.html"):

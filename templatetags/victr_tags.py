@@ -4,7 +4,8 @@ from django.utils.safestring import mark_safe
 import re
 
 register = template.Library()
-@register.simple_tag(name='victr_base')
+
+@register.simple_tag
 def victr_base():
     return reverse('victr.views.home')
 
