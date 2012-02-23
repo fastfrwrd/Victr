@@ -91,15 +91,19 @@ Victr.widgets.auth = function() {
 
     //populate top login
     $('#auth a.dropdown-toggle').on('click', function() {
-        if(!$.trim( $('.login-wrapper').html() )) {
-        $('.login-wrapper').load(Victr.base + 'login .main form', function() {
+    	var current_path = encodeURIComponent(window.location.pathname.slice(Victr.base.length)),
+    	    login_url = Victr.base + 'login/?redirect=' + current_path,
+    		register_url = Victr.base + 'register/';
+        if($('.login-wrapper').hasClass('loading')) {
+        	$('.login-wrapper').load(login_url + ' .main form', function() {
+                $('.login-wrapper').removeClass('loading');
                 //activate and populate auth modal
                 $(this).find('a.register').attr({ 
                     'data-toggle': 'modal',
                     'data-target': '#register'
                 }).on('click', function() {
                     if(!$.trim( $('.register-wrapper').html() )) {
-                        $('.register-wrapper').load(Victr.base + 'register .main form');
+                        $('.register-wrapper').load(register_url + ' form');
                     }
                 });
             });
