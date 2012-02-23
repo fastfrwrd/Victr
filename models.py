@@ -29,7 +29,7 @@ class Project(models.Model):
     main_url = models.URLField()
     # other_urls
     collaborators = models.ManyToManyField(User, blank=True)
-    tech = models.ManyToManyField(Disciplines, blank=True)
+    screenshot = models.ImageField(upload_to="images/screenshot")
 
     def save(self):
         if not self.id:
@@ -41,6 +41,8 @@ class UserProfile(models.Model):
     company = models.CharField(blank=True, max_length=40)
     bio = models.TextField(blank=True)
     skills = models.ManyToManyField(Discipline, blank=True)
+    def __unicode__(self) :
+        return str(self.user)
     
 class Rank(models.Model):
     project = models.ForeignKey(Project)

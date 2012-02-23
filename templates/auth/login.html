@@ -1,0 +1,10 @@
+{% extends "form_layout.html" %}
+{% load victr_tags %}
+
+{% block action %}login{% endblock %}
+{% block method %}POST{% endblock %}
+
+{% block form_actions %}
+<button type="submit" class="btn btn-primary">Login</button>
+<a href="{% victr_base %}register" class="btn register">Register</a>
+{% endblock %}

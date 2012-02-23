@@ -591,37 +591,20 @@
 
   }
 
-  var d = 'a.menu, .dropdown-toggle'
-
-  function clearMenus(e) {
-    var _parent = $(d).parent('li')
-    if (e != undefined) {
-      var srcEl = e.srcElement
-        , isInput = $(srcEl).hasClass('no-close')
-        , insideParent = _parent.has(srcEl).length > 0
-      if (isInput && insideParent) return
-    }
-    _parent.removeClass('open')
+  function clearMenus() {
+    $(toggle).parent().removeClass('open')
   }
 
-  $(function () {
-    $('html').bind("click", clearMenus)
-    $('body').dropdown( '[data-dropdown] a.menu, [data-dropdown] .dropdown-toggle' )
-  })
 
   /* DROPDOWN PLUGIN DEFINITION
    * ========================== */
 
-  $.fn.dropdown = function ( selector ) {
+  $.fn.dropdown = function ( option ) {
     return this.each(function () {
-      $(this).delegate(selector || d, 'click', function (e) {
-        var li = $(this).parent('li')
-          , isActive = li.hasClass('open')
-
-        clearMenus(e)
-        !isActive && li.toggleClass('open')
-        return false
-      })
+      var $this = $(this)
+        , data = $this.data('dropdown')
+      if (!data) $this.data('dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
     })
   }
 

@@ -8,9 +8,11 @@ Victr.init = function() {
     self.$page = $('#'+this.page_id);
 
     // kick off this page's js
-    if (self.hasOwnProperty(self.page_id))
+    if (self.hasOwnProperty(self.page_id)) {
         self[self.page_id]();
+    }
     
+    Victr.widgets.auth();
 }
 
 Victr.project_new = function() {
@@ -28,7 +30,6 @@ Victr.impress_present = function() {
         return false;
     });
 }
-
 
 /* WiDgEtS oMg! */
 
@@ -61,7 +62,7 @@ Victr.widgets.tagger = function($page) {
         }
         $field.addClass('tagger');
     });
-
+    
     $fields
     .on('keyup', 'input', function(e) {
         if (e.which != 13) return;
@@ -85,20 +86,65 @@ Victr.widgets.tagger = function($page) {
 
 }
 
-Victr.widgets.login = function() {
-    $('.dropdown-toggle').dropdown();
-    $('.dropdown input').bind('click', function (e) {
-        e.stopPropagation();
+//handles customizations of dropdown and modal from Bootstrap.
+Victr.widgets.auth = function() {
+
+    //populate top login
+    $('#auth a.dropdown-toggle').on('click', function() {
+        if(!$.trim( $('.login-wrapper').html() )) {
+        $('.login-wrapper').load(Victr.base + 'login .main form', function() {
+                //activate and populate auth modal
+                $(this).find('a.register').attr({ 
+                    'data-toggle': 'modal',
+                    'data-target': '#register'
+                }).on('click', function() {
+                    if(!$.trim( $('.register-wrapper').html() )) {
+                        $('.register-wrapper').load(Victr.base + 'register .main form');
+                    }
+                });
+            });
+        }
     });
+    
+    //submit from the modal
+    $('.modal-footer *:submit').click(function(e) {
+        $(this).closest('.modal').find('form').submit();
+    });
+}
 
 Victr.widgets.autocomplete = function($page) {
-    var self = this;
-
-    var $fields = $page.find("[data-autocomplete='true']");
-    //can we use Bootstrap's Lookahead?
-//    $fields.each(function() {
-//
-//    })
+    var self = this,
+        cache = {};
+    
+    var $fields = $page.find("[data-type]");
+    $fields.each(function() {
+        $field = $(this);
+        var $input = $field.find('input'),
+            type = $field.data('type');
+        cache[type] = {};
+        $input.typeahead({
+            source: function(typeahead, query) {
+                if (!query) return;
+                var data = cache[type][query];
+                if (data) return data;
+                return $.ajax({
+                    url: '/api/'+type+'/search/'+query,
+                    success: function(data) {
+                        cache[type][query] = data;
+                        return typeahead.process(data);
+                    },
+                    dataType: 'json'
+                })
+            },
+            property: 'name',
+            onselect: function() {
+                var e = $.Event('keyup');
+                e.which = 13;
+                e.delegateTarget = e.target = $input.get(0);
+                $fields.trigger(e);
+            }
+        })
+    })
 }
 
 

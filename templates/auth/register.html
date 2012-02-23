@@ -1,0 +1,9 @@
+{% extends "form_layout.html" %}
+
+{% block action %}register{% endblock %}
+{% block method %}POST{% endblock %}
+{% csrf_token %}
+
+{% block form_actions %}
+<div class="label-tag"><input class="btn btn-primary" type="submit" value="Submit" /></div>
+{% endblock %}

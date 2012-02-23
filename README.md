@@ -8,11 +8,28 @@ _coming soon to a GitHub Near you_
 
 ### "to the victr go the spoils" ###
 
-## Manual configs: ##
+## Suggested installation procedure: ##
 
+1.  create a new django project with `django-admin.py startproject mysite`
+2.  create an apps folder `cd mysite && mkdir apps && touch ./apps/__init.py__`
+3.  clone Victr into the apps folder
+4.  add the following to settings.py:
+
+        import os
+        import sys
+
+        PROJECT_ROOT = os.path.dirname(__file__)
+        sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+    
+5.  folow the Manual configs below
+
+## Manual configs: ##
 #### settings.py: ####
-    LOGIN_URL = '/login/'
-_this can be whatever you want, we think login makes sense if you're installing Victr at your root URL_
+_this needs to map to your the url you set in urls.py_
+
+    LOGIN_URL = '/victr/login/'
+    LOGOUT_URL = '/victr/logout/'
+    LOGIN_REDIRECT_URL = '/victr/'
 
     INSTALLED_APPS = (
         ...
@@ -23,14 +40,14 @@ _this can be whatever you want, we think login makes sense if you're installing 
 #### urls.py ####
 
     urlpatterns = patterns('',
-        # ONE OF THESE TWO can be used to get to victr
-        # url(r'^', include('victr.urls')), #NO trailing $! this points to http://yoursitesurl.com/
-        # url(r'^victr/', include('victr.urls')), #this points to http://yoursiteurl.com/victr
+        url(r'^victr/', include('victr.urls')), #this points to http://yoursiteurl.com/victr/. you can do root if you want too with the pattern r'^'
+        ...
     )
 
+## Testing procedures ##
 #### dump fixtures ####
-python manage.py dumpdata --exclude=auth --exclude=contenttypes > victr/fixtures/initial_data.json  
+    $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > victr/fixtures/initial_data.json  
 
 #### install fixtures ####
-python manage.py reset victr  
-python manage.py syncdb  
+    $ > python manage.py reset victr  
+    $ > python manage.py syncdb  

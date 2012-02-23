@@ -1,0 +1,6 @@
+{% for key, value in messages.items %}
+<div class="alert alert-block alert-{{ key }}">
+  <a class="close" data-dismiss="alert">×</a>
+  {{ value }}
+</div>
+{% endfor %}

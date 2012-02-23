@@ -1,37 +1,69 @@
-/* CUSTOM CSS */
+/** 
+ * victr.css 
+ */
 
-
-
-/* layout styles */
-
-.navbar a.login {
-    color: white;
-    padding: 4px 8px;
-    display: block !important;
-    text-shadow: none;
-} 
-
+/* auth styles */
 .navbar #auth {
-    width:250px;
+
 }
 
     .navbar #auth a {
         text-align: right;
     }
-
+    
+        .navbar #auth a.register {
+            padding: 6px 15px 5px;
+            display: inline;
+        }
+    
+    .navbar #auth button {
+        margin: 0 0 5px 5px;
+    }
+    
+    .navbar #auth .dropdown-menu {
+        background-color: whiteSmoke;
+        width:300px;
+    }
+    
     .navbar #auth input {
         margin: 5px;
         width: 90%;
     }
     
-    .navbar #auth button {
-        margin: 0 0 5px 5px;
+    .navbar #auth label {
+        display: none;
+    }
+    
+    .navbar #auth .form-actions,
+    .navbar #auth form {
+        margin-bottom: 0px;
+    }
+
+.navbar .nav-collapse {  
+    float: left;
+}
+
+.navbar ul.nav a.login-collapse {
+    display:none;
+}
+
+#auth_login_page a.register {
+    position: relative;
+    top: 1px;
+}
+
+#register.modal {
+
+}
+
+    #register.modal .form-actions {
+        display: none;
     }
 
 /* general styles */
 
-/* event styles */
 
+/* event styles */
 .event .tweets ul {
     margin-left: 0px;
     list-style: none;
@@ -45,7 +77,6 @@
     }
 
 /* impress */
-
 #impress #first-slide {
     font-family: 'Open Sans', Arial, sans-serif;
 }
@@ -111,7 +142,6 @@
         max-width: 30%;
         max-height: 30%;
     }
-
 
 /* awards */
 .award {
@@ -268,8 +298,13 @@
 }
 
 
-/* media queries */
-@media (max-width: 480px) {
+/* media queries - need to stay at bottom */
+@media only screen and (max-width: 320px) {
+    .project_form input, .project_form textarea {
+        width: 230px;
+    }
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
     h2 small {
         display: block;
     }
@@ -277,18 +312,32 @@
         padding-left: 19px;
     }
 }
-@media (max-width: 768px) {
+@media only screen and (min-width: 480px) and (max-width: 770px) {
     .project_form #project_desc {
-        width: 270px
+        width: 270px;
     }
 }
-@media (min-width: 768px) and (max-width: 980px) {
+@media only screen and (min-width: 770px) and (max-width: 980px) {
     .project_form #project_desc {
         width: 320px;
     }
 }
-@media (min-width: 980px) and (max-width: 1200px) {
+@media only screen and (min-width: 980px) and (max-width: 1200px) {
     .project_form #project_desc {
         width: 480px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .navbar #auth-wrapper {
+        display:none;
+    }
+    .navbar ul.nav a.login-collapse {
+        display:block;
+    }
+}
+@media screen and (min-width: 981px) {
+    .navbar #auth-wrapper {
+        display:block;
     }
 }
