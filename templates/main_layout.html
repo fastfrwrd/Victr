@@ -9,7 +9,7 @@
 <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
 <style type="text/css">
     body {
-        padding-top: 60px;
+        padding-top: 0px;
         padding-bottom: 40px;
     }
     .sidebar-nav {
@@ -21,11 +21,14 @@
 
 {% block nav %}{% include "nav.html" %}{% endblock %}
 
+
 {% block container %}
+  
+    {% block header %}
+  {% endblock %}
 <div class="container main {% block page_class %}{% endblock %}" id="{% block page_id %}{% endblock %}">
     
-  {% block header %}
-  {% endblock %}
+
     
   {% block featured_item %}
   {% endblock %}
