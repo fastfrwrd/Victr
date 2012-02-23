@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from victr.models import *
 from victr.forms import RegistrationForm, LoginForm
+from urllib import quote, unquote
 
 def home(request, default_template="event/open.html"):
     event = Event(name="Event name here")
@@ -26,12 +27,30 @@ def register(request, default_template="auth/register_page.html"):
             current_user = auth.authenticate(username=form.cleaned_data['email'],
                                              password=form.cleaned_data['password'])
             auth.login(request, current_user)
-            return redirect(''.join(reverse('victr.views.home'), 'vip'))
+            return redirect( reverse('victr.views.home') )
+        else :
+            messages = { 'warning' : 'Invalid form submission.' }
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def login(request, default_template="auth/login_page.html"):
-    form = LoginForm()
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+	redirect_path = ''
+	if request.method == 'GET' :
+	    redirect_path = request.GET.get("redirect")
+	form = LoginForm(initial = { 'redirect' : redirect_path })
+	if request.method == 'POST' :
+		form = LoginForm(request.POST)
+		redirect_path = unquote(request.POST.get('redirect'))
+		current_user = auth.authenticate(username=request.POST.get('email'), 
+										 password=request.POST.get('password'))
+		if current_user is not None :
+			if current_user.is_active :
+				auth.login(request, current_user)
+				return redirect(''.join( ( reverse('victr.views.home'), redirect_path ) ))
+			else :
+				messages = { "warning" : "Your account has been disabled. Please contact the site administrator." }
+		else :
+			messages = { "error" : "Invalid username or password. Please try again, or if you are having trouble, reset your password." }
+	return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def logout(request):
     auth.logout(request)

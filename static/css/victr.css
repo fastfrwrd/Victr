@@ -64,6 +64,10 @@
         display: none;
     }
     
+    .navbar #auth .loading {
+		text-align: center
+	}
+    
     .navbar #auth .form-actions,
     .navbar #auth form {
         margin-bottom: 0px;
@@ -281,8 +285,6 @@
     -moz-animation-name: spin;
     -ms-animation-name: spin;
 }
-
-
 
 /* Victr Widgets */
 .tagger ul {
