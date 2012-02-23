@@ -9,23 +9,26 @@ _coming soon to a GitHub Near you_
 ### "to the victr go the spoils" ###
 
 ## Suggested installation procedure: ##
-_just a suggested approach to get you up and Victr-ing - there are other possible methods_
-1. create a new django project with `django-admin.py startproject mysite`
-2. create an apps folder `cd mysite && mkdir apps && touch ./apps/__init.py__`
-3. clone Victr into the apps folder
-4. add the following to settings.py:
+
+1.  create a new django project with `django-admin.py startproject mysite`
+2.  create an apps folder `cd mysite && mkdir apps && touch ./apps/__init.py__`
+3.  clone Victr into the apps folder
+4.  add the following to settings.py:
+
     import os
     import sys
 
     PROJECT_ROOT = os.path.dirname(__file__)
     sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
+5.  folow the Manual configs below
 
 ## Manual configs: ##
 #### settings.py: ####
+_this needs to map to your the url you set in urls.py_
+
     LOGIN_URL = '/victr/login/'
     LOGOUT_URL = '/victr/logout/'
     LOGIN_REDIRECT_URL = '/victr/'
-_this needs to map to your victr folder (which can be root)_
 
     INSTALLED_APPS = (
         ...
@@ -40,9 +43,10 @@ _this needs to map to your victr folder (which can be root)_
         ...
     )
 
+## Testing procedures ##
 #### dump fixtures ####
-python manage.py dumpdata --exclude=auth --exclude=contenttypes > victr/fixtures/initial_data.json  
+    $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > victr/fixtures/initial_data.json  
 
 #### install fixtures ####
-python manage.py reset victr  
-python manage.py syncdb  
+    $ > python manage.py reset victr  
+    $ > python manage.py syncdb  
