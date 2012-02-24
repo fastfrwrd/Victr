@@ -2,76 +2,59 @@ from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
 from django.utils import simplejson as json
+from victr.forms import ProjectForm
 from victr.models import *
 
 
 def project(request, slug, default_template="project/view.html"):
 
-    proj = get_object_or_404(Project, slug=slug)
+    project = get_object_or_404(Project, slug=slug)
 
     if request.method == 'GET':
-        data = {}
-        data['project'] = proj
-        return render_to_response(default_template, context_instance=RequestContext(request, data))
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     if request.method == 'POST':
-        post = request.POST
-        proj.name = post['project_title']
-        proj.mainUrl = post['project_site_url']
-        proj.description = post['project_desc']
-        proj.save()
-        new_tags = post.getlist('project_tags[]')
-        for tag in proj.tags.all():
-            if tag not in new_tags:
-                proj.tags.remove(tag)
-        for tag in new_tags:
-            d = Discipline.objects.filter(name=tag)
-            if not d:
-                d = Discipline(name=tag)
-                d.save()
-            else:
-                d = d[0]
-            if d not in proj.tags.all():
-                proj.tags.add(d)
-        proj.save()
-        return redirect('project', slug=proj.slug)
+        project_form = ProjectForm(request.POST, instance = project)
+        if project_form.is_valid() :
+            try :
+                project = project_form.save()
+            except :
+                return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+            return redirect('project', project.slug)
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET','POST'])
 
 
 def edit(request, slug, default_template="project/edit.html"):
+    
+    if request.method == 'GET':
+        project = Project.objects.get(slug=slug)
+        project_form = ProjectForm(instance = project)
+        action = 'project/' + project.slug
+        method = 'post'
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-    proj = get_object_or_404(Project, slug=slug)
-    data = {}
-    data['project'] = proj
-    return render_to_response(default_template, context_instance=RequestContext(request, data))
+    return HttpResponseNotAllowed(['GET'])
 
 
 def new(request, default_template="project/new.html"):
     
-    # create this model
     if request.method == 'POST':
-        post = request.POST
-        proj = Project()
-        proj.name = post['project_title']
-        proj.description = post['project_desc']
-        proj.main_url = post['project_site_url']
-        proj.save()
-        proj.tags.clear()
-        for tag in post.getlist('project_tags[]'):
-            d = Discipline.objects.filter(name=tag)
-            if not d:
-                d = Discipline(name=tag)
-                d.save()
-            else:
-                d = d[0]
-            if d not in proj.tags.all():
-                proj.tags.add(d)
-        proj.save()
-        return redirect('project', slug=proj.slug)
+        project_form = ProjectForm(request.POST)
+        if project_form.is_valid() :
+            try :
+                proj = project_form.save()
+            except :
+                return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+            return redirect('project', proj.slug)
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     if request.method == 'GET':
-        return render_to_response(default_template, context_instance=RequestContext(request))
+        project_form = ProjectForm()
+        action = 'project/new'
+        method = 'post'
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET', 'POST'])
 
@@ -79,9 +62,7 @@ def new(request, default_template="project/new.html"):
 def all(request, default_template="project/all.html"):
 
     if request.method == 'GET':
-        projs = Project.objects.all()
-        data = {}
-        data['projects'] = projs
-        return render_to_response(default_template, context_instance=RequestContext(request, data))
+        projects = Project.objects.all()
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET'])

@@ -1,51 +1,10 @@
-{% extends "main_layout.html" %}
-{% load victr_tags %}
+{% extends "project/layout.html" %}
 
 {% block page_id %}project_new{% endblock %}
 {% block page_class %}project_form{% endblock %}
 
-{% block content %}
-
+{% block heading %}
 <h2>Submit a Project <small>just fill out the form!</small></h2>
-<form action="{% victr_base %}project/new" method="POST">
-
-    <h3>Project Information</h3>
-    <section class="row">
-        <div class="span3">
-            <p>
-                Tell us a little bit about your project. I bet it's so cool! What up girrrl, this is Section Awesome. Raw denim you probably haven't heard of them jean shorts Austin.
-            </p>
-        </div>
-        <div class="span9">
-            <div class="well form-horizontal">
-                <fieldset>
-                    {% for field in project_form %}
-                    <div class="control-group {% if field.errors %}error{% endif %}">
-                        {{ field.label_tag|add_class:"control-label" }}
-                        <div class="controls">
-                            {{ field }}
-                            {% for error in field.errors %}
-                            <span class="help-inline">{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </fieldset>
-            </div>
-        </div>
-    </section>
-
-    <section class="row">
-        <div class="span9 offset3">
-            <div class="form-horizontal">
-                <div class="form-actions">
-                    {% csrf_token %}
-                    <button type="submit" id="submit" class="btn btn-primary"><i class="icon-gift icon-white"></i><i class="icon-refresh icon-white"></i> Submit Project</button>
-                    <button type="button" id="reset" class="btn">Restart</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</form>
 {% endblock %}
+
+{% block submit %}Submit{% endblock %}

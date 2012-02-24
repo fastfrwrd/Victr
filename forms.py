@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, Form
-from victr.models import UserProfile
+from victr.models import UserProfile, Project
 from django.contrib import auth
 from django.db import models
 
@@ -52,3 +52,12 @@ class LoginForm(ModelForm):
         exclude = ('')
         """
         fields = ['email']
+
+class ProjectForm(ModelForm):
+    title         = forms.fields.CharField(max_length=100, widget=forms.TextInput(attrs={ 'placeholder': 'be creative..'}))
+    description   = forms.fields.CharField(widget=forms.Textarea(attrs={ 'placeholder': 'details..'}))
+    url           = forms.fields.URLField(widget=forms.TextInput(attrs={ 'placeholder': 'http://hacks4you.com'}))
+
+    class Meta:
+        model = Project
+        exclude = ('slug')
