@@ -5,32 +5,6 @@ from django.utils import simplejson as json
 from victr.models import *
 
 
-def default(request):
-
-    # create this model
-    if request.method == 'POST':
-        post = request.POST
-        proj = Project()
-        proj.name = post['project_title']
-        proj.description = post['project_desc']
-        proj.main_url = post['project_site_url']
-        proj.save()
-        proj.tags.clear()
-        for tag in post.getlist('project_tags[]'):
-            d = Discipline.objects.filter(name=tag)
-            if not d:
-                d = Discipline(name=tag)
-                d.save()
-            else:
-                d = d[0]
-            if d not in proj.tags.all():
-                proj.tags.add(d)
-        proj.save()
-        return redirect('project', slug=proj.slug)
-
-    return HttpResponseNotAllowed(['POST'])
-
-
 def project(request, slug, default_template="project/view.html"):
 
     proj = get_object_or_404(Project, slug=slug)
@@ -74,11 +48,32 @@ def edit(request, slug, default_template="project/edit.html"):
 
 
 def new(request, default_template="project/new.html"):
+    
+    # create this model
+    if request.method == 'POST':
+        post = request.POST
+        proj = Project()
+        proj.name = post['project_title']
+        proj.description = post['project_desc']
+        proj.main_url = post['project_site_url']
+        proj.save()
+        proj.tags.clear()
+        for tag in post.getlist('project_tags[]'):
+            d = Discipline.objects.filter(name=tag)
+            if not d:
+                d = Discipline(name=tag)
+                d.save()
+            else:
+                d = d[0]
+            if d not in proj.tags.all():
+                proj.tags.add(d)
+        proj.save()
+        return redirect('project', slug=proj.slug)
 
     if request.method == 'GET':
         return render_to_response(default_template, context_instance=RequestContext(request))
 
-    return HttpResponseNotAllowed(['GET'])
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 
 def all(request, default_template="project/all.html"):
