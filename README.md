@@ -20,7 +20,7 @@ _coming soon to a GitHub near you_
         PROJECT_ROOT = os.path.dirname(__file__)
         sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
     
-5.  folow the Manual configs below
+5.  follow the Manual configs below
 
 ## Manual configs: ##
 #### settings.py: ####
@@ -45,7 +45,7 @@ _this needs to map to your the url you set in urls.py_
 
 ## Testing procedures ##
 #### dump fixtures ####
-    $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > victr/fixtures/initial_data.json  
+    $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > apps/victr/fixtures/initial_data.json  
 
 #### install fixtures ####
     $ > python manage.py reset victr  

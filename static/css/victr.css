@@ -274,8 +274,9 @@
     padding-left: 180px;
 }
 
-.project_form #project_desc {
-    height: 100px
+.project_form #id_description {
+    height: 100px;
+    width: 480px
 }
 
 .project_form #reset {
@@ -379,19 +380,22 @@
     .project_form .form-horizontal .form-actions {
         padding-left: 19px;
     }
+    .project_form #id_description {
+        width: 270px;
+    }
 }
 @media only screen and (min-width: 480px) and (max-width: 770px) {
-    .project_form #project_desc {
+    .project_form #id_description {
         width: 270px;
     }
 }
 @media only screen and (min-width: 770px) and (max-width: 980px) {
-    .project_form #project_desc {
+    .project_form #id_description {
         width: 320px;
     }
 }
 @media only screen and (min-width: 980px) and (max-width: 1200px) {
-    .project_form #project_desc {
+    .project_form #id_description {
         width: 480px;
     }
 }

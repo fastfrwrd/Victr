@@ -59,18 +59,18 @@ class Schedule(models.Model):
 	event = models.ForeignKey(Event)
 
 class Project(models.Model):
-    slug = models.SlugField()
-    name = models.CharField(max_length=50)
-    description = models.TextField(blank=True)
-    tags = models.ManyToManyField(Discipline, blank=True)
-    main_url = models.URLField()
+    slug          = models.SlugField()
+    title         = models.CharField(max_length=50)
+    description   = models.TextField(blank=True)
+    url           = models.URLField(blank=True)
     # other_urls
-    collaborators = models.ManyToManyField(User, blank=True)
-    screenshot = models.ImageField(upload_to="images/screenshot")
+    # tags = models.ManyToManyField(Discipline, blank=True)
+    # collaborators = models.ManyToManyField(User, blank=True)
+    # screenshot = models.ImageField(upload_to="images/screenshot")
 
     def save(self):
         if not self.id:
-            self.slug = SlugifyUniquely(self.name, self.__class__)
+            self.slug = SlugifyUniquely(self.title, self.__class__)
         super(self.__class__, self).save()
     
 class UserProfile(models.Model):
