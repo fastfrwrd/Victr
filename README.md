@@ -46,7 +46,7 @@ _this needs to map to your the url you set in urls.py_
 
 ## Testing procedures ##
 #### dump fixtures ####
-    $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > victr/fixtures/initial_data.json  
+    $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > apps/victr/fixtures/initial_data.json  
 
 #### install fixtures ####
     $ > python manage.py reset victr  
