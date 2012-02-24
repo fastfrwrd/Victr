@@ -15,40 +15,49 @@ class Discipline(models.Model):
     def __str__(self):
         return self.name
 
-class Schedule(models.Model):
-	scheduled = models.DateTimeField(
-			blank=True, 
-			help_text = "When your contest will appear publicly as a simple page \
-					     with an RSVP link. Leaving this blank means that your event \
-					     will appear as soon as it is saved."
-	)
-	open = models.DateTimeField(
-			help_text = "When you participants can start submitting their projects."
-	)
-	close = models.DateTimeField(
-			help_text = "When submissions will close."
-	)
-	displayResults = models.DateTimeField(
-			blank=True, 
-			help_text = "When the results of your contest will go live, if there are \
-					     results entered. This will be overridden if \"Display Results\" \
-					     is selected within the event. Field is optional - use \"Display \
-					     Results\" checkbox in event if not using this."
-	)
-	hidden = models.DateTimeField(			
-			blank=True, 
-			help_text = "When the event, results, and hacks will go into hidden mode. \
-						 Leaving this off will leave all portions of this event accessible on \
-						 the \"Events\" section of the site."
-	)
-    
 class Event(models.Model):
 	slug = models.SlugField()
 	name = models.CharField(max_length=50)
 	description = models.TextField(blank=True) #this should be a WYSIWYG Field
-	creator = models.ForeignKey(User, blank=True)
-	rsvp = models.URLField(blank=True)
-	schedule = models.ForeignKey(Schedule)
+	rsvp = models.URLField(
+			blank=True,			
+			help_text = "A URL to the event RSVP (Eventbrite, etc.)",
+	)
+	
+	def __unicode__(self):
+		return self.name;
+	
+class Schedule(models.Model):
+	scheduled = models.DateTimeField(
+			blank=True, 
+			null=True,
+			help_text = "When your contest will appear publicly as a simple page \
+					     with an RSVP link. Leaving this blank means that your event \
+					     will appear as soon as it is saved.",
+	)
+	open = models.DateTimeField(
+			help_text = "When you participants can start submitting their projects.",
+	)
+	close = models.DateTimeField(
+			help_text = "When submissions will close.",
+	)
+	displayResults = models.DateTimeField(
+			"Display results",
+			blank=True, 
+			null=True,
+			help_text = "When the results of your contest will go live, if there are \
+					     results entered. This will be overridden if \"Display Results\" \
+					     is selected within the event. Field is optional - use \"Display \
+					     Results\" checkbox in event if not using this.",
+	)
+	hidden = models.DateTimeField(			
+			blank=True,
+			null=True,
+			help_text = "When the event, results, and hacks will go into hidden mode. \
+						 Leaving this off will leave all portions of this event accessible on \
+						 the \"Events\" section of the site.",
+	)
+	event = models.ForeignKey(Event)
 
 class Project(models.Model):
     slug = models.SlugField()
