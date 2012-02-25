@@ -7,7 +7,7 @@
 {% block content %}
 
 {% block heading %}{% endblock %}
-<form action="{% victr_base %}{{ action }}" method="{{ method }}" class="form-horizontal">
+<form action="{% victr_base %}{% block action %}{% endblock %}" method="{% block method %}post{% endblock %}" class="form-horizontal">
 
     <h3>Project Informations</h3>
     <section class="row">

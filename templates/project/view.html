@@ -13,14 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="details well container-fluid">
-        <!-- todo: add an if for the screenshot, award -->
-        <img class="screenshot pull-right" src="http://placekitten.com/g/200/200/" />
-        <span class="award">Winner, Outstanding UX</span>
-        <div class="field"><span class="label">created by:</span>User 1 and User 2</div>
-        <div class="field"><span class="label">tech:</span>{{ project.tags.all|join:', ' }}</div>
-        <div class="field"><span class="label">github:</span><a class="btn btn-small btn-success" href="https://github.com/twitter/bootstrap/">browse code</a></div>
-    </section>
+    {% include "project/includes/details.html" %}
     <article class="description">
         <h3>About {{ project.name }}</h3>
         <p>{{ project.description }}</p>

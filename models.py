@@ -64,6 +64,7 @@ class Project(models.Model):
     title         = models.CharField(max_length=50)
     description   = models.TextField(blank=True)
     url           = models.URLField(blank=True)
+    event         = models.ForeignKey(Event)
     # other_urls
     # tags = models.ManyToManyField(Discipline, blank=True)
     # collaborators = models.ManyToManyField(User, blank=True)

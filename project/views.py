@@ -31,8 +31,6 @@ def edit(request, slug, default_template="project/edit.html"):
     if request.method == 'GET':
         project = Project.objects.get(slug=slug)
         project_form = ProjectForm(instance = project)
-        action = 'project/' + project.slug
-        method = 'post'
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET'])
@@ -52,8 +50,6 @@ def new(request, default_template="project/new.html"):
 
     if request.method == 'GET':
         project_form = ProjectForm()
-        action = 'project/new'
-        method = 'post'
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET', 'POST'])

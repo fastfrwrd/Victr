@@ -3,6 +3,9 @@
 {% block page_id %}project_edit{% endblock %}
 {% block page_class %}project_form{% endblock %}
 
+{% block action %}project/{{ project.slug }}{% endblock %}
+{% block method %}post{% endblock %}
+
 {% block heading %}
 <h2>Edit Your Project <small>edit all the things!</small></h2>
 {% endblock %}

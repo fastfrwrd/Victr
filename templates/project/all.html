@@ -3,11 +3,8 @@
 {% block page_id %}project_all{% endblock %}
 
 {% block content %}
-    <ul class="span12">
-        {% for project in projects %}
-        <li class="well">
-            {{ project.name }}
-        </li>
-        {% endfor %}
-    </ul>
+    {% for project in projects %}
+        {{ project.title }}
+        {% include "project/includes/details.html" %}
+    {% endfor %}
 {% endblock %}
