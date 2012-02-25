@@ -17,7 +17,16 @@ class Discipline(models.Model):
     def __str__(self):
         return self.name
 
-class Schedule(models.Model):
+class Event(models.Model):
+	slug = models.SlugField()
+	name = models.CharField(max_length=50)
+	description = models.TextField(blank=True)
+	show_results = models.BooleanField()
+	rsvp = models.URLField(
+			blank=True,		
+			verbose_name="RSVP",
+			help_text = "A URL to the event RSVP (Eventbrite, etc.)",
+	)
 	scheduled = models.DateTimeField(
 			blank=True, 
 			null=True,
@@ -39,33 +48,13 @@ class Schedule(models.Model):
 						 the \"Events\" section of the site.",
 	)
 
-class Event(models.Model):
-    slug = models.SlugField()
-    name = models.CharField(max_length=50)
-    description = models.TextField(blank=True)
-    show_results = models.BooleanField()
-    schedule = models.ForeignKey(Schedule)
-    twitter = models.CharField(
-    		max_length=50,
-    		blank=True,
-    		help_text = "A Twitter #hashtag or @account to follow and include on the sidebar \
-    					 (include the # and @)."
-    )
-    rsvp = models.URLField(
-            blank=True,			
-            help_text = "A URL to the event RSVP (Eventbrite, etc.)",
-    )
+	def __unicode__(self):
+		return self.name;
 
-    def __unicode__(self):
-        return self.name;
-
-    def save(self):
-        if not self.id:
-            self.slug = SlugifyUniquely(self.name, self.__class__)
-        super(self.__class__, self).save()
-    
-    def state(self):
-        return "open"
+	def save(self):
+		if not self.id:
+			self.slug = SlugifyUniquely(self.name, self.__class__)
+		super(self.__class__, self).save()
 
 class Project(models.Model):
     slug          = models.SlugField()
@@ -73,6 +62,17 @@ class Project(models.Model):
     description   = models.TextField(blank=True)
     url           = models.URLField(blank=True)
     event         = models.ForeignKey(Event)
+    rank = models.IntegerField(
+    		blank=True,	
+    		null=True,
+            help_text = "What place the project came in in the contest."
+    )
+    award = models.CharField(
+    		max_length=50,
+    		blank=True,			
+            help_text = "e.g. \"Best UX\" or \"Honorable Mention\""
+    )
+    
     # other_urls
     # tags = models.ManyToManyField(Discipline, blank=True)
     # collaborators = models.ManyToManyField(User, blank=True)
@@ -90,7 +90,3 @@ class UserProfile(models.Model):
     skills = models.ManyToManyField(Discipline, blank=True)
     def __unicode__(self) :
         return str(self.user)
-    
-class Rank(models.Model):
-    project = models.ForeignKey(Project)
-    rank = models.IntegerField(blank=True)

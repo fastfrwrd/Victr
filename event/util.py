@@ -1,6 +1,6 @@
 from django.db.models import Q
 from datetime import datetime, timedelta
-from victr.models import Event, Schedule
+from victr.models import Event
 
 class EventQuery:
 
@@ -8,18 +8,18 @@ class EventQuery:
         """
         Returns ALL events, including invisible ones. Careful...
         """
-        return Event.objects.order_by('-schedule__close')
+        return Event.objects.order_by('-close')
     
     def visible(self):
         """
         Returns all events that are visible.
         """
         return Event.objects.filter( 
-            Q(schedule__scheduled__lte = datetime.now()) | Q(schedule__scheduled__isnull = True),
-            Q(schedule__hidden__gte = datetime.now()) | Q(schedule__hidden__isnull = True),
-        ).order_by('-schedule__close')
+            Q(scheduled__lte = datetime.now()) | Q(scheduled__isnull = True),
+            Q(hidden__gte = datetime.now()) | Q(hidden__isnull = True),
+        ).order_by('-close')
         
-    def current(self):
+    def current(self, limit=None):
         """
         Returns the current event that project submissions goes to and that the
         front page will display, or returns false if there's no current event.
@@ -27,10 +27,11 @@ class EventQuery:
         try :
             return Event.objects.filter(
                 # visible
-                Q(schedule__scheduled__lte = datetime.now()) | Q(schedule__scheduled__isnull = True),
-                Q(schedule__hidden__gte = datetime.now()) | Q(schedule__hidden__isnull = True),
+                Q(scheduled__lte = datetime.now()) | Q(scheduled__isnull = True),
+                Q(hidden__gte = datetime.now()) | Q(hidden__isnull = True),
                 # is open or closed less than 48 hours ago
-                schedule__close__lte = datetime.now() + timedelta(days = 2),
-            ).order_by('-schedule__close')[0]
+                close__gte = (datetime.now() - timedelta(days = 2)),
+            #order by close chronologically, not farthest away this time.
+            ).order_by('close')[0]
         except IndexError:
             return False

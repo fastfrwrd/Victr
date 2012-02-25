@@ -1,17 +1,22 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
+from datetime import datetime
 import re
 
 register = template.Library()
 
+#tags
 @register.simple_tag
 def victr_base():
+    """returns base URL for victr. Available as Victr.base in JS."""
     return reverse('victr.views.home')
 
+#filters
 class_re = re.compile(r'(?<=class=["\'])(.*)(?=["\'])')
 @register.filter
 def add_class(value, css_class):
+    """adds class to element."""
     string = unicode(value)
     match = class_re.search(string)
     if match:
@@ -28,4 +33,10 @@ def add_class(value, css_class):
     
 @register.filter
 def multiply(value, multiplier):
+    """multiplies tag value by multiplier."""
     return value * multiplier
+    
+@register.filter
+def past(value):
+    """returns true if scheduled event is in the past."""
+    return value <= datetime.now()

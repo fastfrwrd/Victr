@@ -116,56 +116,6 @@
     },
     {
         "pk": 1,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2012-04-26 09:00:00",
-            "hidden": null,
-            "open": "2012-04-24 09:00:00"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2012-02-26 12:00:00",
-            "hidden": null,
-            "open": "2012-02-24 12:00:00"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2012-01-02 17:53:46",
-            "hidden": null,
-            "open": "2011-12-05 12:00:00"
-        }
-    },
-    {
-        "pk": 4,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": "2012-07-02 17:54:38",
-            "close": "2013-02-25 17:54:27",
-            "hidden": null,
-            "open": "2013-02-24 17:54:28"
-        }
-    },
-    {
-        "pk": 5,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2011-02-24 17:54:59",
-            "hidden": "2011-02-28 17:55:09",
-            "open": "2011-02-23 17:54:57"
-        }
-    },
-    {
-        "pk": 1,
         "model": "victr.event",
         "fields": {
             "description": "Mixtape dreamcatcher ea semiotics in, carles yr farm-to-table mumblecore locavore anim ad ethnic occaecat. Pour-over irony velit, id pinterest chillwave cliche trust fund wayfarers. Duis banh mi nisi, portland typewriter american apparel jean shorts polaroid banksy. Artisan consectetur bicycle rights sunt fingerstache, locavore yr art party seitan carles. Yr viral ethical odd future. Id sunt selvage, single-origin coffee pitchfork assumenda esse placeat next level forage bespoke beard chambray. Tempor mustache typewriter gluten-free fingerstache messenger bag aute, butcher ethnic stumptown id.",
@@ -173,7 +123,10 @@
             "show_results": true,
             "slug": "html-5-mobile-hackathon",
             "name": "HTML 5 Mobile Hackathon",
-            "schedule": 1
+            "scheduled": null,
+            "close": "2012-04-26 09:00:00",
+            "hidden": null,
+            "open": "2012-04-24 09:00:00"
         }
     },
     {
@@ -185,7 +138,10 @@
             "show_results": false,
             "slug": "optaros-current-hackathon",
             "name": "Optaros Current Hackathon",
-            "schedule": 2
+            "scheduled": null,
+            "close": "2012-02-26 12:00:00",
+            "hidden": null,
+            "open": "2012-02-24 12:00:00"
         }
     },
     {
@@ -197,7 +153,10 @@
             "show_results": false,
             "slug": "ancient-hackathon",
             "name": "Ancient Hackathon",
-            "schedule": 3
+            "scheduled": null,
+            "close": "2012-01-02 17:53:46",
+            "hidden": null,
+            "open": "2011-12-05 12:00:00"
         }
     },
     {
@@ -209,7 +168,10 @@
             "show_results": false,
             "slug": "super-secret-future-hackathon",
             "name": "Super Secret Future Hackathon",
-            "schedule": 4
+            "scheduled": "2012-07-02 17:54:38",
+            "close": "2013-02-25 17:54:27",
+            "hidden": null,
+            "open": "2013-02-24 17:54:28"
         }
     },
     {
@@ -221,7 +183,10 @@
             "show_results": false,
             "slug": "embarassing-hidden-hackathon",
             "name": "Embarassing, Hidden Hackathon",
-            "schedule": 5
+            "scheduled": null,
+            "close": "2011-02-24 17:54:59",
+            "hidden": "2011-02-28 17:55:09",
+            "open": "2011-02-23 17:54:57"
         }
     },
     {
@@ -232,7 +197,9 @@
             "description": "a tool to manage your competitions (like hack days!)\r\n\r\nby Tucker Bickler, Paul Marbach, Raul Mireles, and Shela Xu\r\n\r\ncoming soon to a GitHub Near you\r\n\r\n\"to the victr go the spoils\"",
             "slug": "victr",
             "title": "Victr",
-            "event": 2
+            "event": 2,
+            "rank": null,
+            "award": ""
         }
     },
     {
@@ -243,7 +210,9 @@
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum vestibulum enim a fringilla. Aenean blandit, mi a venenatis scelerisque, dolor ipsum commodo tellus, eget tempus tellus tortor sed sapien. Aliquam facilisis lobortis ipsum consectetur egestas. Vivamus pharetra laoreet ornare. Nunc faucibus ornare nisi sed blandit. Phasellus eu sapien dui, non sagittis neque. Integer porta, nisl in laoreet elementum, lacus enim rhoncus tortor, quis viverra erat urna ut turpis. Fusce quis turpis vel augue viverra vehicula. Pellentesque malesuada, dolor id ultrices mollis, sem tortor lobortis eros, at vulputate ipsum massa pharetra justo. Nunc pretium gravida vehicula. Aenean pellentesque posuere enim in tincidunt. In lacinia vestibulum nulla, sed luctus elit vulputate eget. Nam nisi nibh, pellentesque et iaculis ut, tempus vel augue. Duis ut dolor eu sem aliquam pretium vel at tortor.",
             "slug": "optaros",
             "title": "Optaros",
-            "event": 2
+            "event": 2,
+            "rank": null,
+            "award": ""
         }
     },
     {
@@ -254,7 +223,9 @@
             "description": "Bookmark your favorite videos from across the internet! Sign in with Facebook to access your profile videos! Use our awesome bookmarklet to automatically save from any webpage.",
             "slug": "clippfeed",
             "title": "ClippFeed",
-            "event": 2
+            "event": 2,
+            "rank": null,
+            "award": ""
         }
     },
     {
@@ -265,7 +236,9 @@
             "description": "Take notes and search the web!....at the same time!! This is your Google Docs replacement basically. End of story.",
             "slug": "riffnotes",
             "title": "RiffNotes",
-            "event": 2
+            "event": 2,
+            "rank": null,
+            "award": ""
         }
     }
 ]
