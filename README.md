@@ -46,12 +46,15 @@ _this needs to map to your the url you set in urls.py_
 
 ## Dependencies ##
 pil (for thumbnail images)
+
     $ > pip install pil
 
 ## Testing procedures ##
 #### dump fixtures ####
+
     $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > apps/victr/fixtures/initial_data.json  
 
 #### install fixtures ####
+
     $ > python manage.py reset victr  
     $ > python manage.py syncdb
