@@ -110,6 +110,41 @@
     padding: 90px 0px;
 }
 
+    .hero-unit.active {
+        padding: 90px 0px 30px;
+    }
+
+    .hero-unit .btn {
+        margin: 30px auto 0;
+        padding: 20px;
+        display: block;
+        width: 40%;
+        color: #383030;
+        font-size: 30px;
+        font-weight: bold;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        line-height: 30px;
+        -moz-box-shadow: 2px 2px 5px #666;
+        -webkit-box-shadow: 2px 2px 5px #666;
+        box-shadow: 2px 2px 5px #666;
+}
+    }
+    
+    .hero-unit .btn-primary {
+        background: -moz-linear-gradient(center top, #f7e421, #fcc316) repeat scroll 0 0 transparent;
+        background-image: -ms-linear-gradient(center top, #f7e421, #fcc316);
+        background-image: -webkit-gradient(linear, top, bottom, from(#f7e421), to(#fcc316));
+        background-image: -webkit-linear-gradient(top, #f7e421, #fcc316);
+        background-image: -o-linear-gradient(top, #f7e421, #fcc316);
+        background-image: linear-gradient(top, #f7e421, #fcc316);
+    }
+    
+    .hero-unit .btn-primary:hover {
+        background-color: #fcc316;
+    }
+
 .btn-primary {
     background-color: #6F5099;
     background-image: -moz-linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
@@ -127,6 +162,23 @@
 .btn-primary[disabled] {
   background-color: #6F5099;
 }
+    
+    .hero-unit .btn-primary {
+        background: -moz-linear-gradient(center top, #f7e421, #fcc316) repeat scroll 0 0 transparent;
+        background-image: -ms-linear-gradient(center top, #f7e421, #fcc316);
+        background-image: -webkit-gradient(linear, top, bottom, from(#f7e421), to(#fcc316));
+        background-image: -webkit-linear-gradient(top, #f7e421, #fcc316);
+        background-image: -o-linear-gradient(top, #f7e421, #fcc316);
+        background-image: linear-gradient(top, #f7e421, #fcc316);
+    }
+    
+    .hero-unit .btn-primary:hover,
+    .hero-unit .btn-primary:active,
+    .hero-unit .btn-primary.active,
+    .hero-unit .btn-primary.disabled,
+    .hero-unit .btn-primary[disabled] {
+        background-color: #fcc316;
+    }
 
 .hero-unit * {
     color:#ffffff;
@@ -212,6 +264,15 @@
     .project .details img {
         max-width: 30%;
         max-height: 30%;
+    }
+    
+.project.small {
+    
+}
+
+    .project.small h3 {
+        line-height: 14px;
+        margin-bottom: 10px;
     }
 
 /* awards */
@@ -407,6 +468,10 @@
     }
     .navbar ul.nav a.login-collapse {
         display:block;
+    }
+    .hero-unit .btn {
+        margin: 30px 0;
+        width: auto;
     }
 }
 @media screen and (min-width: 981px) {

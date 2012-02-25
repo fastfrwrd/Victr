@@ -14,8 +14,7 @@ def view(request, slug="", default_template="event/view.html"):
     if(slug is "") :
         eq = EventQuery()
         event = eq.current()
-        projects = Project.objects.get(event=event)
     else :
         event = get_object_or_404(Event, slug=slug)
-        projects = Project.objects.filter(event=event)
+    projects = Project.objects.filter(event=event)
     return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event, 'projects' : projects }))

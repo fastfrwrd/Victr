@@ -14,21 +14,19 @@
     <section class="main span12">        
         {% if event.description %}
         <div class="description">
-            <h3>About</h3>
+            <h2>About</h2>
             <p>{{ event.description }}</p>
         </div>
         {% endif %}    
-        <h2>Contenders</h2>
         <div class="projects">
-        {% for project in projects %}
-            {% cycle '<div class="row">' '' '' %}
-                <article class="project span4">
+            <h2>Contenders</h2>
+            {% for project in projects %}
+                {% cycle '<div class="row">' '' '' %}
                 {% include "project/small.html" %}
-                </article>
-            {% cycle '' '' '</div>' %}
-        {% empty %}
-            <p class="center empty">There are no projects currently submitted for {{ event.name }}!</p>
-        {% endfor %}
+                {% cycle '' '' '</div>' %}
+            {% empty %}
+                <p class="center empty">There are no projects currently submitted for {{ event.name }}!</p>
+            {% endfor %}
         </div>
     </section>    
 </div>
