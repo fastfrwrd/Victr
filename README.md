@@ -1,10 +1,9 @@
 # Victr #
 
 a tool to manage your competitions (like hack days!)
-
 by Tucker Bickler, Paul Marbach, Raul Mireles, and Shela Xu
 
-_coming soon to a GitHub Near you_
+_coming soon to a GitHub near you_
 
 ### "to the victr go the spoils" ###
 
@@ -50,4 +49,4 @@ _this needs to map to your the url you set in urls.py_
 
 #### install fixtures ####
     $ > python manage.py reset victr  
-    $ > python manage.py syncdb  
+    $ > python manage.py syncdb

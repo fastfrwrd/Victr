@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
+
 from victr.util import *
 
 # Create your models here.
@@ -16,16 +18,25 @@ class Discipline(models.Model):
         return self.name
 
 class Event(models.Model):
-	slug = models.SlugField()
-	name = models.CharField(max_length=50)
-	description = models.TextField(blank=True) #this should be a WYSIWYG Field
-	rsvp = models.URLField(
-			blank=True,			
-			help_text = "A URL to the event RSVP (Eventbrite, etc.)",
-	)
-	
-	def __unicode__(self):
-		return self.name;
+    slug = models.SlugField()
+    name = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
+    show_results = models.BooleanField()
+    rsvp = models.URLField(
+            blank=True,			
+            help_text = "A URL to the event RSVP (Eventbrite, etc.)",
+    )
+
+    def __unicode__(self):
+        return self.name;
+
+    def save(self):
+        if not self.id:
+            self.slug = SlugifyUniquely(self.name, self.__class__)
+        super(self.__class__, self).save()
+    
+    def state(self):
+        return "open"
 	
 class Schedule(models.Model):
 	scheduled = models.DateTimeField(
@@ -36,19 +47,10 @@ class Schedule(models.Model):
 					     will appear as soon as it is saved.",
 	)
 	open = models.DateTimeField(
-			help_text = "When you participants can start submitting their projects.",
+			help_text = "When your participants can start submitting their projects.",
 	)
 	close = models.DateTimeField(
 			help_text = "When submissions will close.",
-	)
-	displayResults = models.DateTimeField(
-			"Display results",
-			blank=True, 
-			null=True,
-			help_text = "When the results of your contest will go live, if there are \
-					     results entered. This will be overridden if \"Display Results\" \
-					     is selected within the event. Field is optional - use \"Display \
-					     Results\" checkbox in event if not using this.",
 	)
 	hidden = models.DateTimeField(			
 			blank=True,
