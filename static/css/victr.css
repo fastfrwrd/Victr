@@ -329,6 +329,11 @@
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E69E2F', endColorstr='#CC6E0E', GradientType=0);
     }
 
+/* general form styles */
+.form_page h2 {
+    margin-bottom: 20px;
+}
+    
 /* project form styles */
 .project_form .form-horizontal .form-actions {
     padding-left: 180px;
@@ -343,9 +348,6 @@
     margin-left: 30px
 }
 
-#project_new h2 {
-    margin-bottom: 20px;
-}
 
 /* general form styles */
 #submit  .icon-refresh {

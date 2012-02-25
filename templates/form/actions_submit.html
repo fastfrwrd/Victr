@@ -1,0 +1,5 @@
+<div class="form-actions">
+    {% csrf_token %}
+    <button type="submit" id="submit" class="btn btn-primary"><i class="{{ submit_icon }} icon-white"></i><i class="icon-refresh icon-white"></i> {{ submit_text }}</button>
+    <button type="reset" id="reset" class="btn">{{ reset_text|default:"Reset" }}</button>
+</div>

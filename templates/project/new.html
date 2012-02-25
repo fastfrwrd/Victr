@@ -1,13 +1,13 @@
-{% extends "project/layout.html" %}
+{% extends "project/form.html" %}
 
 {% block page_id %}project_new{% endblock %}
-{% block page_class %}project_form{% endblock %}
 
 {% block action %}project/new{% endblock %}
-{% block method %}post{% endblock %}
 
 {% block heading %}
-<h2>Submit a Project <small>just fill out the form!</small></h2>
+Submit a Project <small>just fill out the form!</small>
 {% endblock %}
 
-{% block submit %}Submit{% endblock %}
+{% block actions %}
+{% include "form/actions_submit.html" with submit_text="Submit Project"  submit_icon="icon-gift" %}   
+{% endblock %}

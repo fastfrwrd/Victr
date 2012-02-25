@@ -1,13 +1,13 @@
-{% extends "project/layout.html" %}
+{% extends "project/form.html" %}
 
 {% block page_id %}project_edit{% endblock %}
-{% block page_class %}project_form{% endblock %}
 
 {% block action %}project/{{ project.slug }}{% endblock %}
-{% block method %}post{% endblock %}
 
 {% block heading %}
-<h2>Edit Your Project <small>edit all the things!</small></h2>
+Edit Your Project <small>edit all the things!</small>
 {% endblock %}
 
-{% block submit %}Update{% endblock %}
+{% block actions %}
+{% include "form/actions_submit.html" with submit_text="Update Project"  submit_icon="icon-arrow-up" %}
+{% endblock %}

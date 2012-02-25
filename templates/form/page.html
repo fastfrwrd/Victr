@@ -1,0 +1,30 @@
+{% extends "main_layout.html" %}
+{% load victr_tags %}
+
+{% block page_class %}form_page{% endblock %}
+
+{% block content %}
+
+<h2>{% block heading %}{% endblock %}</h2>
+<form action="{% victr_base %}{% block action %}{% endblock %}" method="{% block method %}post{% endblock %}" class="form-horizontal">
+
+    <h3>{% block sub_section_heading %}{% endblock %}</h3>
+    <section class="row">
+        <div class="span3">
+            {% block sub_section_text %}{% endblock %}
+        </div>
+        <div class="span9">
+            <div class="well">
+                {% include "form/fields.html" %}
+            </div>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="span9 offset3">
+            {% block actions %}{% endblock %}
+        </div>
+    </section>
+
+</form>
+{% endblock %}
