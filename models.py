@@ -34,6 +34,9 @@ class Event(models.Model):
         if not self.id:
             self.slug = SlugifyUniquely(self.name, self.__class__)
         super(self.__class__, self).save()
+    
+    def state(self):
+        return "open"
 	
 class Schedule(models.Model):
 	scheduled = models.DateTimeField(
@@ -44,7 +47,7 @@ class Schedule(models.Model):
 					     will appear as soon as it is saved.",
 	)
 	open = models.DateTimeField(
-			help_text = "When you participants can start submitting their projects.",
+			help_text = "When your participants can start submitting their projects.",
 	)
 	close = models.DateTimeField(
 			help_text = "When submissions will close.",

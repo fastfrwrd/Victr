@@ -6,7 +6,7 @@ class EventQuery:
 
     def all():
         """
-        Shows ALL events, including invisible ones. Careful...
+        Returns ALL events, including invisible ones. Careful...
         """
         return Event.objects.order_by('-schedule__close')
     
@@ -21,7 +21,7 @@ class EventQuery:
         
     def current():
         """
-        Gets the current event that project submissions goes to and that the
+        Returns the current event that project submissions goes to and that the
         front page will display, or returns false if there's no current event.
         """
         try :
@@ -30,7 +30,7 @@ class EventQuery:
                 Q(schedule__scheduled__lte = datetime.now()) | Q(schedule__scheduled__isnull = True),
                 Q(schedule__hidden__gte = datetime.now()) | Q(schedule__hidden__isnull = True),
                 # is open or closed less than 48 hours ago
-                schedule__close__lte = datetime.now() + timedelta(2),
+                schedule__close__lte = datetime.now() + timedelta(days = 2),
             ).order_by('-schedule__close')[0]
         except IndexError:
             return False
