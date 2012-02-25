@@ -26,24 +26,21 @@
 
 {% block container %}
   
-    {% block header %}
-  {% endblock %}
-<div class="container main {% block page_class %}{% endblock %}" id="{% block page_id %}{% endblock %}">
-
-  {% block messages %}{% include "messages.html" %}{% endblock %}
-    
-
-    
-  {% block featured_item %}
-  {% endblock %}
-    
-  {% block content %}
+  {% block header %}
   {% endblock %}
   
-  {% block footer %}
-  {% endblock %}
-
-</div><!--/.fluid-fixed-->
+  <div class="container main {% block page_class %}{% endblock %}" id="{% block page_id %}{% endblock %}">
+      {% block messages %}{% include "messages.html" %}{% endblock %}
+        
+      {% block featured_item %}
+      {% endblock %}
+        
+      {% block content %}
+      {% endblock %}
+      
+      {% block footer %}
+      {% endblock %}
+  </div>
 {% endblock %}
 
 {% block js %}

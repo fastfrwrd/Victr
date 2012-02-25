@@ -8,7 +8,7 @@ from victr.util import *
 
 class Discipline(models.Model):
     name = models.CharField(max_length=40)
-
+    
     def save(self):
         if not self.id:
             self.name = SlugifyUniquely(self.name, self.__class__, 'name')
@@ -17,27 +17,6 @@ class Discipline(models.Model):
     def __str__(self):
         return self.name
 
-class Event(models.Model):
-    slug = models.SlugField()
-    name = models.CharField(max_length=50)
-    description = models.TextField(blank=True)
-    show_results = models.BooleanField()
-    rsvp = models.URLField(
-            blank=True,			
-            help_text = "A URL to the event RSVP (Eventbrite, etc.)",
-    )
-
-    def __unicode__(self):
-        return self.name;
-
-    def save(self):
-        if not self.id:
-            self.slug = SlugifyUniquely(self.name, self.__class__)
-        super(self.__class__, self).save()
-    
-    def state(self):
-        return "open"
-	
 class Schedule(models.Model):
 	scheduled = models.DateTimeField(
 			blank=True, 
@@ -59,7 +38,34 @@ class Schedule(models.Model):
 						 Leaving this off will leave all portions of this event accessible on \
 						 the \"Events\" section of the site.",
 	)
-	event = models.ForeignKey(Event)
+
+class Event(models.Model):
+    slug = models.SlugField()
+    name = models.CharField(max_length=50)
+    description = models.TextField(blank=True)
+    show_results = models.BooleanField()
+    schedule = models.ForeignKey(Schedule)
+    twitter = models.CharField(
+    		max_length=50,
+    		blank=True,
+    		help_text = "A Twitter #hashtag or @account to follow and include on the sidebar \
+    					 (include the # and @)."
+    )
+    rsvp = models.URLField(
+            blank=True,			
+            help_text = "A URL to the event RSVP (Eventbrite, etc.)",
+    )
+
+    def __unicode__(self):
+        return self.name;
+
+    def save(self):
+        if not self.id:
+            self.slug = SlugifyUniquely(self.name, self.__class__)
+        super(self.__class__, self).save()
+    
+    def state(self):
+        return "open"
 
 class Project(models.Model):
     slug          = models.SlugField()

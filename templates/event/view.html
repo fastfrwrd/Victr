@@ -1,0 +1,35 @@
+{% extends "main_layout.html" %}
+
+{% block page_id %}event_open{% endblock %}
+{% block class %}event{% endblock %}
+
+{% block page_title %}Victr - {{ event.name }}{% endblock %}
+
+{% block header %}
+{% include "event/header.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <section class="main span12">        
+        {% if event.description %}
+        <div class="description">
+            <h3>About</h3>
+            <p>{{ event.description }}</p>
+        </div>
+        {% endif %}    
+        <h2>Contenders</h2>
+        <div class="projects">
+        {% for project in projects %}
+            {% cycle '<div class="row">' '' '' %}
+                <article class="project span4">
+                {% include "project/small.html" %}
+                </article>
+            {% cycle '' '' '</div>' %}
+        {% empty %}
+            <p class="center empty">There are no projects currently submitted for {{ event.name }}!</p>
+        {% endfor %}
+        </div>
+    </section>    
+</div>
+{% endblock %}

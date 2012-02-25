@@ -116,13 +116,64 @@
     },
     {
         "pk": 1,
+        "model": "victr.schedule",
+        "fields": {
+            "scheduled": null,
+            "close": "2012-04-26 09:00:00",
+            "hidden": null,
+            "open": "2012-04-24 09:00:00"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "victr.schedule",
+        "fields": {
+            "scheduled": null,
+            "close": "2012-02-26 12:00:00",
+            "hidden": null,
+            "open": "2012-02-24 12:00:00"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "victr.schedule",
+        "fields": {
+            "scheduled": null,
+            "close": "2012-01-02 17:53:46",
+            "hidden": null,
+            "open": "2011-12-05 12:00:00"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "victr.schedule",
+        "fields": {
+            "scheduled": "2012-07-02 17:54:38",
+            "close": "2013-02-25 17:54:27",
+            "hidden": null,
+            "open": "2013-02-24 17:54:28"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "victr.schedule",
+        "fields": {
+            "scheduled": null,
+            "close": "2011-02-24 17:54:59",
+            "hidden": "2011-02-28 17:55:09",
+            "open": "2011-02-23 17:54:57"
+        }
+    },
+    {
+        "pk": 1,
         "model": "victr.event",
         "fields": {
             "description": "Mixtape dreamcatcher ea semiotics in, carles yr farm-to-table mumblecore locavore anim ad ethnic occaecat. Pour-over irony velit, id pinterest chillwave cliche trust fund wayfarers. Duis banh mi nisi, portland typewriter american apparel jean shorts polaroid banksy. Artisan consectetur bicycle rights sunt fingerstache, locavore yr art party seitan carles. Yr viral ethical odd future. Id sunt selvage, single-origin coffee pitchfork assumenda esse placeat next level forage bespoke beard chambray. Tempor mustache typewriter gluten-free fingerstache messenger bag aute, butcher ethnic stumptown id.",
             "rsvp": "",
             "show_results": true,
             "slug": "html-5-mobile-hackathon",
-            "name": "HTML 5 Mobile Hackathon"
+            "name": "HTML 5 Mobile Hackathon",
+            "schedule": 1
         }
     },
     {
@@ -133,7 +184,8 @@
             "rsvp": "http://www.optaros.com/",
             "show_results": false,
             "slug": "optaros-current-hackathon",
-            "name": "Optaros Current Hackathon"
+            "name": "Optaros Current Hackathon",
+            "schedule": 2
         }
     },
     {
@@ -144,7 +196,8 @@
             "rsvp": "",
             "show_results": false,
             "slug": "ancient-hackathon",
-            "name": "Ancient Hackathon"
+            "name": "Ancient Hackathon",
+            "schedule": 3
         }
     },
     {
@@ -155,7 +208,8 @@
             "rsvp": "",
             "show_results": false,
             "slug": "super-secret-future-hackathon",
-            "name": "Super Secret Future Hackathon"
+            "name": "Super Secret Future Hackathon",
+            "schedule": 4
         }
     },
     {
@@ -166,62 +220,8 @@
             "rsvp": "",
             "show_results": false,
             "slug": "embarassing-hidden-hackathon",
-            "name": "Embarassing, Hidden Hackathon"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2012-04-26 09:00:00",
-            "hidden": null,
-            "open": "2012-04-24 09:00:00",
-            "event": 1
-        }
-    },
-    {
-        "pk": 2,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2012-02-26 12:00:00",
-            "hidden": null,
-            "open": "2012-02-24 12:00:00",
-            "event": 2
-        }
-    },
-    {
-        "pk": 3,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2012-01-02 17:53:46",
-            "hidden": null,
-            "open": "2011-12-05 12:00:00",
-            "event": 3
-        }
-    },
-    {
-        "pk": 4,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": "2012-07-02 17:54:38",
-            "close": "2013-02-25 17:54:27",
-            "hidden": null,
-            "open": "2013-02-24 17:54:28",
-            "event": 4
-        }
-    },
-    {
-        "pk": 5,
-        "model": "victr.schedule",
-        "fields": {
-            "scheduled": null,
-            "close": "2011-02-24 17:54:59",
-            "hidden": "2011-02-28 17:55:09",
-            "open": "2011-02-23 17:54:57",
-            "event": 5
+            "name": "Embarassing, Hidden Hackathon",
+            "schedule": 5
         }
     },
     {

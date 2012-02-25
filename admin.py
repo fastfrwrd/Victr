@@ -8,5 +8,5 @@ class ScheduleInline(admin.StackedInline):
 class EventAdmin(admin.ModelAdmin):
     exclude = ['slug']
     inlines = [ScheduleInline]
-    pass
+
 admin.site.register(Event, EventAdmin)

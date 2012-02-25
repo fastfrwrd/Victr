@@ -5,10 +5,21 @@
 {% block page_title %}Victr - Event List{% endblock %}
 
 {% block header %}
-<header>
-    <h1>Event List</h1>
-</header>
+
 {% endblock %}
 
 {% block content %}
+<header>
+    <h1>Events</h1>
+</header>
+<div class="row">
+    <section class="main span12">
+    {% for event in events %}
+        {% include "event/small.html" %}
+    {% empty %}
+        <h3>No scheduled events</h3>
+        <p>Huh... there don't seem to be any events in here. Shucks! Be sure to come back another time.</p>
+    {% endfor %}
+    </section>
+</div>
 {% endblock %}

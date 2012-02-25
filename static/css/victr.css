@@ -94,7 +94,7 @@
         display: none;
     }
 
-/* general styles */
+/* general styles and bootstrap overrides */
 .hero-unit {
     background: -moz-linear-gradient(center top , #522A87, #6F5099) repeat scroll 0 0 transparent;
     background-image: -ms-linear-gradient(center top , #522A87, #6F5099);
@@ -128,24 +128,26 @@
   background-color: #6F5099;
 }
 
-.hero-unit h1 , .hero-unit  h2, .hero-unit p {
+.hero-unit * {
     color:#ffffff;
 }
 
-/* event styles */
-.event .tweets ul {
+.tweets ul {
     margin-left: 0px;
     list-style: none;
 }
 
-    .event .tweets ul li {
+    .tweets ul li {
         color: #676767;
         font-family: georgia, serif;
         font-style: italic;
         margin: 5px 0;
     }
 
-/* impress */
+/* event styles */
+
+
+/* impress styles and overrides */
 #impress #first-slide {
     font-family: 'Open Sans', Arial, sans-serif;
 }

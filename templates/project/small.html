@@ -1,0 +1,6 @@
+{% load victr_tags %}
+<article class="project small">
+    <h2><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h2>
+    <p>{{ project.description|truncatewords:50 }}</p>
+    <p>by User 1 and User 2</p>
+</article>

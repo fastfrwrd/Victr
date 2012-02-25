@@ -7,12 +7,15 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from victr.models import *
+from victr.event.util import EventQuery
 from victr.forms import RegistrationForm, LoginForm
 from urllib import quote, unquote
 
-def home(request, default_template="event/open.html"):
-    event = Event(name="Event name here")
-    return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event }))
+def home(request, default_template="event/view.html"):
+    eq = EventQuery()
+    event = eq.current()
+    projects = Project.objects.filter(event=event)
+    return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event, 'projects' : projects }))
 
 def register(request, default_template="auth/register_page.html"):
     form = RegistrationForm()

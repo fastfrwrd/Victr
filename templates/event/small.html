@@ -1,0 +1,6 @@
+{% load victr_tags %}
+<article class="event small">
+    <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a></h2>
+    <h4>{{ event.schedule.open|date:"l, F j, Y - P" }}</h4>
+    {% if event.description %}<p>{{ event.description|truncatewords:50 }}</p>{% endif %}
+</article>
