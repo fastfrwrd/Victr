@@ -1,0 +1,11 @@
+<header>
+    <div class="container-fluid">
+        <h1 class="pull-left">{{ project.title }}</h1>
+        <a class="btn btn-primary pull-left" href="{{ project.mainUrl }}">view hack <i class="icon-arrow-right icon-white"></i></a>
+    </div>
+</header>
+{% include "project/details.html" %}
+<article class="description">
+    <h3>About {{ project.name }}</h3>
+    <p>{{ project.description }}</p>
+</article>
