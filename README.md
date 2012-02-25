@@ -31,9 +31,10 @@ _this needs to map to your the url you set in urls.py_
     LOGIN_REDIRECT_URL = '/victr/'
 
     INSTALLED_APPS = (
-        ...
-        'victr',
-        ...
+        ... #your other apps are above this
+        'victr', #boom
+        'django.contrib.admin', #to edit and add events
+        ... #other apps, your victr extension
     )
 
 #### urls.py ####
@@ -46,10 +47,17 @@ _this needs to map to your the url you set in urls.py_
         url(r'^admin/', include(admin.site.urls)),
     )
 
+## Dependencies ##
+pil (for thumbnail images)
+
+    $ > pip install pil
+
 ## Testing procedures ##
 #### dump fixtures ####
+
     $ > python manage.py dumpdata --exclude=auth --exclude=contenttypes > apps/victr/fixtures/initial_data.json  
 
 #### install fixtures ####
+
     $ > python manage.py reset victr  
     $ > python manage.py syncdb
