@@ -31,9 +31,10 @@ _this needs to map to your the url you set in urls.py_
     LOGIN_REDIRECT_URL = '/victr/'
 
     INSTALLED_APPS = (
-        ...
-        'victr',
-        ...
+        ... #your other apps are above this
+        'victr', #boom
+        'django.contrib.admin', #to edit and add events
+        ... #other apps, your victr extension
     )
 
 #### urls.py ####
@@ -42,6 +43,10 @@ _this needs to map to your the url you set in urls.py_
         url(r'^victr/', include('victr.urls')), #this points to http://yoursiteurl.com/victr/. you can do root if you want too with the pattern r'^'
         ...
     )
+
+## Dependencies ##
+pil (for thumbnail images)
+    $ > pip install pil
 
 ## Testing procedures ##
 #### dump fixtures ####
