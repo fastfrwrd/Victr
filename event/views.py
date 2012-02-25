@@ -9,9 +9,6 @@ from datetime import datetime
 def list(request, default_template="event/list.html"):
     eq = EventQuery()
     events = eq.visible()
-    
-    for event in events:
-        event.current = event.open < datetime.now() and event.close > datetime.now()
     return render_to_response(default_template, context_instance=RequestContext(request, { 'events' : events }))
     
 def view(request, slug="", default_template="event/view.html"):
@@ -20,8 +17,7 @@ def view(request, slug="", default_template="event/view.html"):
         event = eq.current()
     else :
         event = get_object_or_404(Event, slug=slug)
-    visible = (event.scheduled is None or event.scheduled <= datetime.now()) and (event.hidden is None or event.hidden >= datetime.now())
-    if not visible :
+    if not event.is_visible :
         raise Http404
     projects = Project.objects.filter(event=event)
     return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event, 'projects' : projects }))

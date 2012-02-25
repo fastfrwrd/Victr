@@ -4,7 +4,6 @@ from django.template import RequestContext
 from django.utils import simplejson as json
 from django.core import serializers
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from victr.models import *
 from victr.event.util import EventQuery

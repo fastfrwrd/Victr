@@ -50,6 +50,14 @@ class Event(models.Model):
 
 	def __unicode__(self):
 		return self.name;
+		
+	def is_open(self):
+		# checks if current event is in the open scope
+		return self.open < datetime.now() and self.close > datetime.now()
+		
+	def is_visible(self):
+		# checks if current event is in the visible scope
+		return(self.scheduled is None or self.scheduled <= datetime.now()) and (self.hidden is None or self.hidden >= datetime.now())
 
 	def save(self):
 		if not self.id:

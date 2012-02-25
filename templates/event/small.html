@@ -1,6 +1,6 @@
 {% load victr_tags %}
-<article class="event small{% if event.current %} well alert-info{% endif %}">
-    <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a>{% if event.current %}&nbsp;<small>happening now!</small>{% endif %}</h2>
+<article class="event small{% if event.is_open %} well alert-info{% endif %}">
+    <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a>{% if event.is_open %}&nbsp;<small>happening now!</small>{% endif %}</h2>
     <h4>{{ event.open|date:"l, F j, Y - P" }}</h4>
     {% if event.description %}<p>{{ event.description|truncatewords:50 }}</p>{% endif %}
 </article>

@@ -1,10 +1,12 @@
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.core.urlresolvers import reverse
 from django.template import RequestContext
 from django.utils import simplejson as json
+from django.contrib.auth.decorators import login_required
+from victr.event.util import EventQuery
 from victr.forms import ProjectForm
 from victr.models import *
-
 
 def project(request, slug, default_template="project/view.html"):
 
@@ -25,7 +27,7 @@ def project(request, slug, default_template="project/view.html"):
 
     return HttpResponseNotAllowed(['GET','POST'])
 
-
+@login_required
 def edit(request, slug, default_template="project/edit.html"):
     
     if request.method == 'GET':
@@ -35,8 +37,15 @@ def edit(request, slug, default_template="project/edit.html"):
 
     return HttpResponseNotAllowed(['GET'])
 
-
+@login_required
 def new(request, default_template="project/new.html"):
+    
+    # grab the current event and check to see if it's actually open.
+    eq = EventQuery()
+    event = eq.current()
+    if event is None or not event.is_open() :
+        messages = { 'warning' : 'There is currently no event open for submission.' }
+        return redirect(reverse('victr.views.home'), locals())
     
     if request.method == 'POST':
         project_form = ProjectForm(request.POST)
@@ -49,7 +58,7 @@ def new(request, default_template="project/new.html"):
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     if request.method == 'GET':
-        project_form = ProjectForm()
+        project_form = ProjectForm(initial = {'event' : event}) # the current event is preselected.
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET', 'POST'])
