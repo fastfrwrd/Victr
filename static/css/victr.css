@@ -196,7 +196,9 @@
     }
 
 /* event styles */
-
+.event.small.alert-info {
+    color: black;
+}
 
 /* impress styles and overrides */
 #impress #first-slide {

@@ -4,7 +4,9 @@
 
 {% block content %}
     {% for project in projects %}
-        {% include "project/project.html" %}
+        <article class="project">
+            {% include "project/project.html" %}
+        </article>
     {% empty %}
         <p class="center empty">Hmmmm, no projects.</p>
     {% endfor %}

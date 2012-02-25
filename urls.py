@@ -9,6 +9,5 @@ urlpatterns = patterns('',
     #temporary: below are the patterns as they appear in main/urls.py for the auth work
     url(r'register/$', 'victr.views.register'), #temporary login work
     url(r'login/$', 'victr.views.login'), #temporary login work
-    url(r'vip/$', 'victr.views.vip'), #temporary login work
     url(r'logout/$', 'victr.views.logout'), #temporary login work
 )

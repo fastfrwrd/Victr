@@ -1,12 +1,14 @@
 from django.contrib import admin
-from victr.models import Event, Schedule
-
-class ScheduleInline(admin.StackedInline):
-    model = Schedule
-    max_num = 1
+from victr.models import Event
 
 class EventAdmin(admin.ModelAdmin):
     exclude = ['slug']
-    inlines = [ScheduleInline]
+    fieldsets = ( (None, {
+            'fields': ('name', 'description', 'show_results', 'rsvp')
+        }),
+        ('Schedule', {
+            'fields': ('scheduled', 'open', 'close', 'hidden')
+        })
+    )
 
 admin.site.register(Event, EventAdmin)
