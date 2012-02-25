@@ -114,9 +114,7 @@ Victr.widgets.auth = function() {
     $('.modal-footer *:submit').click(function(e) {
         $(this).closest('.modal').find('form').submit();
     });
-    $('.modal').enter(function(e) {
-        $(this).find('form').submit();
-    });
+    //todo: capture enter in modal
 }
 
 Victr.widgets.autocomplete = function($page) {

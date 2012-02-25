@@ -4,13 +4,13 @@ from victr.models import Event, Schedule
 
 class EventQuery:
 
-    def all():
+    def all(self):
         """
         Returns ALL events, including invisible ones. Careful...
         """
         return Event.objects.order_by('-schedule__close')
     
-    def visible():
+    def visible(self):
         """
         Returns all events that are visible.
         """
@@ -19,7 +19,7 @@ class EventQuery:
             Q(schedule__hidden__gte = datetime.now()) | Q(schedule__hidden__isnull = True),
         ).order_by('-schedule__close')
         
-    def current():
+    def current(self):
         """
         Returns the current event that project submissions goes to and that the
         front page will display, or returns false if there's no current event.

@@ -106,9 +106,8 @@
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
-    margin-bottom: 30px;                                                                  
-    padding: 90px;
-    margin-top:-20px; /*pulls the unit up to the nav without screwing with the other pages*/
+    margin: -20px auto 30px;                                                                
+    padding: 90px 0px;
 }
 
 .btn-primary {

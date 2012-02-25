@@ -39,8 +39,11 @@ _this needs to map to your the url you set in urls.py_
 #### urls.py ####
 
     urlpatterns = patterns('',
-        url(r'^victr/', include('victr.urls')), #this points to http://yoursiteurl.com/victr/. you can do root if you want too with the pattern r'^'
+        #this points to http://yoursiteurl.com/victr/. you can do root if you want too with the pattern r'^'
+        url(r'^victr/', include('victr.urls')),
         ...
+        # Uncomment the next line to enable the admin:
+        url(r'^admin/', include(admin.site.urls)),
     )
 
 ## Testing procedures ##

@@ -42,3 +42,7 @@ Thumbs.db
 ##########################
 *.pyc
 settings.py
+
+# IDE nonsense #
+################
+.idea
