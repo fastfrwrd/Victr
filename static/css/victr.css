@@ -159,7 +159,7 @@
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #6F5099;
+    background-color: #6F5099;
 }
     
     .hero-unit .btn-primary {
@@ -206,7 +206,6 @@
     #impress #first-slide h1 {
        font-size: 60px;
        line-height: 70px;
-       margin-bottom: 20px;
     }
 
     #impress #first-slide p {

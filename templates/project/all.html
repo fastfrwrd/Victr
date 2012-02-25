@@ -4,7 +4,8 @@
 
 {% block content %}
     {% for project in projects %}
-        {{ project.title }}
-        {% include "project/details.html" %}
+        {% include "project/project.html" %}
+    {% empty %}
+        <p class="center empty">Hmmmm, no projects.</p>
     {% endfor %}
 {% endblock %}

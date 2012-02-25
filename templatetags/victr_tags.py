@@ -25,3 +25,7 @@ def add_class(value, css_class):
     else:
         return mark_safe(string.replace('>', ' class="%s">' % css_class))
     return value
+    
+@register.filter
+def multiply(value, multiplier):
+    return value * multiplier

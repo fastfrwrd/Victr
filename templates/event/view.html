@@ -1,7 +1,7 @@
 {% extends "main_layout.html" %}
 
 {% block page_id %}event_open{% endblock %}
-{% block class %}event{% endblock %}
+{% block page_class %}event{% endblock %}
 
 {% block page_title %}Victr - {{ event.name }}{% endblock %}
 
@@ -25,7 +25,7 @@
                 {% include "project/small.html" %}
                 {% cycle '' '' '</div>' %}
             {% empty %}
-                <p class="center empty">There are no projects currently submitted for {{ event.name }}!</p>
+                <p class="center empty">There are no projects currently submitted for {{ event.name }}.</p>
             {% endfor %}
         </div>
     </section>    

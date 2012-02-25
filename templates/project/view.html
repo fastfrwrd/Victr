@@ -1,21 +1,6 @@
 {% extends "main_layout.html" %}
 
 {% block page_id %}project_view{% endblock %}
-{% block class %}project{% endblock %}
+{% block page_class %}project{% endblock %}
 
-{% block header %}
-    <header>
-        <div class="container-fluid">
-            <h1 class="pull-left">{{ project.title }}</h1>
-            <a class="btn btn-primary pull-left" href="{{ project.mainUrl }}">view hack <i class="icon-arrow-right icon-white"></i></a>
-        </div>
-    </header>
-{% endblock %}
-
-{% block content %}
-    {% include "project/details.html" %}
-    <article class="description">
-        <h3>About {{ project.name }}</h3>
-        <p>{{ project.description }}</p>
-    </article>
-{% endblock %}
+{% block content %}{% include "project/project.html" %}{% endblock %}
