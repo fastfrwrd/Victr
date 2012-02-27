@@ -29,7 +29,7 @@ def edit(request, slug, default_template="project/edit.html"):
         form = ProjectForm(request.POST, instance = project)
         if form.is_valid() :
             try :
-                project = project_form.save()
+                project = form.save()
             except :
                 messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))

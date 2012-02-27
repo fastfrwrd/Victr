@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm, Form
 from django.contrib import auth
 from django.db import models
-from victr.models import UserProfile, Project
+from victr.models import UserProfile, Project, Event
 from victr.event.util import EventQuery
 
 class RegistrationForm(ModelForm):
@@ -46,17 +46,20 @@ class LoginForm(ModelForm):
 
 class ProjectForm(ModelForm):
     eq = EventQuery()
-    event = eq.current()
+    events = eq.current()
+    # choices = []
+    # for e in events:
+        # choices.push([e.pk, e])
     # eventually, we shall iterate over all current events. today, we simply pass the single current.
-    if(event):
-        choices = [(event.pk, event.name)]
-    else:
-        choices = []
+    choices = [(events.pk, events)]
     
     title         = forms.fields.CharField(max_length=100, widget=forms.TextInput(attrs={ 'placeholder': 'be creative..'}))
     description   = forms.fields.CharField(widget=forms.Textarea(attrs={ 'placeholder': 'details..'}))
     url           = forms.fields.URLField(widget=forms.TextInput(attrs={ 'placeholder': 'http://hacks4you.com'}))
-    event         = forms.fields.ChoiceField(choices=choices, widget=forms.Select(attrs = {'disabled':'disabled'}))
+    event         = forms.fields.ChoiceField(choices=choices)
+    
+    def clean_event(self):
+        return Event.objects.get(pk=int(self.cleaned_data['event']))
     
     class Meta:
         model = Project
