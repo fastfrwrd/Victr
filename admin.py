@@ -10,7 +10,7 @@ class EventAdmin(admin.ModelAdmin):
             'fields': ('scheduled', 'open', 'close', 'hidden',)
         })
     )
-    list_display = ('name', 'is_open', 'open', 'close',)
+    list_display = ('name', 'show_results', 'is_open', 'open', 'close',)
 
 class ProjectAdmin(admin.ModelAdmin):    
     list_display = ('title', 'event', 'url', 'rank', 'award',)
