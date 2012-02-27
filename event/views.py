@@ -6,7 +6,7 @@ from victr.models import Event, Project
 from victr.event.util import EventQuery
 from datetime import datetime
 
-def list(request, default_template="event/list.html"):
+def all(request, default_template="event/all.html"):
     eq = EventQuery()
     events = eq.visible()
     return render_to_response(default_template, context_instance=RequestContext(request, { 'events' : events }))

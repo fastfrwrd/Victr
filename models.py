@@ -47,11 +47,11 @@ class Event(models.Model):
 		return self.name;
 		
 	def is_open(self):
-		# checks if current event is in the open scope
+		""" checks if current event is in the open scope """
 		return self.open < datetime.now() and self.close > datetime.now()
 		
 	def is_visible(self):
-		# checks if current event is in the visible scope
+		""" checks if current event is in the visible scope """
 		return(self.scheduled is None or self.scheduled <= datetime.now()) and (self.hidden is None or self.hidden >= datetime.now())
 
 	def save(self):
@@ -79,6 +79,27 @@ class Project(models.Model):
     # collaborators = models.ManyToManyField(User, blank=True)
     # screenshot = models.ImageField(upload_to="images/screenshot")
 
+    def __unicode__(self):
+		return self.title
+	
+    def award_text(self):
+        if self.award and self.rank is None: 
+            a = self.award
+        elif self.rank > 0 and self.rank < 4 :
+            ranks = ['First Place','Second Place','Third Place']
+            if self.award :
+                a = "%s - %s" % (ranks[self.rank-1], self.award)
+            else :
+                a = ranks[self.rank-1]
+        return a
+	
+    def rank_class(self):
+        """ pass a class for use in styling project/details.html """
+        classes = [' first',' second',' third']
+        if self.rank and self.rank > 0 and self.rank < 4 :
+            return classes[self.rank-1]
+        return ''
+	
     def save(self):
         if not self.id:
             self.slug = SlugifyUniquely(self.title, self.__class__)
