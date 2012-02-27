@@ -48,7 +48,10 @@ class ProjectForm(ModelForm):
     eq = EventQuery()
     event = eq.current()
     # eventually, we shall iterate over all current events. today, we simply pass the single current.
-    choices = [(event.pk, event.name)]
+    if(event):
+        choices = [(event.pk, event.name)]
+    else:
+        choices = []
     
     title         = forms.fields.CharField(max_length=100, widget=forms.TextInput(attrs={ 'placeholder': 'be creative..'}))
     description   = forms.fields.CharField(widget=forms.Textarea(attrs={ 'placeholder': 'details..'}))

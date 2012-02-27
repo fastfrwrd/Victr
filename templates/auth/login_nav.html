@@ -1,10 +1,12 @@
+{% load victr_tags %}
+
 {% if user.is_authenticated %}
 <a class="dropdown-toggle" data-toggle="dropdown" href="#auth"><i class="icon-home"></i> {{ user.first_name }} {{ user.last_name }}</a>
 <ul class="dropdown-menu">
-  <li><a href="user/projects">My Projects</a></li>
-  <li><a href="user/edit">Account</a></li>
+  <li><a href="{% victr_base %}user/projects">My Projects</a></li>
+  <li><a href="{% victr_base %}user/account">My Account</a></li>
   <li class="divider"></li>
-  <li><a href="logout">Logout</a></li>
+  <li><a href="{% victr_base %}logout">Logout</a></li>
 </ul>
 {% else %}
 <a class="dropdown-toggle" data-toggle="dropdown" href="#auth"><i class="icon-home"></i> Login</a>

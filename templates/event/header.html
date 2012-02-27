@@ -1,20 +1,25 @@
 {% load victr_tags do_if %}
 <header class="page-header hero-unit">
     <div class="container">
-        <h2>Optaros presents</h2>
-        <h1>{{ event.name }}</h1>
-        <h3>{{ event.open|date:"l, F j, Y - P" }}</h3>
-        {% if event.close|past %}
-            {% if event.show_results %}
-            <p>This will be the winner.</p>
-            {% else %}
-            <p class="center closed">Submissions are now closed.</p>
+        {% if event %}
+            <h2>Optaros presents</h2>
+            <h1>{{ event.name }}</h1>
+            <h3>{{ event.open|date:"l, F j, Y - P" }}</h3>
+            {% if event.close|past %}
+                {% if event.show_results %}
+                <p>This will be the winner.</p>
+                {% else %}
+                <p class="center closed">Submissions are now closed.</p>
+                {% endif %}
+                <a class="btn" href="{% victr_base %}impress/present/{{ event.slug }}">Demo</a>
+            {% elif event.open|past %}
+                <a class="btn btn-primary" href="{% victr_base %}project/new">Submit your project</a>
+            {% elif event.rsvp %}
+                <a class="btn" href="{{ event.rsvp }}">RSVP</a>
             {% endif %}
-            <a class="btn" href="{% victr_base %}impress/present/{{ event.slug }}">Demo</a>
-        {% elif event.open|past %}
-            <a class="btn btn-primary" href="{% victr_base %}project/new">Submit your project</a>
-        {% elif event.rsvp %}
-            <a class="btn" href="{{ event.rsvp }}">RSVP</a>
+        {% else %}
+            <h1>victr</h1>
+            <h3>your new favorite competition manager</h3>
         {% endif %}
     </div>
 </header>

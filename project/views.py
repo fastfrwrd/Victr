@@ -43,7 +43,7 @@ def new(request, default_template="project/new.html"):
     # grab the current event and check to see if it's actually open.
     eq = EventQuery()
     event = eq.current()
-    if event is None or not event.is_open() :
+    if not event or not event.is_open() :
         messages = { 'warning' : 'There is currently no event open for submission.' }
         return redirect(reverse('victr.views.home'), locals())
     

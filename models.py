@@ -25,28 +25,23 @@ class Event(models.Model):
 	rsvp = models.URLField(
 			blank=True,		
 			verbose_name="RSVP",
-			help_text = "A URL to the event RSVP (Eventbrite, etc.)",
-	)
+			help_text = "A URL to the event RSVP (Eventbrite, etc.)", )
 	scheduled = models.DateTimeField(
 			blank=True, 
 			null=True,
 			help_text = "When your contest will appear publicly as a simple page \
 					     with an RSVP link. Leaving this blank means that your event \
-					     will appear as soon as it is saved.",
-	)
+					     will appear as soon as it is saved.", )
 	open = models.DateTimeField(
-			help_text = "When your participants can start submitting their projects.",
-	)
+			help_text = "When your participants can start submitting their projects.", )
 	close = models.DateTimeField(
-			help_text = "When submissions will close.",
-	)
+			help_text = "When submissions will close.", )
 	hidden = models.DateTimeField(			
 			blank=True,
 			null=True,
 			help_text = "When the event, results, and hacks will go into hidden mode. \
 						 Leaving this off will leave all portions of this event accessible on \
-						 the \"Events\" section of the site.",
-	)
+						 the \"Events\" section of the site.", )
 
 	def __unicode__(self):
 		return self.name;
@@ -70,16 +65,14 @@ class Project(models.Model):
     description   = models.TextField(blank=True)
     url           = models.URLField(blank=True)
     event         = models.ForeignKey(Event)
-    rank = models.IntegerField(
-    		blank=True,	
-    		null=True,
-            help_text = "What place the project came in in the contest."
-    )
-    award = models.CharField(
-    		max_length=50,
-    		blank=True,			
-            help_text = "e.g. \"Best UX\" or \"Honorable Mention\""
-    )
+    rank          = models.IntegerField(
+    		            blank=True,	
+    		            null=True,
+                        help_text = "What place the project came in in the contest.", )
+    award         = models.CharField(
+    		            max_length=50,
+    		            blank=True,			
+                        help_text = "e.g. \"Best UX\" or \"Honorable Mention\"", )
     
     # other_urls
     # tags = models.ManyToManyField(Discipline, blank=True)

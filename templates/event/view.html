@@ -3,31 +3,38 @@
 {% block page_id %}event_open{% endblock %}
 {% block page_class %}event{% endblock %}
 
-{% block page_title %}Victr - {{ event.name }}{% endblock %}
+{% block page_title %}Victr - {% if event %}{{ event.name }}{% endif %}to the victr go the spoils{% endblock %}
 
 {% block header %}
 {% include "event/header.html" %}
 {% endblock %}
 
 {% block content %}
+
 <div class="row">
-    <section class="main span12">        
-        {% if event.description %}
-        <div class="description">
-            <h2>About</h2>
-            <p>{{ event.description }}</p>
-        </div>
-        {% endif %}    
-        <div class="projects">
-            <h2>Contenders</h2>
-            {% for project in projects %}
-                {% cycle '<div class="row">' '' '' %}
-                {% include "project/small.html" %}
-                {% cycle '' '' '</div>' %}
-            {% empty %}
-                <p class="center empty">There are no projects currently submitted for {{ event.name }}.</p>
-            {% endfor %}
-        </div>
-    </section>    
+    <section class="main span12">
+        {% if event %}
+            {% if event.description %}
+            <div class="description">
+                <h2>About</h2>
+                <p>{{ event.description }}</p>
+            </div>
+            {% endif %}    
+            <div class="projects">
+                <h2>Contenders</h2>
+                {% for project in projects %}
+                    {% cycle '<div class="row">' '' '' %}
+                    {% include "project/small.html" %}
+                    {% cycle '' '' '</div>' %}
+                {% empty %}
+                    <p class="center empty">There are no projects currently submitted for {{ event.name }}.</p>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="about_victr">
+            {% include "victr_description.html" %}
+            </div>
+        {% endif %}
+    </section>
 </div>
 {% endblock %}
