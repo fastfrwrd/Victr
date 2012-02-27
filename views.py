@@ -44,11 +44,11 @@ def register(request, default_template="auth/register_page.html"):
 def login(request, default_template="auth/login_page.html"):
 	redirect_path = ''
 	if request.method == 'GET' :
-	    redirect_path = request.GET.get("redirect")
-	form = LoginForm(initial = { 'redirect' : redirect_path })
+	    redirect_path = request.GET.get("next")
+	form = LoginForm(initial = { 'next' : redirect_path })
 	if request.method == 'POST' :
 		form = LoginForm(request.POST)
-		redirect_path = unquote(request.POST.get('redirect'))
+		redirect_path = unquote(request.POST.get('next'))
 		current_user = auth.authenticate(username=request.POST.get('email'), 
 										 password=request.POST.get('password'))
 		if current_user is not None :

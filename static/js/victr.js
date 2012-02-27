@@ -92,7 +92,7 @@ Victr.widgets.auth = function() {
     //populate top login
     $('#auth a.dropdown-toggle').on('click', function() {
     	var current_path = encodeURIComponent(window.location.pathname.slice(Victr.base.length)),
-    	    login_url = Victr.base + 'login/?redirect=' + current_path,
+    	    login_url = Victr.base + 'login/?next=' + current_path,
     		register_url = Victr.base + 'register/';
         if($('.login-wrapper').hasClass('loading')) {
         	$('.login-wrapper').load(login_url + ' .main form', function() {
