@@ -110,6 +110,10 @@
     padding: 90px 0px;
 }
 
+    .hero-unit * {
+        color:#ffffff;
+    }
+
     .hero-unit.active {
         padding: 90px 0px 30px;
     }
@@ -143,6 +147,11 @@
     .hero-unit .btn-primary:hover {
         background-color: #fcc316;
     }
+    
+    .hero-unit a:active,
+    .hero-unit a:hover {
+        color: #fcc316;
+    }
 
 .btn-primary {
     background-color: #6F5099;
@@ -160,6 +169,7 @@
 .btn-primary.disabled,
 .btn-primary[disabled] {
     background-color: #6F5099;
+    color: #383030 !important;
 }
     
     .hero-unit .btn-primary {
@@ -178,11 +188,7 @@
     .hero-unit .btn-primary[disabled] {
         background-color: #fcc316;
     }
-
-.hero-unit * {
-    color:#ffffff;
-}
-
+    
 .tweets ul {
     margin-left: 0px;
     list-style: none;
@@ -198,6 +204,10 @@
 /* event styles */
 .event.small.alert-info {
     color: black;
+}
+
+#event_list article {
+    margin: 0.5em 0;
 }
 
 /* impress styles and overrides */

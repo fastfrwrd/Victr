@@ -83,9 +83,9 @@ class Project(models.Model):
 		return self.title
 	
     def award_text(self):
-        if self.award and self.rank is None: 
+        if self.award and (self.rank is None or self.rank >= 4): 
             a = self.award
-        elif self.rank > 0 and self.rank < 4 :
+        elif self.rank and self.rank < 4 :
             ranks = ['First Place','Second Place','Third Place']
             if self.award :
                 a = "%s - %s" % (ranks[self.rank-1], self.award)

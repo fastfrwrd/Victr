@@ -20,4 +20,17 @@ def view(request, slug="", default_template="event/view.html"):
     if not event.is_visible :
         raise Http404
     projects = Project.objects.filter(event=event)
-    return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event, 'projects' : projects }))
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+    
+def results(request, slug="", default_template="event/results.html"):
+    if(slug is "") :
+        eq = EventQuery()
+        event = eq.current()
+    else :
+        event = get_object_or_404(Event, slug=slug)
+    if not event.is_visible :
+        raise Http404
+    projects = Project.objects.filter(event=event).order_by('rank')
+    top_projects = Project.objects.filter(event=event, rank__isnull=False).order_by('rank')
+    winner = Project.objects.get(event=event, rank=1)
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))

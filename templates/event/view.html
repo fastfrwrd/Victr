@@ -3,7 +3,7 @@
 {% block page_id %}event_open{% endblock %}
 {% block page_class %}event{% endblock %}
 
-{% block page_title %}Victr - {% if event %}{{ event.name }}{% endif %}to the victr go the spoils{% endblock %}
+{% block page_title %}Victr - {% if event %}{{ event.name }}{% else %}to the victr go the spoils{% endif %}{% endblock %}
 
 {% block header %}
 {% include "event/header.html" %}
