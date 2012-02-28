@@ -1,13 +1,14 @@
 {% extends "project/form.html" %}
+{% load victr_tags %}
 
 {% block page_id %}project_new{% endblock %}
 
 {% block action %}project/new{% endblock %}
 
 {% block heading %}
-Submit a Project <small>just fill out the form!</small>
+Submit a {% filter capfirst %}{% victr_keyword "project" %}{% endfilter %} <small>just fill out the form!</small>
 {% endblock %}
 
 {% block actions %}
-{% include "form/actions_submit.html" with submit_text="Submit Project"  submit_icon="icon-gift" %}   
+{% include "form/actions_submit.html" with submit_text="Submit" submit_icon="icon-gift" %}
 {% endblock %}

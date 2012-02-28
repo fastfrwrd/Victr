@@ -11,8 +11,8 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="{% victr_base %}login" class="login-collapse"><i class="icon-home"></i> Login</a></li>
-          <li><a href="{% victr_base %}event/all"><i class="icon-calendar"></i> Hack Days</a></li>
-          <li><a href="{% victr_base %}project/all"><i class="icon-gift"></i> Hacks</a></li>
+          <li><a href="{% victr_base %}event/all"><i class="icon-calendar"></i> {% filter capfirst %}{% victr_keyword "event" %}{% endfilter %}s</a></li>
+          <li><a href="{% victr_base %}project/all"><i class="icon-gift"></i> {% filter capfirst %}{% victr_keyword "project" %}{% endfilter %}s</a></li>
         </ul>
       </div>
       <ul id="auth-wrapper" class="nav pull-right">

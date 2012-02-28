@@ -152,6 +152,28 @@
     .hero-unit a:hover {
         color: #fcc316;
     }
+    
+    .hero-unit h1 {
+        margin-bottom: 10px;
+    }
+    
+    .hero-unit .btn-primary {
+        background: -moz-linear-gradient(center top, #f7e421, #fcc316) repeat scroll 0 0 transparent;
+        background-image: -ms-linear-gradient(center top, #f7e421, #fcc316);
+        background-image: -webkit-gradient(linear, top, bottom, from(#f7e421), to(#fcc316));
+        background-image: -webkit-linear-gradient(top, #f7e421, #fcc316);
+        background-image: -o-linear-gradient(top, #f7e421, #fcc316);
+        background-image: linear-gradient(top, #f7e421, #fcc316);
+    }
+    
+    .hero-unit .btn-primary:hover,
+    .hero-unit .btn-primary:active,
+    .hero-unit .btn-primary.active,
+    .hero-unit .btn-primary.disabled,
+    .hero-unit .btn-primary[disabled] {
+        background-color: #fcc316;
+        color: #383030 !important;
+    }
 
 .btn-primary {
     background-color: #6F5099;
@@ -169,25 +191,7 @@
 .btn-primary.disabled,
 .btn-primary[disabled] {
     background-color: #6F5099;
-    color: #383030 !important;
 }
-    
-    .hero-unit .btn-primary {
-        background: -moz-linear-gradient(center top, #f7e421, #fcc316) repeat scroll 0 0 transparent;
-        background-image: -ms-linear-gradient(center top, #f7e421, #fcc316);
-        background-image: -webkit-gradient(linear, top, bottom, from(#f7e421), to(#fcc316));
-        background-image: -webkit-linear-gradient(top, #f7e421, #fcc316);
-        background-image: -o-linear-gradient(top, #f7e421, #fcc316);
-        background-image: linear-gradient(top, #f7e421, #fcc316);
-    }
-    
-    .hero-unit .btn-primary:hover,
-    .hero-unit .btn-primary:active,
-    .hero-unit .btn-primary.active,
-    .hero-unit .btn-primary.disabled,
-    .hero-unit .btn-primary[disabled] {
-        background-color: #fcc316;
-    }
     
 .tweets ul {
     margin-left: 0px;

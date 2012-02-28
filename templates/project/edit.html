@@ -1,13 +1,14 @@
 {% extends "project/form.html" %}
+{% load victr_tags %}
 
 {% block page_id %}project_edit{% endblock %}
 
 {% block action %}project/{{ project.slug }}/edit{% endblock %}
 
 {% block heading %}
-Edit Your Project <small>edit all the things!</small>
+Edit Your {% filter capfirst %}{% victr_keyword "project" %}{% endfilter %} <small>edit all the things!</small>
 {% endblock %}
 
 {% block actions %}
-{% include "form/actions_submit.html" with submit_text="Update Project"  submit_icon="icon-arrow-up" %}
+{% include "form/actions_submit.html" with submit_text="Update"  submit_icon="icon-arrow-up" %}
 {% endblock %}

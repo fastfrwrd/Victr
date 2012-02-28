@@ -1,8 +1,9 @@
 {% extends "form/page.html" %}
+{% load victr_tags %}
 
 {% block page_class %}{{ block.super }} project_form{% endblock %}
 
-{% block sub_section_heading %}Project Informations{% endblock %}
+{% block sub_section_heading %}{% filter capfirst %}{% victr_keyword "project" %}{% endfilter %} Informations{% endblock %}
 {% block sub_section_text %}
-<p>Tell us a little bit about your project.</p>
+<p>Tell us a little bit about your {% victr_keyword "project" %}.</p>
 {% endblock %}
