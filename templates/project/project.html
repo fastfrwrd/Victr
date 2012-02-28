@@ -1,7 +1,11 @@
+{% load victr_tags %}
 <header>
     <div class="container">
         <h1 class="pull-left">{{ project.title }}</h1>
-        <a class="btn btn-primary pull-left" href="{{ project.url }}">view project <i class="icon-arrow-right icon-white"></i></a>
+        <a class="btn btn-primary" href="{{ project.url }}">view project <i class="icon-arrow-right icon-white"></i></a>
+        {% if current_user in project.users.all.select_related %}
+        <a class="btn" href="{% victr_base %}project/{{ project.slug }}/edit">edit <i class="icon-pencil"></i></a>
+        {% endif %}
     </div>
 </header>
 <div>

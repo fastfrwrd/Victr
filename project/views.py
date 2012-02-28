@@ -12,6 +12,7 @@ def project(request, slug, default_template="project/view.html"):
 
     if request.method == 'GET':
         project = get_object_or_404(Project, slug=slug)
+        current_user = UserProfile.objects.get(user=request.user)
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET'])
@@ -21,6 +22,10 @@ def edit(request, slug, default_template="project/edit.html"):
 
     project = get_object_or_404(Project, slug=slug)
     current_user = UserProfile.objects.get(user = request.user)
+    
+    if(current_user not in project.users.all() and not request.user.is_staff):
+        messages = { 'warning' : 'Access denied: you do not have permission to view this form.' }
+        return redirect(reverse('victr.project.views.project', args=[slug]))
     
     if request.method == 'GET':
         form = ProjectForm(instance = project)
