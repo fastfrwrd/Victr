@@ -10,12 +10,12 @@ register = template.Library()
 #tags
 @register.simple_tag
 def victr_base():
-    """returns base URL for victr. Available as Victr.base in JS."""
+    """ returns base URL for victr. Available as Victr.base in JS. """
     return reverse('victr.views.home')
     
 @register.simple_tag
 def victr_keyword(key):
-    """returns language set in config.py"""
+    """ returns language set in config.py """
     return config.keyword(key)
 
 #filters
