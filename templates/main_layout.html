@@ -23,7 +23,6 @@
 
 {% block nav %}{% include "nav.html" %}{% endblock %}
 
-
 {% block container %}
   
   {% block header %}
@@ -41,6 +40,8 @@
       {% block footer %}
       {% endblock %}
   </div>
+
+    <div id="modals"></div>
 {% endblock %}
 
 {% block js %}
@@ -52,6 +53,11 @@
     {% block script %}{% endblock %}
     <script>
         $(function() {
+            //Victr.current = todo: use django template tag to get current url
+            Victr.register = "{% url register %}";
+            Victr.register_modal = "{% url register_modal %}";
+            Victr.login = "{% url login %}";
+            Victr.login_nav = "{% url login_nav %}";
             Victr.base = "{% victr_base %}";
             Victr.init();
             {% block inline_scripts %}{% endblock %}

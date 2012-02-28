@@ -11,26 +11,15 @@
       <div class="nav-collapse">
         <ul class="nav">
           <li><a href="{% victr_base %}login" class="login-collapse"><i class="icon-home"></i> Login</a></li>
-          <li><a href="{% victr_base %}event/all"><i class="icon-calendar"></i> Hack Days</a></li>
+          <li><a href="{% victr_base %}event/list"><i class="icon-calendar"></i> Hack Days</a></li>
           <li><a href="{% victr_base %}project/all"><i class="icon-gift"></i> Hacks</a></li>
         </ul>
       </div>
       <ul id="auth-wrapper" class="nav pull-right">
         <li id="auth" class="dropdown">
-          {% include "auth/login_nav.html" %}
+          {% include "user/nav.html" %}
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<div id="register" class="modal fade">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Victr - register</h3>
-  </div>
-  <div class="modal-body register-wrapper">
-  </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-primary btn-large">Register</button>
-  </div>
-</div>

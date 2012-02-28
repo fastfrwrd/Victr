@@ -1,0 +1,5 @@
+{% load victr_tags %}
+<a class="dropdown-toggle" data-toggle="dropdown" data-target="user_nav" href="{% block url %}{% endblock %}"><i class="icon-home"></i> {% block title %}{% endblock %}</a>
+<ul id="user_nav" class="dropdown-menu">
+    {% block content %}{% endblock %}
+</ul>

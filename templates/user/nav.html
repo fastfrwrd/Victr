@@ -1,0 +1,31 @@
+{% extends "dropdown_layout.html" %}
+{% load victr_tags %}
+
+{% block url %}{% url login %}{% endblock %}
+
+{% block title %}
+{% if user.is_authenticated %}
+{{ user.first_name }} {{ user.last_name }}
+{% else %}
+Login
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<li><a href="{% victr_base %}user/projects">My Projects</a></li>
+<li><a href="{% victr_base %}user/account">My Account</a></li>
+<li class="divider"></li>
+<li><a href="{% url logout %}">Logout</a></li>
+
+{% else %}
+
+<li class="login-wrapper loading">
+    <img src="{{ STATIC_URL }}img/ajax-loader.gif" alt="Loading..." />
+</li>
+
+{% endif %}
+
+{% endblock %}

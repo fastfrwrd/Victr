@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 from victr.models import *
 from victr.event.util import EventQuery
 from victr.forms import RegistrationForm, LoginForm
-from urllib import quote, unquote
 
 def home(request, default_template="event/view.html"):
     """
@@ -22,49 +21,8 @@ def home(request, default_template="event/view.html"):
         projects = Project.objects.filter(event=event)
     return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event, 'projects' : projects }))
 
-# todo: everything below this needs to go to a victrauth subapp
-def register(request, default_template="auth/register_page.html"):
-    form = RegistrationForm()
-    if request.method == 'POST' :
-        form = RegistrationForm(request.POST)
-        if form.is_valid() :
-            try :
-                form.save()    #user registered
-            except : #IntegrityError as detail :
-                messages = { 'error' : "Whoops! The email address %s is already registered. Try logging in or resetting your password." % (form.cleaned_data['email'],) }
-                return render_to_response(default_template, locals(), context_instance=RequestContext(request, { 'messages' : messages }))
-            current_user = auth.authenticate(username=form.cleaned_data['email'],
-                                             password=form.cleaned_data['password'])
-            auth.login(request, current_user)
-            return redirect( reverse('victr.views.home') )
-        else :
-            messages = { 'warning' : 'Invalid form submission.' }
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-def login(request, default_template="auth/login_page.html"):
-	redirect_path = ''
-	if request.method == 'GET' :
-	    redirect_path = request.GET.get("next")
-	form = LoginForm(initial = { 'next' : redirect_path })
-	if request.method == 'POST' :
-		form = LoginForm(request.POST)
-		redirect_path = unquote(request.POST.get('next'))
-		current_user = auth.authenticate(username=request.POST.get('email'), 
-										 password=request.POST.get('password'))
-		if current_user is not None :
-			if current_user.is_active :
-				auth.login(request, current_user)
-				return redirect(''.join( ( reverse('victr.views.home'), redirect_path ) ))
-			else :
-				messages = { "warning" : "Your account has been disabled. Please contact the site administrator." }
-		else :
-			messages = { "error" : "Invalid username or password. Please try again, or if you are having trouble, reset your password." }
-	return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-def logout(request):
-    auth.logout(request)
-    # add a message object to display as a notification of logout on the top part of the page
-    return redirect(reverse('victr.views.home'))
 
 @login_required
 def projects(request, default_template="auth/projects.html"):

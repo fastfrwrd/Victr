@@ -1,7 +1,7 @@
 {% load victr_tags %}
 <fieldset>
-    {% for field in form %}
-    <div class="control-group {% if field.errors %}error{% endif %}">
+    {% for field in form.visible_fields %}
+    <div class="control-group field-{{ field.html_name }}{% if field.errors %}error{% endif %}">
         {{ field.label_tag|add_class:"control-label" }}
         <div class="controls">
             {{ field|add_class:"input-xlarge" }}
@@ -11,4 +11,8 @@
         </div>
     </div>
     {% endfor %}
+    {% for hidden in form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    {% block special_fields %}{% endblock %}
 </fieldset>

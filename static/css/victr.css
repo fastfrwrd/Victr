@@ -86,13 +86,15 @@
     top: 1px;
 }
 
-#register.modal {
-
+#modals form {
+    margin:0;
 }
-
-    #register.modal .form-actions {
-        display: none;
-    }
+#modals .form-actions {
+    padding-top:0;
+    margin-top:0;
+    border-top:0;
+    margin-bottom:0;
+}
 
 /* general styles and bootstrap overrides */
 .hero-unit {
@@ -336,18 +338,17 @@
     margin-bottom: 20px;
 }
     
-/* project form styles */
-.project_form .form-horizontal .form-actions {
+.form_page .form-horizontal .form-actions {
     padding-left: 180px;
 }
 
-.project_form #id_description {
+.form_page textarea {
     height: 100px;
     width: 480px
 }
 
-.project_form #reset {
-    margin-left: 30px
+.form_page .form-horizontal .form-actions .btn {
+    margin-right: 30px
 }
 
 
@@ -441,25 +442,25 @@
     h2 small {
         display: block;
     }
-    .project_form .form-horizontal .form-actions {
+    .form_page .form-horizontal .form-actions {
         padding-left: 19px;
     }
-    .project_form #id_description {
+    .form_page textarea {
         width: 270px;
     }
 }
 @media only screen and (min-width: 480px) and (max-width: 770px) {
-    .project_form #id_description {
+    .form_page textarea {
         width: 270px;
     }
 }
 @media only screen and (min-width: 770px) and (max-width: 980px) {
-    .project_form #id_description {
+    .form_page textarea {
         width: 320px;
     }
 }
 @media only screen and (min-width: 980px) and (max-width: 1200px) {
-    .project_form #id_description {
+    .form_page textarea {
         width: 480px;
     }
 }

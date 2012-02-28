@@ -1,0 +1,11 @@
+{% extends "form/modal.html" %}
+
+{% block action %}{% url register %}{% endblock %}
+
+{% block id %}register{% endblock %}
+{% block modal_class %}{{ super.block }} register{% endblock %}
+{% block heading %}Register{% endblock %}
+
+{% block actions %}
+{% include "form/actions.html" with submit_text="Register"  submit_icon="icon-ok" %}
+{% endblock %}

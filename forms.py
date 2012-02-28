@@ -34,7 +34,7 @@ class RegistrationForm(ModelForm):
 class LoginForm(ModelForm):
     email = forms.EmailField(max_length=100, widget=forms.TextInput(attrs={'placeholder':'victr@email.com'}))
     password = forms.fields.CharField(max_length=50, widget=forms.PasswordInput(attrs={'placeholder':'password'}))
-    redirect = forms.fields.CharField(max_length=400, widget=forms.HiddenInput())
+    next = forms.fields.CharField(max_length=400, widget=forms.HiddenInput())
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
     class Meta:

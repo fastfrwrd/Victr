@@ -1,0 +1,24 @@
+{% extends "modal_layout.html" %}
+{% load victr_tags %}
+
+{% block modal_class %}{{ block.super }} form{% endblock %}
+
+{% block modal_top %}
+<form action="{% block action %}{% endblock %}" method="{% block method %}post{% endblock %}" class="form-horizontal">
+{% endblock %}
+
+{% block content %}
+{% block fields %}
+{% include "form/fields.html" %}
+{% endblock %}
+{% endblock %}
+
+{% block footer %}
+{% block actions %}
+{% include "form/actions.html" %}
+{% endblock %}
+{% endblock %}
+
+{% block modal_bottom %}
+</form>
+{% endblock %}

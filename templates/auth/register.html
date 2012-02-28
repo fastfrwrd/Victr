@@ -1,9 +1,18 @@
-{% extends "form_layout.html" %}
+{% extends "auth/form_page.html" %}
+{% load victr_tags %}
 
 {% block action %}register{% endblock %}
-{% block method %}POST{% endblock %}
-{% csrf_token %}
 
-{% block form_actions %}
-<div class="label-tag"><input class="btn btn-primary" type="submit" value="Submit" /></div>
+{% block page_id %}auth_register{% endblock %}
+{% block page_class %}{{ block.super }} register{% endblock %}
+         
+{% block sub_section_heading %}Register{% endblock %}
+{% block sub_section_text %}
+<p>Registration is required for at least one team member for entry into the contest. All team members are encouraged to sign up, however, so they can be attributed and show off their work.</p>
+<p>Already registered? <a href="{% victr_base %}login">Login</a> to manage your projects.</p>
+<p>Don't remember your password? <a href="{% victr_base %}reset">Reset your password</a> and get back in the action.</p>
+{% endblock %}
+
+{% block actions %}
+{% include "form/actions.html" with submit_text="Register"  submit_icon="icon-ok" %}
 {% endblock %}

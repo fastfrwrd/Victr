@@ -12,7 +12,7 @@ Victr.init = function() {
         self[self.page_id]();
     }
     
-    Victr.widgets.auth();
+    Victr.widgets.auth('#auth');
 }
 
 Victr.project_new = function() {
@@ -87,27 +87,30 @@ Victr.widgets.tagger = function($page) {
 }
 
 //handles customizations of dropdown and modal from Bootstrap.
-Victr.widgets.auth = function() {
-
-    //populate top login
-    $('#auth a.dropdown-toggle').on('click', function() {
-    	var current_path = encodeURIComponent(window.location.pathname.slice(Victr.base.length)),
-    	    login_url = Victr.base + 'login/?next=' + current_path,
-    		register_url = Victr.base + 'register/';
-        if($('.login-wrapper').hasClass('loading')) {
-        	$('.login-wrapper').load(login_url + ' .main form', function() {
-                $('.login-wrapper').removeClass('loading');
-                //activate and populate auth modal
-                $(this).find('a.register').attr({ 
+Victr.widgets.auth = function(id) {
+    var self = this,
+        $auth = $(id),
+        $wrapper = $auth.find('.login-wrapper'),
+        $modal = $('#modals');
+    
+    $auth.find('a.dropdown-toggle').on('click', function(e) {
+        e.preventDefault();
+    	var current_path = encodeURIComponent(window.location.pathname.slice(Victr.login.length)),
+    	    login_url = Victr.login_nav + '?next=' + current_path;
+        
+        if($wrapper.hasClass('loading')) {
+            $wrapper.load(login_url + ' form', function() {
+                $wrapper.removeClass('loading');
+                $modal.load( Victr.register_modal );
+                $(this).find('a.register').attr({
                     'data-toggle': 'modal',
                     'data-target': '#register'
-                }).on('click', function() {
-                    if(!$.trim( $('.register-wrapper').html() )) {
-                        $('.register-wrapper').load(register_url + ' form');
-                    }
+                }).on('click', function(e) {
+                    e.preventDefault();
                 });
             });
         }
+        
     });
     
     //submit from the modal

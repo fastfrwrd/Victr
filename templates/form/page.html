@@ -4,7 +4,6 @@
 {% block page_class %}form_page{% endblock %}
 
 {% block content %}
-
 <h2>{% block heading %}{% endblock %}</h2>
 <form action="{% victr_base %}{% block action %}{% endblock %}" method="{% block method %}post{% endblock %}" class="form-horizontal">
 
@@ -15,14 +14,18 @@
         </div>
         <div class="span9">
             <div class="well">
+                {% block fields %}
                 {% include "form/fields.html" %}
+                {% endblock %}
             </div>
         </div>
     </section>
 
     <section class="row">
         <div class="span9 offset3">
-            {% block actions %}{% endblock %}
+            {% block actions %}
+            {% include "form/actions.html" %}
+            {% endblock %}
         </div>
     </section>
 
