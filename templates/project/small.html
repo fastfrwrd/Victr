@@ -1,5 +1,5 @@
 {% load victr_tags %}
 <article class="project span4 small">
-    <h3><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a>&nbsp;<small>by Paul Marbach and Tucker Bickler</small></h3>
+    <h3><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a>&nbsp;<small>by {% include "project/user_list.html" with users=project.users.all.select_related %}</small></h3>
     <p>{{ project.description|truncatewords:50 }}</p>
 </article>
