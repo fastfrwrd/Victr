@@ -19,9 +19,10 @@ def home(request, default_template="event/view.html"):
     projects = []
     if(event):
         projects = Project.objects.filter(event=event)
-    return render_to_response(default_template, context_instance=RequestContext(request, { 'event' : event, 'projects' : projects }))
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-
+def archive(request, default_template="archive.html"):
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 
 @login_required

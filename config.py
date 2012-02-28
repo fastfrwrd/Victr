@@ -6,13 +6,16 @@ def keyword(key):
     """
     key = key.lower()
     keywords = {
-        'contender' : 'contender', 
+        'contender' : 'contender',
         'event' : 'event',
+        'events' : 'events',
         'event.rsvp' : 'RSVP',
         'host_name' : 'Victr',
         'project' : 'project',
+        'projects' : 'projects',
         'project.title' : 'title',
         'project.description' : 'description',
         'project.url' : 'URL',
+        'archive' : 'archive'
     }
     return keywords[key]
