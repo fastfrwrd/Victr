@@ -6,12 +6,14 @@ Victr.init = function() {
     // grab the current page
     self.page_id = $('.main').attr('id');
     self.$page = $('#'+this.page_id);
+    self.$nav = $('nav');
 
     // kick off this page's js
     if (self.hasOwnProperty(self.page_id)) {
         self[self.page_id]();
     }
     
+    Victr.widgets.scroller(self.$nav,self.$page);
     Victr.widgets.auth('#auth', '#register', Victr.url.register_modal);
 }
 
@@ -33,6 +35,73 @@ Victr.impress_present = function() {
 }
 
 /* WiDgEtS oMg! */
+
+Victr.widgets.scroller = function($nav,$page) {
+    var data, $w = $(window);
+    
+    var snip = function(url) {
+        return url.split('#')[1];
+    },
+    getItems = function(){
+        var items = {},
+            links = $nav.find('.nav a[href*="#"]');
+        links.each(function() {
+            
+            var hash = snip($(this).attr('href'));
+            if (hash)
+                items[hash] = {};
+        });
+        return items
+    },
+    getElements = function() {
+        for( var id in data ) {
+            data[id].$ = $page.find('#'+id);
+        }
+    },
+    getOffsets = function() {
+        for( var id in data ) {
+            var item = data[id];
+            item.off = Math.floor(item.$.offset().top);
+        }
+    },
+    scrollTo = function(id) {
+        if (!id) return;
+        var offset = data[id].off,
+            duration = Math.abs($w.scrollTop() - offset);
+        $('body').animate({
+            scrollTop: offset
+        }, duration, function() {
+            window.location.hash = id;
+        });
+    },
+    setListeners = function() {
+        $nav.on('click','a[href*="#"]', function(e) {
+            var hash = snip($(this).attr('href'));
+            if (!hash) return;
+            e.preventDefault();
+            scrollTo(hash);
+        })
+    };
+    
+    $(function(){
+        data = getItems();
+        getElements();
+        getOffsets();
+        setListeners();
+        $w.on('resize', function() {
+            getOffsets();
+        });
+        $('a.btn-navbar').on('click',function() {
+            setTimeout(function() {
+                getOffsets();
+            },300);
+        });
+        setTimeout(function() {
+            scrollTo(snip(window.location.href));
+        }, 100);
+    });
+
+}
 
 Victr.widgets.form = function($form) {
     var self = this;

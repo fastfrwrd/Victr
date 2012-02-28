@@ -27,7 +27,7 @@ def register(request, default_template="auth/register.html"):
             auth.login(request, current_user)
             return redirect( reverse('victr.views.home') )
         else :
-            messages = { 'warning' : 'Invalid form submission.' }
+            messages = { 'error' : 'Invalid form submission.' }
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def register_modal(request, default_template="auth/register_modal.html"):
