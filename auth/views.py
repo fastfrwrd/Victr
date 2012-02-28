@@ -36,19 +36,20 @@ def register_modal(request, default_template="auth/register_modal.html"):
 
 
 def login(request, default_template="auth/login.html"):
-    redirect_path = ''
     if request.method == 'GET' :
         redirect_path = request.GET.get("next")
-    form = LoginForm(initial = { 'next' : redirect_path })
-    if request.method == 'POST' :
+        form = LoginForm(initial = { 'next' : redirect_path })
+    elif request.method == 'POST' :
         form = LoginForm(request.POST)
         redirect_path = unquote(request.POST.get('next'))
+        if not redirect_path:
+            redirect_path = reverse('victr.views.home')
         current_user = auth.authenticate(username=request.POST.get('email'),
             password=request.POST.get('password'))
         if current_user is not None :
             if current_user.is_active :
                 auth.login(request, current_user)
-                return redirect(''.join( ( reverse('victr.views.home'), redirect_path ) ))
+                return redirect( redirect_path )
             else :
                 messages = { "warning" : "Your account has been disabled. Please contact the site administrator." }
         else :

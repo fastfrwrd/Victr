@@ -26,8 +26,8 @@ _coming soon to a GitHub near you_
 #### settings.py: ####
 _this needs to map to your the url you set in urls.py_
 
-    LOGIN_URL = '/victr/login/'
-    LOGOUT_URL = '/victr/logout/'
+    LOGIN_URL = '/victr/auth/login'
+    LOGOUT_URL = '/victr/auth/logout'
     LOGIN_REDIRECT_URL = '/victr/'
 
     INSTALLED_APPS = (

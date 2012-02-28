@@ -12,7 +12,7 @@ Victr.init = function() {
         self[self.page_id]();
     }
     
-    Victr.widgets.auth('#auth');
+    Victr.widgets.auth('#auth', '#register', Victr.register_modal);
 }
 
 Victr.project_new = function() {
@@ -87,11 +87,11 @@ Victr.widgets.tagger = function($page) {
 }
 
 //handles customizations of dropdown and modal from Bootstrap.
-Victr.widgets.auth = function(id) {
+Victr.widgets.auth = function(id, modal, modal_url) {
     var self = this,
         $auth = $(id),
         $wrapper = $auth.find('.login-wrapper'),
-        $modal = $('#modals');
+        $modals = $('#modals');
     
     $auth.find('a.dropdown-toggle').on('click', function(e) {
         e.preventDefault();
@@ -101,7 +101,7 @@ Victr.widgets.auth = function(id) {
         if($wrapper.hasClass('loading')) {
             $wrapper.load(login_url + ' form', function() {
                 $wrapper.removeClass('loading');
-                $modal.load( Victr.register_modal );
+                $modals.load( modal_url );
                 $(this).find('a.register').attr({
                     'data-toggle': 'modal',
                     'data-target': '#register'
@@ -110,14 +110,14 @@ Victr.widgets.auth = function(id) {
                 });
             });
         }
-        
     });
-    
-    //submit from the modal
-    $('.modal-footer *:submit').click(function(e) {
-        $(this).closest('.modal').find('form').submit();
+    $modals.on('click', modal+' .modal-footer *:submit', function(e) {
+        $(this).closest('form').submit();
     });
-    //todo: capture enter in modal
+    $modals.on('keyup', modal+' :input', function(e) {
+        if (e.which != 13) return;
+        $(this).closest('form').submit();
+    });
 }
 
 Victr.widgets.autocomplete = function($page) {

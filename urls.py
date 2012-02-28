@@ -9,8 +9,8 @@ urlpatterns = patterns('',
     url(r'auth', include('victr.auth.urls')),
     
     #todo: move below patterns into victrauth subapp
-    url(r'user/account/$', 'victr.views.account'),
-    url(r'user/(?P<id>.+)/account/$', 'victr.views.account'),
-    url(r'user/projects/$', 'victr.views.projects'),
-    url(r'user/(?P<id>.+)/projects/$', 'victr.views.projects'),
+    url(r'user/account$', 'victr.views.account'),
+    url(r'user/(?P<id>.+)/account$', 'victr.views.account'),
+    url(r'user/projects$', 'victr.views.projects'),
+    url(r'user/(?P<id>.+)/projects$', 'victr.views.projects'),
 )
