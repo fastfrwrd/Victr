@@ -61,12 +61,21 @@ class Event(models.Model):
 			self.slug = SlugifyUniquely(self.name, self.__class__)
 		super(self.__class__, self).save()
 
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    company = models.CharField(blank=True, max_length=40)
+    bio = models.TextField(blank=True)
+    skills = models.ManyToManyField(Discipline, blank=True)
+    def __unicode__(self) :
+        return u"%s %s" % (self.user.first_name, self.user.last_name, self.user.email)
+
 class Project(models.Model):
     slug          = models.SlugField()
     title         = models.CharField(max_length=50, verbose_name=string.capwords(config.keyword('Project.title')))
     description   = models.TextField(blank=True, verbose_name=string.capwords(config.keyword('Project.description')))
     url           = models.URLField(blank=True, verbose_name=string.capwords(config.keyword('Project.url')))
     event         = models.ForeignKey(Event, verbose_name=string.capwords(config.keyword('Event')))
+    users         = models.ManyToManyField(UserProfile)
     rank          = models.IntegerField(
     		            blank=True,	
     		            null=True,
@@ -107,11 +116,3 @@ class Project(models.Model):
         if not self.id:
             self.slug = SlugifyUniquely(self.title, self.__class__)
         super(self.__class__, self).save()
-    
-class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-    company = models.CharField(blank=True, max_length=40)
-    bio = models.TextField(blank=True)
-    skills = models.ManyToManyField(Discipline, blank=True)
-    def __unicode__(self) :
-        return str(self.user)

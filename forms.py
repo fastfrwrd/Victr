@@ -60,9 +60,9 @@ class LoginForm(ModelForm):
 
 class ProjectForm(ModelForm):
     eq = EventQuery()
-    events = eq.current()
+    event = eq.current()
     # eventually, we shall iterate over all current events. today, we simply pass the single current.
-    choices = [(events.pk, events)]
+    events = [(event.pk, event)]
     
     title = forms.fields.CharField(
                 label= string.capwords(config.keyword('Project.title')),
@@ -76,7 +76,7 @@ class ProjectForm(ModelForm):
                 widget=forms.TextInput(attrs={ 'placeholder': 'http://hacks4you.com'}), )
     event = forms.fields.ChoiceField(
                 label= string.capwords(config.keyword('Event')),
-                choices=choices, )
+                choices=events, )
     
     def clean_event(self):
         """ turns int into Event entity for ze processing """
