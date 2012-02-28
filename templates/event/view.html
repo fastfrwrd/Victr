@@ -1,5 +1,6 @@
 {% extends "main_layout.html" %}
-
+{% load victr_tags %}
+        
 {% block page_id %}event_open{% endblock %}
 {% block page_class %}event{% endblock %}
 
@@ -15,12 +16,12 @@
     <section class="main span12">
         {% if event %}
             {% if event.description %}
-            <div class="description">
+            <div id="About" class="description">
                 <h2>About</h2>
                 <p>{{ event.description }}</p>
             </div>
             {% endif %}    
-            <div class="projects">
+            <div id="{% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}" class="projects">
                 <h2>Contenders</h2>
                 {% for project in projects %}
                     {% cycle '<div class="row">' '' '' %}
