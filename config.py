@@ -1,6 +1,6 @@
 def keyword(key):
     """ 
-    change values here to cahnge them sitewide! for example, if you're running
+    change values here to change them sitewide! for example, if you're running
     a hack day, you can change the value for "project" from "project" to "hack." 
     Don't worry - Victr normalizes capitalization for you.
     """
