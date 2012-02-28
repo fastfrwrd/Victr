@@ -1,0 +1,35 @@
+{% extends "main_layout.html" %}
+{% load victr_tags %}
+
+{% block page_id %}event_results{% endblock %}
+
+{% block header %}
+<header class="page-header hero-unit">
+    <div class="container">
+        <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a> <small>congratulates</small></h2>
+        <h1><a href="{% victr_base %}project/{{ winner.slug }}">{{ winner.title }}</a></h1>
+        <h3>Top Hacks</h3>
+        <ol class="results">
+        {% for project in top_projects %}
+            {% if forloop.counter0 < 5 %}
+            <li><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ol>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<h2>Awards</h2>
+{% for project in projects %}
+{% if project.award %}
+    {% cycle '<div class="row">' '' '' '' %}
+        <article class="award-item span3">
+            <h3>{{ project.award }}</h3>
+            <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+        </article>
+    {% cycle '' '' '' '</div>' %}
+{% endif %}
+{% endfor %}
+{% endblock %}

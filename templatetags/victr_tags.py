@@ -2,6 +2,7 @@ from django import template
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from datetime import datetime
+from victr import config
 import re
 
 register = template.Library()
@@ -11,6 +12,11 @@ register = template.Library()
 def victr_base():
     """returns base URL for victr. Available as Victr.base in JS."""
     return reverse('victr.views.home')
+    
+@register.simple_tag
+def victr_keyword(key):
+    """returns language set in config.py"""
+    return config.keyword(key)
 
 #filters
 class_re = re.compile(r'(?<=class=["\'])(.*)(?=["\'])')

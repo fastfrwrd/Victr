@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+from victr import config
+import string
 
 from victr.util import *
 
@@ -24,7 +26,7 @@ class Event(models.Model):
 	show_results = models.BooleanField()
 	rsvp = models.URLField(
 			blank=True,		
-			verbose_name="RSVP",
+			verbose_name=string.capwords(config.keyword('Event.RSVP')),
 			help_text = "A URL to the event RSVP (Eventbrite, etc.)", )
 	scheduled = models.DateTimeField(
 			blank=True, 
@@ -61,10 +63,10 @@ class Event(models.Model):
 
 class Project(models.Model):
     slug          = models.SlugField()
-    title         = models.CharField(max_length=50)
-    description   = models.TextField(blank=True)
-    url           = models.URLField(blank=True)
-    event         = models.ForeignKey(Event)
+    title         = models.CharField(max_length=50, verbose_name=string.capwords(config.keyword('Project.title')))
+    description   = models.TextField(blank=True, verbose_name=string.capwords(config.keyword('Project.description')))
+    url           = models.URLField(blank=True, verbose_name=string.capwords(config.keyword('Project.url')))
+    event         = models.ForeignKey(Event, verbose_name=string.capwords(config.keyword('Event')))
     rank          = models.IntegerField(
     		            blank=True,	
     		            null=True,
@@ -83,9 +85,10 @@ class Project(models.Model):
 		return self.title
 	
     def award_text(self):
-        if self.award and self.rank is None: 
+        """ generate award text for display on various pages """
+        if self.award and (self.rank is None or self.rank >= 4): 
             a = self.award
-        elif self.rank > 0 and self.rank < 4 :
+        elif self.rank and self.rank < 4 :
             ranks = ['First Place','Second Place','Third Place']
             if self.award :
                 a = "%s - %s" % (ranks[self.rank-1], self.award)
