@@ -60,23 +60,31 @@ class LoginForm(ModelForm):
 
 class ProjectForm(ModelForm):
     eq = EventQuery()
-    events = eq.current()
+    event = eq.current()
     # eventually, we shall iterate over all current events. today, we simply pass the single current.
-    choices = [(events.pk, events)]
+    events = [(event.pk, event)]
+    users = []
+    user_results = UserProfile.objects.filter()
+    for userprofile in user_results : 
+        users.append( (userprofile, "%s - %s" % (userprofile, userprofile.user.email)) )
     
-    title = forms.fields.CharField(
-                label= string.capwords(config.keyword('Project.title')),
-                max_length=100, 
-                widget=forms.TextInput(attrs={ 'placeholder': 'be creative..'}), )
+    title       = forms.fields.CharField(
+                    label = string.capwords(config.keyword('Project.title')),
+                    max_length = 100, 
+                    widget = forms.TextInput(attrs={ 'placeholder': 'be creative..'}), )
     description = forms.fields.CharField(
-                label= string.capwords(config.keyword('Project.description')),
-                widget=forms.Textarea(attrs={ 'placeholder': 'details..'}), )
-    url = forms.fields.URLField(
-                label= string.capwords(config.keyword('Project.url')),
-                widget=forms.TextInput(attrs={ 'placeholder': 'http://hacks4you.com'}), )
-    event = forms.fields.ChoiceField(
-                label= string.capwords(config.keyword('Event')),
-                choices=choices, )
+                    label = string.capwords(config.keyword('Project.description')),
+                    widget = forms.Textarea(attrs={ 'placeholder': 'details..'}), )
+    url         = forms.fields.URLField(
+                    label = string.capwords(config.keyword('Project.url')),
+                    widget = forms.TextInput(attrs={ 'placeholder': 'http://hacks4you.com'}), )
+    event       = forms.fields.ChoiceField(
+                    label = string.capwords(config.keyword('Event')),
+                    choices = events, )
+    users       = forms.fields.MultipleChoiceField(
+                    label = string.capwords(config.keyword('Users')),
+                    choices = users,
+                    widget = forms.SelectMultiple(attrs={ 'data-placeholder': 'search for %s by name or email' % (config.keyword('Users'),) }), )
     
     def clean_event(self):
         """ turns int into Event entity for ze processing """

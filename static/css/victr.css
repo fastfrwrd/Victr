@@ -425,6 +425,11 @@
         .tagger ul li:hover i:not(.icon-remove) {
             display:none;
         }
+        
+.chzn-container + .help-inline {
+    vertical-align: top;
+    margin-top: 6px;
+}
 
 /* Animations */
 @-webkit-keyframes spin{
