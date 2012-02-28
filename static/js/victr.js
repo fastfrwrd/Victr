@@ -12,7 +12,7 @@ Victr.init = function() {
         self[self.page_id]();
     }
     
-    Victr.widgets.auth('#auth', '#register', Victr.register_modal);
+    Victr.widgets.auth('#auth', '#register', Victr.url.register_modal);
 }
 
 Victr.project_new = function() {
@@ -95,8 +95,8 @@ Victr.widgets.auth = function(id, modal, modal_url) {
     
     $auth.find('a.dropdown-toggle').on('click', function(e) {
         e.preventDefault();
-    	var current_path = encodeURIComponent(window.location.pathname.slice(Victr.login.length)),
-    	    login_url = Victr.login_nav + '?next=' + current_path;
+    	var current_path = encodeURIComponent(window.location.pathname.slice(Victr.url.login.length)),
+    	    login_url = Victr.url.login_nav + '?next=' + current_path;
         
         if($wrapper.hasClass('loading')) {
             $wrapper.load(login_url + ' form', function() {
