@@ -53,7 +53,8 @@
     {% block script %}{% endblock %}
     <script>
         $(function() {
-            //Victr.current = todo: use django template tag to get current url
+            Victr.current = "{% path request %}"
+            Victr.next = "{% next request %}";
             Victr.register = "{% url register %}";
             Victr.register_modal = "{% url register_modal %}";
             Victr.login = "{% url login %}";

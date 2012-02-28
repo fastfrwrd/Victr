@@ -8,7 +8,8 @@ urlpatterns = patterns('',
     url(r'event', include('victr.event.urls')),
     url(r'auth', include('victr.auth.urls')),
     
-    #todo: move below patterns into victrauth subapp
+    #todo: move below patterns into subapp
+    url(r'archive/$', 'victr.views.archive'),
     url(r'user/account$', 'victr.views.account'),
     url(r'user/(?P<id>.+)/account$', 'victr.views.account'),
     url(r'user/projects$', 'victr.views.projects'),

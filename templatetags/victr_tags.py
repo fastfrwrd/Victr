@@ -46,3 +46,17 @@ def multiply(value, multiplier):
 def past(value):
     """returns true if scheduled event is in the past."""
     return value <= datetime.now()
+
+@register.simple_tag
+def active(request, view, class1, class2):
+    if path(request) == reverse(view):
+        return class1
+    return class2
+
+@register.simple_tag
+def next(request):
+    return getattr(getattr(request,request.method),'next','')
+
+@register.simple_tag
+def path(request):
+    return request.path
