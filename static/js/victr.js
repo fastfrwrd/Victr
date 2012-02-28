@@ -111,10 +111,12 @@ Victr.widgets.auth = function(id, modal, modal_url) {
             });
         }
     });
-    $modals.on('click', modal+' .modal-footer *:submit', function(e) {
+    
+    $modals
+    .on('click', modal+' .modal-footer *:submit', function(e) {
         $(this).closest('form').submit();
-    });
-    $modals.on('keyup', modal+' :input', function(e) {
+    })
+    .on('keyup', modal+' :input', function(e) {
         if (e.which != 13) return;
         $(this).closest('form').submit();
     });
