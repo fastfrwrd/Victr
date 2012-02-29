@@ -14,12 +14,33 @@
 </header>
 <div class="row">
     <section class="main span12">
-        {% for event in events %}
-        {% include "event/archive.html" %}
-        {% empty %}
-        <h3>No scheduled events</h3>
-        <p>Huh... there don't seem to be any events in here. Shucks! Be sure to come back another time.</p>
+
+        
+        {% for year,months in grouped_events.items %}
+            <div class="year">
+                <div class="row">
+                    <div class="offset10 span2">{{ year }}</div>
+                </div>
+                <div class="months">
+                    {% for month,data in months.items %}
+                        <div class="month">
+                            <div class="row">
+                                <div class="offset9 span3">{{ data.month }}</div>
+                            </div>
+                            <div class="events">
+                                {% for event in data.events %}
+                                    <div class="event">
+                                        {% include "event/archive.html" %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         {% endfor %}
+        
+        
     </section>
 </div>
 {% endblock %}

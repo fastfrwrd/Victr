@@ -1,20 +1,19 @@
 {% load victr_tags %}
-<article class="event small" {% if event.is_open %}id="now"{% endif %}>
-    <div class="row info">
-        <div class="span9">
-            <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a></h2>
-        </div>
-        <div class="timeline span3">
-            <h4>{% if event.is_open %}<small>Happening Now! -</small> {% endif %}{{ event.open|date:"F j, Y" }}</h4>
-            <small>{{ event.open|date:"l, P" }}</small>
-            <div class="marker"></div>
-        </div>
+
+<div class="row info" {% if event.is_open %}id="now"{% endif %}>
+    <div class="span9">
+        <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a></h2>
     </div>
+    <div class="span3">
+        <h4 class="date">{% if event.is_open %}<small>Happening Now! -</small> {% endif %}{{ event.open|date:"l \t\he\ jS @ P" }}</h4>
+    </div>
+</div>
+<div class="projects">
     {% for project in event.project_set.all %}
-    {% cycle '<div class="row">' '' '' %}
-        {% include "project/small.html" %}
+        {% cycle '<div class="row">' '' '' %}
+            {% include "project/small.html" %}
         {% cycle '' '' '</div>' %}
-    {% empty %}
-    <p class="center empty">There are no projects currently submitted for {{ event.name }}.</p>
+        {% empty %}
+        <p class="center empty">There are no projects currently submitted for {{ event.name }}.</p>
     {% endfor %}
-</article>
+</div>
