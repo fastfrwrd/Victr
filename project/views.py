@@ -20,13 +20,14 @@ def project(request, slug, default_template="project/view.html"):
 def edit(request, slug, default_template="project/edit.html"):
 
     project = get_object_or_404(Project, slug=slug)
+    current_user = UserProfile.objects.get(user = request.user)
     
     if request.method == 'GET':
         form = ProjectForm(instance = project)
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance = project)
+        form = ProjectForm(request.POST, instance = project, current_user=current_user)
         if form.is_valid() :
             try :
                 project = form.save()
@@ -45,12 +46,19 @@ def new(request, default_template="project/new.html"):
     # grab the current event and check to see if it's actually open.
     eq = EventQuery()
     event = eq.current()
+    
     if not event or not event.is_open() :
         messages = { 'warning' : 'There is currently no event open for submission.' }
         return redirect(reverse('victr.views.home'), locals())
     
+    current_user = UserProfile.objects.get(user=request.user)
+    
+    if request.method == 'GET':
+      form = ProjectForm(initial = {'event' : event, 'users' : [current_user]}) # the current event is preselected.
+      return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+    
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, current_user=current_user)
         if form.is_valid() :
             try :
                 proj = form.save()
@@ -59,10 +67,6 @@ def new(request, default_template="project/new.html"):
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))
             return redirect('project', proj.slug)
         messages = { 'error': 'Invalid form submission. Please correct the indicated fields below before proceeding.' }
-        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-
-    if request.method == 'GET':
-        form = ProjectForm(initial = {'event' : event}) # the current event is preselected.
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET', 'POST'])

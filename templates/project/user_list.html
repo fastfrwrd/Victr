@@ -1,0 +1,2 @@
+{% load victr_tags %}
+{% for user in users %}{% if not forloop.first %}&nbsp;{% endif %}{% if forloop.last and users.count > 1 %}and&nbsp;{% endif %}<a href="{% victr_base %}user/{{ user.pk }}">{{ user.user.first_name }}&nbsp;{{ user.user.last_name }}</a>{% if users.count > 2 and not forloop.last %}<span>,</span>{% endif %}{% endfor %}

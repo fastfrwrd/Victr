@@ -66,8 +66,8 @@ class UserProfile(models.Model):
     company = models.CharField(blank=True, max_length=40)
     bio = models.TextField(blank=True)
     skills = models.ManyToManyField(Discipline, blank=True)
-    def __unicode__(self) :
-        return u"%s %s" % (self.user.first_name, self.user.last_name)
+    def __unicode__(self):
+        return str(self.pk)
 
 class Project(models.Model):
     slug          = models.SlugField()

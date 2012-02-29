@@ -13,23 +13,26 @@ class RegistrationForm(ModelForm):
     It seems that the reason we have fields specified below as attributes is because
     this form has to gather information for both auth.User and victr.UserProfile
     """
-    first_name = forms.fields.CharField(
-                max_length=25, 
-                widget=forms.TextInput(attrs={'placeholder':'Victr'}), )
-    last_name = forms.fields.CharField(
-                max_length=25, 
-                widget=forms.TextInput(attrs={'placeholder':'Appleseed'}), )
-    email = forms.EmailField(
-                max_length=100, 
-                widget=forms.TextInput(attrs={'placeholder':'victr@email.com'}), )
-    password = forms.fields.CharField(
-                max_length=50, 
-                widget=forms.PasswordInput(attrs={'placeholder':'password'}), )
+    first_name  = forms.fields.CharField(
+                    max_length = 25, 
+                    widget = forms.TextInput(attrs={'placeholder':'Victr'}), )
+    last_name   = forms.fields.CharField(
+                    max_length = 25, 
+                    widget = forms.TextInput(attrs={'placeholder':'Appleseed'}), )
+    email       = forms.EmailField(
+                    max_length = 100, 
+                    widget = forms.TextInput(attrs={'placeholder':'victr@email.com'}), )
+    password    = forms.fields.CharField(
+                    max_length = 50, 
+                    widget = forms.PasswordInput(attrs={'placeholder':'password'}), )
+                    
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
+        
     class Meta:
         model = UserProfile
         fields = ('first_name', 'last_name', 'email')
+        
     def save(self):
         if self.is_valid():
             au = auth.models.User.objects.create_user(username=self.cleaned_data['email'], email=self.cleaned_data['email'], password=self.cleaned_data['password'])
@@ -40,22 +43,21 @@ class RegistrationForm(ModelForm):
             ModelForm.save(self)
 
 class LoginForm(ModelForm):
-    email = forms.EmailField(
-                max_length=100, 
-                widget=forms.TextInput(attrs={'placeholder':'victr@email.com'}), )
-    password = forms.fields.CharField(
-                max_length=50, 
-                widget=forms.PasswordInput(attrs={'placeholder':'password'}), )
-    next = forms.fields.CharField(
-                max_length=400, 
-                widget=forms.HiddenInput(), )
+    email       = forms.EmailField(
+                    max_length = 100, 
+                    widget = forms.TextInput(attrs={'placeholder':'victr@email.com'}), )
+    password    = forms.fields.CharField(
+                    max_length = 50, 
+                    widget = forms.PasswordInput(attrs={'placeholder':'password'}), )
+    next        = forms.fields.CharField(
+                    max_length=400, 
+                    widget=forms.HiddenInput(), )
+                    
     def __init__(self, *args, **kwargs):
         super(ModelForm, self).__init__(*args, **kwargs)
+        
     class Meta:
         model = UserProfile
-        """
-        exclude = ('')
-        """
         fields = ['email']
 
 class ProjectForm(ModelForm):
@@ -66,7 +68,7 @@ class ProjectForm(ModelForm):
     users = []
     user_results = UserProfile.objects.filter()
     for userprofile in user_results : 
-        users.append( (userprofile, "%s - %s" % (userprofile, userprofile.user.email)) )
+        users.append( (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email)) )
     
     title       = forms.fields.CharField(
                     label = string.capwords(config.keyword('Project.title')),
@@ -86,9 +88,21 @@ class ProjectForm(ModelForm):
                     choices = users,
                     widget = forms.SelectMultiple(attrs={ 'data-placeholder': 'search for %s by name or email' % (config.keyword('Users'),) }), )
     
+    def __init__(self, *args, **kwargs):
+        """ loads current_user """
+        self.current_user = kwargs.pop('current_user', None)
+        super(ProjectForm, self).__init__(*args, **kwargs)
+    
     def clean_event(self):
         """ turns int into Event entity for ze processing """
         return Event.objects.get(pk=int(self.cleaned_data['event']))
+        
+    def clean_users(self):
+        """ makes sure currently logged in user is part of this list """
+        data = self.cleaned_data['users']
+        if str(self.current_user) not in data:
+            self._errors["users"] = self.error_class(["Make sure to include yourself in the %s list!" % config.keyword('Users')])
+        return data
     
     class Meta:
         model = Project

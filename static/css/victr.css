@@ -462,6 +462,14 @@
     margin-top: 6px;
 }
 
+.chzn-container > * {
+    color: #555;
+    border: 1px solid #CCC !important;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
 /* Animations */
 @-webkit-keyframes spin{
  	from {
