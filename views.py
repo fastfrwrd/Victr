@@ -22,6 +22,8 @@ def home(request, default_template="event/view.html"):
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def archive(request, default_template="archive.html"):
+    eq = EventQuery()
+    events = eq.visible()
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 

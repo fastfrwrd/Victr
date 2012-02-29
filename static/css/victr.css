@@ -397,6 +397,37 @@
     -ms-animation-name: spin;
 }
 
+
+/* Archive Widgets */
+#archive {
+    border-right:1px solid #DDDDDD;
+    box-sizing: border-box;
+}
+#archive .event {
+    margin-top:40px;
+}
+    #archive .event .info {
+        background: #F5F5F5 url(../img/marker.png) no-repeat right center;
+    }
+    #archive .event .timeline {
+        text-align: right;
+        padding-right: 30px;
+        box-sizing: border-box;
+        position:relative;
+    }
+        #archive .event .marker {
+            width: 10px;
+            height: 20px;
+            position: absolute;
+            right:0;
+            top: 7px;
+        }
+    .event .row {
+        margin-top:20px
+    }
+
+
+
 /* Victr Widgets */
 .tagger ul {
     min-height: 30px;
@@ -493,9 +524,12 @@
         width: 320px;
     }
 }
-@media only screen and (min-width: 980px) and (max-width: 1200px) {
+@media only screen and (min-width: 980px) {
     .form_page textarea {
         width: 480px;
+    }
+    .span4 {
+        width: 360px;
     }
 }
 

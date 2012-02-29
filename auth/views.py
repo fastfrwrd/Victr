@@ -36,6 +36,7 @@ def register_modal(request, default_template="auth/register_modal.html"):
 
 
 def login(request, default_template="auth/login.html"):
+    # todo: handle case where we shouldn't redirect if we are on a page like 'archive' after we log in.
     if request.method == 'GET' :
         redirect_path = request.GET.get("next")
         form = LoginForm(initial = { 'next' : redirect_path })
@@ -62,5 +63,5 @@ def login_nav(request, default_template="auth/login_nav.html"):
 
 def logout(request):
     auth.logout(request)
-    # add a message object to display as a notification of logout on the top part of the page
+    # todo: add a message object to display as a notification of logout on the top part of the page
     return redirect(reverse('victr.views.home'))

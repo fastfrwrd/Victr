@@ -19,7 +19,6 @@ def view(request, slug="", default_template="event/view.html"):
         event = get_object_or_404(Event, slug=slug)
     if not event.is_visible :
         raise Http404
-    projects = Project.objects.filter(event=event)
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
     
 def results(request, slug="", default_template="event/results.html"):
