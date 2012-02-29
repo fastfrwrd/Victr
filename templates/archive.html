@@ -29,7 +29,7 @@
                             </div>
                             <div class="events">
                                 {% for event in data.events %}
-                                    <div class="event">
+                                    <div class="event {% if not event.is_open %}closed hide{% else %}{% endif %}">
                                         {% include "event/archive.html" %}
                                     </div>
                                 {% endfor %}

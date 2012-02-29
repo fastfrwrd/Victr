@@ -2,6 +2,8 @@
 
 <div class="row info" {% if event.is_open %}id="now"{% endif %}>
     <div class="span8">
+        <span class="switch open"><i class="icon-chevron-down"></i></span>
+        <span class="switch closed"><i class="icon-chevron-right"></i></span>
         <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a></h2>
     </div>
     <div class="span4">

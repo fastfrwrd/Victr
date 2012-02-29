@@ -36,6 +36,11 @@ Victr.impress_present = function() {
         return false;
     });
 }
+    
+Victr.archive = function() {
+    var self = this;
+    self.widgets.expand(self.$page, '.event .info', '.projects');
+}
 
 /* WiDgEtS oMg! */
 
@@ -64,6 +69,7 @@ Victr.widgets.scroller = function($nav,$page) {
     getOffsets = function() {
         for( var id in data ) {
             var item = data[id];
+            if (!item.$.length) continue;
             item.off = Math.floor(item.$.offset().top);
         }
     },
@@ -228,6 +234,14 @@ Victr.widgets.autocomplete = function($page) {
             }
         })
     })
+}
+    
+    
+Victr.widgets.expand = function($page, click, area) {
+    $page.on('click', click, function() {
+        var $parent = $(this).parent().toggleClass('closed');
+        $parent.find(area).slideToggle();
+    });
 }
 
 
