@@ -14,7 +14,7 @@ Victr.init = function() {
     }
     
     if(self.page_id.indexOf('impress') === -1) {
-        Victr.widgets.scroller(self.$nav,self.$page);
+        //Victr.widgets.scroller(self.$nav,self.$page);
         Victr.widgets.auth('#auth', '#register', Victr.url.register_modal);
     }
    
@@ -40,6 +40,7 @@ Victr.impress_present = function() {
 Victr.archive = function() {
     var self = this;
     self.widgets.expand(self.$page, '.event .info', '.projects');
+    self.widgets.goTo(self.$page, '#now');
 }
 
 /* WiDgEtS oMg! */
@@ -103,13 +104,46 @@ Victr.widgets.scroller = function($nav,$page) {
         $('a.btn-navbar').on('click',function() {
             setTimeout(function() {
                 getOffsets();
-            },300);
+            }, 300);
         });
         setTimeout(function() {
             scrollTo(snip(window.location.href));
         }, 100);
     });
 
+}
+    
+Victr.widgets.goTo = function($page, id) {
+    var $w = $(window), $el, offset;
+    
+    var getItem = function() {
+        $el = $($page.find(id).get(0));
+    },
+    getOffset = function() {
+        offset = Math.floor($el.offset().top);
+    },
+    scrollTo = function() {
+        var duration = Math.abs($w.scrollTop() - offset);
+        $('body').animate({
+            scrollTop: offset
+        }, duration, function() {
+            window.location.hash = id;
+        });
+    }
+    
+    $(function() {
+        getItem();
+        getOffset();
+        $w.on('resize', getOffset);
+        $('a.btn-navbar').on('click',function() {
+            setTimeout(function() {
+                getOffset();
+            }, 300);
+        });
+        setTimeout(function() {
+            scrollTo()
+        }, 100);
+    })
 }
 
 Victr.widgets.form = function($form) {
