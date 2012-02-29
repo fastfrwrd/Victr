@@ -39,99 +39,99 @@ Victr.impress_present = function() {
 Victr.archive = function() {
     var self = this;
     self.widgets.expand(self.$page, '.event .info', '.projects');
-    self.widgets.goTo(self.$page, '#now');
+    self.widgets.goTo(self.$page, '#now', $('.navbar').height());
 }
 
 /* WiDgEtS oMg! */
     
-Victr.widgets.onHashMatch = function(match, fn, args) {
-    $(w).bind('hashchange', function() {
-        var hash = w.location.hash;
-        if (hash == match) {
-            fn.apply(Victr, args);
-        }
-    });
-}
+//Victr.widgets.onHashMatch = function(match, fn, args) {
+//    $(w).bind('hashchange', function() {
+//        var hash = w.location.hash;
+//        if (hash == match) {
+//            fn.apply(Victr, args);
+//        }
+//    });
+//}
 
-Victr.widgets.scroller = function($nav,$page) {
-    var data, $w = $(window);
+//Victr.widgets.scroller = function($nav,$page) {
+//    var data, $w = $(window);
+//    
+//    var snip = function(url) {
+//        return url.split('#')[1];
+//    },
+//    getItems = function(){
+//        var items = {},
+//            links = $nav.find('.nav a[href*="#"]');
+//        links.each(function() {
+//            
+//            var hash = snip($(this).attr('href'));
+//            if (hash)
+//                items[hash] = {};
+//        });
+//        return items
+//    },
+//    getElements = function() {
+//        for( var id in data ) {
+//            data[id].$ = $page.find('#'+id);
+//        }
+//    },
+//    getOffsets = function() {
+//        for( var id in data ) {
+//            var item = data[id];
+//            if (!item.$.length) continue;
+//            item.off = Math.floor(item.$.offset().top);
+//        }
+//    },
+//    scrollTo = function(id) {
+//        if (!id) return;
+//        var offset = data[id].off,
+//            duration = Math.abs($w.scrollTop() - offset);
+//        $('body').animate({
+//            scrollTop: offset
+//        }, duration, function() {
+//            window.location.hash = id;
+//        });
+//    },
+//    setListeners = function() {
+//        $nav.on('click','a[href*="#"]', function(e) {
+//            var hash = snip($(this).attr('href'));
+//            if (!hash) return;
+//            e.preventDefault();
+//            scrollTo(hash);
+//        })
+//    };
+//    
+//    $(function(){
+//        data = getItems();
+//        getElements();
+//        getOffsets();
+//        setListeners();
+//        $w.on('resize', function() {
+//            getOffsets();
+//        });
+//        $('a.btn-navbar').on('click',function() {
+//            setTimeout(function() {
+//                getOffsets();
+//            }, 300);
+//        });
+//        setTimeout(function() {
+//            scrollTo(snip(window.location.href));
+//        }, 100);
+//    });
+//
+//}
     
-    var snip = function(url) {
-        return url.split('#')[1];
-    },
-    getItems = function(){
-        var items = {},
-            links = $nav.find('.nav a[href*="#"]');
-        links.each(function() {
-            
-            var hash = snip($(this).attr('href'));
-            if (hash)
-                items[hash] = {};
-        });
-        return items
-    },
-    getElements = function() {
-        for( var id in data ) {
-            data[id].$ = $page.find('#'+id);
-        }
-    },
-    getOffsets = function() {
-        for( var id in data ) {
-            var item = data[id];
-            if (!item.$.length) continue;
-            item.off = Math.floor(item.$.offset().top);
-        }
-    },
-    scrollTo = function(id) {
-        if (!id) return;
-        var offset = data[id].off,
-            duration = Math.abs($w.scrollTop() - offset);
-        $('body').animate({
-            scrollTop: offset
-        }, duration, function() {
-            window.location.hash = id;
-        });
-    },
-    setListeners = function() {
-        $nav.on('click','a[href*="#"]', function(e) {
-            var hash = snip($(this).attr('href'));
-            if (!hash) return;
-            e.preventDefault();
-            scrollTo(hash);
-        })
-    };
-    
-    $(function(){
-        data = getItems();
-        getElements();
-        getOffsets();
-        setListeners();
-        $w.on('resize', function() {
-            getOffsets();
-        });
-        $('a.btn-navbar').on('click',function() {
-            setTimeout(function() {
-                getOffsets();
-            }, 300);
-        });
-        setTimeout(function() {
-            scrollTo(snip(window.location.href));
-        }, 100);
-    });
-
-}
-    
-Victr.widgets.goTo = function($page, id) {
-    var $w = $(window), $el, offset;
+Victr.widgets.goTo = function($page, id, padding) {
+    var $w = $(window), $el, offset, duration;
     
     var getItem = function() {
         $el = $($page.find(id).get(0));
     },
     getOffset = function() {
-        offset = Math.floor($el.offset().top);
+        offset = Math.floor($el.offset().top) - padding;
+        duration = offset/2;
     },
     scrollTo = function() {
-        var duration = Math.abs($w.scrollTop() - offset);
         $('body').animate({
             scrollTop: offset
         }, duration, function() {
