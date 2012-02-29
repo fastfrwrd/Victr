@@ -107,3 +107,6 @@ class ProjectForm(ModelForm):
     class Meta:
         model = Project
         exclude = ('slug', 'rank', 'award')
+        
+class UserProfileForm(auth.forms.PasswordChangeForm):
+    pass

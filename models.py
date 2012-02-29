@@ -73,6 +73,9 @@ class UserProfile(models.Model):
     def profile(self):
         """ list of the profile items that should show up on the User Profile page """
         return [self.company, self.skills, self.bio]
+
+    def full_name(self):
+        return "%s %s" % (self.user.first_name, self.user.last_name)
         
 
 class Project(models.Model):
