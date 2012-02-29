@@ -1,4 +1,13 @@
 /** 
+ * bootstrap overrides
+ */
+.hide {
+    display:inherit;
+}
+
+
+
+/** 
  * victr.css 
  */
 
@@ -414,7 +423,7 @@
             box-sizing: border-box;
         }
             #archive .year .months {
-                margin-bottom: 40px;
+                margin-bottom: 20px;
             }
                 #archive .year .month > .row {
                     margin-bottom: 10px;
@@ -429,8 +438,26 @@
                         margin-bottom: 20px;
                     }
                         #archive .year .month .event .info {
-                            background: #F5F5F5 url(../img/marker.png) no-repeat right center;
+                            background: #F5F5F5 url(../img/marker.png) right center no-repeat;
+                            position: relative;
                         }
+                            #archive .year .month .event .info .switch {
+                                position:absolute;
+                                left: 10px;
+                                top: 10px;
+                            }
+                            #archive .year .month .event .info .switch.open {
+                                display:block
+                            }
+                            #archive .year .month .event .info .switch.closed {
+                                display:none
+                            }
+                            #archive .year .month .event.closed .info .switch.open {
+                                display:none
+                            }
+                            #archive .year .month .event.closed .info .switch.closed {
+                                display:block
+                            }
                             #archive .year .month .event .info .date {
                                 text-align: right;
                                 padding-right: 20px;
@@ -440,6 +467,17 @@
                             }
                         #archive .year .month .event .projects {
                             margin-top: 30px;
+                        }
+                        /*#archive .year .month .event .projects {*/
+                            /*height: 0;*/
+                            /*overflow:hidden;*/
+                            /*-webkit-transition: height 0.25s ease-out;*/
+                            /*-moz-transition: height 0.25s ease-out;*/
+                            /*-o-transition: height 0.25s ease-out;*/
+                            /*transition: height 0.25s ease-out;*/
+                        /*}*/
+                        #archive .year .month .event.hide .projects {
+                            display:none
                         }
 
         
