@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from victr.models import *
 from victr.event.util import EventQuery
 from victr.forms import RegistrationForm, LoginForm
+import calendar
 
 def home(request, default_template="event/view.html"):
     """
@@ -24,4 +25,19 @@ def home(request, default_template="event/view.html"):
 def archive(request, default_template="archive.html"):
     eq = EventQuery()
     events = eq.visible()
+    grouped_events = {}
+    
+    for event in events:
+        date = event.open.date()
+        year = date.year
+        month = date.month
+        if year not in grouped_events:
+            grouped_events[year] = {}
+        if month not in grouped_events[year]:
+            grouped_events[year][month] = { 'month': calendar.month_name[month], 'events': [] }
+        print grouped_events[year][month]
+        grouped_events[year][month]['events'].append(event)
+    
+    print grouped_events
+        
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))

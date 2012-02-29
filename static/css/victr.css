@@ -415,25 +415,44 @@
     border-right: 1px solid #DDDDDD;
     box-sizing: border-box;
 }
-#archive .event {
-    margin-top: 40px;
-}
-    #archive .event .info {
-        background: #F5F5F5 url(../img/marker.png) no-repeat right center;
-    }
-    #archive .event .timeline {
+    #archive .year > .row {
+        margin-bottom: 20px;
         text-align: right;
-        padding-right: 30px;
-        box-sizing: border-box;
-        position: relative;
+        font-size:28px;
+        font-weight:bold;
     }
-        #archive .event .marker {
-            width: 10px;
-            height: 20px;
-            position: absolute;
-            right: 0;
-            top: 7px;
+        #archive .year > .row div {
+            padding-right: 30px;
+            box-sizing: border-box;
         }
+            #archive .year .months {
+                margin-bottom: 40px;
+            }
+                #archive .year .month > .row {
+                    margin-bottom: 10px;
+                    text-align: right;
+                    font-size:20px;
+                }
+                #archive .year .month > .row div {
+                    padding-right: 30px;
+                    box-sizing: border-box;
+                }
+                    #archive .year .month .events {
+                        margin-bottom: 20px;
+                    }
+                        #archive .year .month .event .info {
+                            background: #F5F5F5 url(../img/marker.png) no-repeat right center;
+                        }
+                            #archive .year .month .event .info .date {
+                                text-align: right;
+                                padding-right: 20px;
+                                box-sizing: border-box;
+                                line-height: 36px;
+                                font-weight:normal;
+                            }
+                        #archive .year .month .event .projects {
+                            margin-top: 30px;
+                        }
 
 /* Victr Widgets */
 .tagger ul {
