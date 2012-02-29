@@ -13,20 +13,20 @@
 </header>
 <div class="row">
     <section class="profile span8">
-    {% for field in userprofile.profile %}
-       {% if value %}
-       <div class="row">
-           <div class="label span2">{{ field.label }}</label>
-           <div class="span6">{{ field }}</div>
-       </div>
-       {% endif %}
+    {% for value in userprofile.profile %}
+        <div class="row">
+            <div class="label span2">{{ value|verbose_name }}</div>
+            <div class="span6">{{ value }}</div>
+        </div>
     {% endfor %}
     </section>
     <section class="projects span4">
     <h3>Projects</h3>
     <div class="row">
         {% for project in userprofile.project_set.all %}
-            {% include "project/small.html" %}
+            <div class="span4">
+                <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+            </div>
         {% empty %}
             <div class="span4"><em>{{ userprofile.full_name }} currently has no projects.</em></div>
         {% endfor %}

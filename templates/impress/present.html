@@ -12,7 +12,7 @@
 </section>
 
 {% for project in projects %}
-<article class="step slide project" data-x="-2000" data-y="{{ forloop.counter0|multiply:- 1000 }}" data-rotate="-90">
+<article class="step slide project" data-x="-2000" data-y="{{ forloop.counter0|multiply:-1000 }}" data-rotate="-90">
     {% include "project/project.html" %}
 </article>
 {% empty %}

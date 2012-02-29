@@ -33,7 +33,7 @@
 .dropdown.open .dropdown-toggle {
     color: #522A87;
     font-weight: bold;
-}   
+}
 
 .navbar .brand {
     padding-top: 0px;
@@ -110,6 +110,17 @@
 }
 
 /* general styles and bootstrap overrides */
+div.label  {
+    background: none;
+    color: #999;
+    text-align: right;
+    width: 7em;
+    margin-right: 0.5em;
+    display: block;
+    float: left;
+    line-height: 1.7em;
+}
+
 .hero-unit {
     background: -moz-linear-gradient(center top , #522A87, #6F5099) repeat scroll 0 0 transparent;
     background-image: -ms-linear-gradient(center top , #522A87, #6F5099);
@@ -282,17 +293,6 @@
         display: block;
         padding: 0.8em;
         margin: 0.5em;
-    }
-    
-    .project .details .label  {
-        background: none;
-        color: #999;
-        text-align: right;
-        width: 7em;
-        margin-right: 0.5em;
-        display: block;
-        float: left;
-        line-height: 1.7em;
     }
     
     .project .details .btn-small {

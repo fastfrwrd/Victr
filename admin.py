@@ -1,5 +1,5 @@
 from django.contrib import admin
-from victr.models import Event, Project
+from victr.models import *
 
 class EventAdmin(admin.ModelAdmin):
     exclude = ['slug']
@@ -18,3 +18,4 @@ class ProjectAdmin(admin.ModelAdmin):
     
 admin.site.register(Event, EventAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(UserProfile)

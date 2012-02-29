@@ -79,3 +79,7 @@ def multiply(value, multiplier):
 def past(value):
     """returns true if scheduled event is in the past."""
     return value <= datetime.now()
+    
+@register.filter
+def verbose_name(object):
+    """returns verbose name."""

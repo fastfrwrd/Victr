@@ -63,8 +63,8 @@ class Event(models.Model):
 
 class UserProfile(models.Model):
     user          = models.ForeignKey(User, unique=True)
-    company       = models.CharField(blank=True, max_length=40)
-    bio           = models.TextField(blank=True)
+    company       = models.CharField(blank=True, max_length=40, verbose_name="Company")
+    bio           = models.TextField(blank=True, verbose_name="Bio")
     skills        = models.ManyToManyField(Discipline, blank=True)
     
     def __unicode__(self):
@@ -72,7 +72,7 @@ class UserProfile(models.Model):
         
     def profile(self):
         """ list of the profile items that should show up on the User Profile page """
-        return [self.company, self.skills, self.bio]
+        return [self.company, self.user.email, self.bio]
 
     def full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
