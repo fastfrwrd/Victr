@@ -5,7 +5,7 @@
 
 {% block title %}
 {% if user.is_authenticated %}
-{{ user.first_name }} {{ user.last_name }}
+{{ user.userprofile_set.get.full_name }}
 {% else %}
 Login
 {% endif %}

@@ -7,5 +7,6 @@ urlpatterns = patterns('victr.auth.views',
     url(r'^/login/nav/$'      , 'login_nav'     , name='login_nav'     ),
     url(r'^/logout/$'         , 'logout'        , name='logout'        ),
     url(r'^/user/$'           , 'profile'       , name='profile'       ),
+    url(r'^/user/edit/$'      , 'edit'          , name='edit'          ),
     url(r'^/user/(?P<id>.+)/$', 'profile'       , name='profile'       ),
 )

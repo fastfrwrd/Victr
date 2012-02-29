@@ -253,7 +253,8 @@
     margin-bottom: 0.5em;
 }
 
-    .project header h1 {
+    .project header h1,
+    .user header h1 {
         padding-right: 0.4em;
         font-size: 2em;
     }

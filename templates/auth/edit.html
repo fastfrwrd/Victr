@@ -1,0 +1,20 @@
+{% extends "auth/form_page.html" %}
+{% load victr_tags %}
+
+{% block action %}{% victr_base %}auth/user/edit/{% endblock %}
+
+{% block page_id %}auth_edit{% endblock %}
+{% block page_class %}{{ block.super }} login{% endblock %}
+
+
+{% block sub_section_heading %}Edit Account{% endblock %}
+{% block sub_section_text %}
+<p>Change your password, fix up your profile, and show the world how awesome you are here.</p>
+{% endblock %}
+
+{% block actions %}
+{% include "form/actions.html" with submit_text="Update Project"  submit_icon="icon-arrow-up" %}
+{% endblock %}
+
+{% block extra_css %}<link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">{% endblock %}
+{% block script %}<script type="text/javascript" src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>{% endblock %}

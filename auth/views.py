@@ -8,7 +8,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from victr.models import *
 from victr.event.util import EventQuery
-from victr.forms import RegistrationForm, LoginForm
+from victr.forms import RegistrationForm, LoginForm, UserProfileForm
 from urllib import quote, unquote
 
 
@@ -32,8 +32,6 @@ def register(request, default_template="auth/register.html"):
 
 def register_modal(request, default_template="auth/register_modal.html"):
     return register(request, default_template)
-
-
 
 def login(request, default_template="auth/login.html"):
     # todo: handle case where we shouldn't redirect if we are on a page like 'archive' after we log in.
@@ -60,15 +58,28 @@ def login(request, default_template="auth/login.html"):
 def login_nav(request, default_template="auth/login_nav.html"):
     return login(request, default_template)
 
-
 def logout(request):
     auth.logout(request)
     # todo: add a message object to display as a notification of logout on the top part of the page
     return redirect(reverse('victr.views.home'))
 
-def profile(request, default_template="auth/account.html"):
-    """
-    the account of a user. if user is currently logged in user, should return
-    a form. should respond to POST and GET.
-    """
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+def profile(request, id=None, default_template="auth/profile.html"):
+    userprofile = False
+    if id :
+        print id
+        userprofile = UserProfile.objects.get(pk=id)
+    elif request.user.is_authenticated() :
+        userprofile = UserProfile.objects.get(user=request.user) 
+    if userprofile :   
+        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+    return redirect(reverse('victr.auth.views.login'))
+
+def edit(request, default_template="auth/edit.html"):
+    if request.user.is_authenticated() :    
+        userprofile = UserProfile.objects.get(user=request.user)
+        form = UserProfileForm(request.user)
+        if userprofile:
+            return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+    return redirect(reverse('victr.auth.views.login'))
+    
+    
