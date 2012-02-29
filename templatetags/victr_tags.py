@@ -20,10 +20,11 @@ def victr_keyword(key):
     return config.keyword(key)
 
 @register.simple_tag
-def active(request, view, class1, class2):
+def active(request, view, class1, class2=None):
     if path(request) == reverse(view):
         return class1
-    return class2
+    if class2:
+        return class2
 
 @register.simple_tag
 def next(request):

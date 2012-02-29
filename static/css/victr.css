@@ -436,6 +436,9 @@ div.label  {
     border-right: 1px solid #DDDDDD;
     box-sizing: border-box;
 }
+    #archive .year {
+        margin-bottom: 10px;
+    }
     #archive .year > .row {
         margin-bottom: 20px;
         text-align: right;
@@ -470,17 +473,11 @@ div.label  {
                                 left: 10px;
                                 top: 10px;
                             }
-                            #archive .year .month .event .info .switch.open {
+                            #archive .year .month .event .info .switch.open, #archive .year .month .event.closed .info .switch.closed {
                                 display:block
                             }
-                            #archive .year .month .event .info .switch.closed {
+                            #archive .year .month .event .info .switch.closed, #archive .year .month .event.closed .info .switch.open {
                                 display:none
-                            }
-                            #archive .year .month .event.closed .info .switch.open {
-                                display:none
-                            }
-                            #archive .year .month .event.closed .info .switch.closed {
-                                display:block
                             }
                             #archive .year .month .event .info .date {
                                 text-align: right;
@@ -492,14 +489,6 @@ div.label  {
                         #archive .year .month .event .projects {
                             margin-top: 30px;
                         }
-                        /*#archive .year .month .event .projects {*/
-                            /*height: 0;*/
-                            /*overflow:hidden;*/
-                            /*-webkit-transition: height 0.25s ease-out;*/
-                            /*-moz-transition: height 0.25s ease-out;*/
-                            /*-o-transition: height 0.25s ease-out;*/
-                            /*transition: height 0.25s ease-out;*/
-                        /*}*/
                         #archive .year .month .event.hide .projects {
                             display:none
                         }
