@@ -14,8 +14,7 @@ Victr.init = function() {
     }
     
     if(self.page_id.indexOf('impress') === -1) {
-        //Victr.widgets.scroller(self.$nav,self.$page);
-        Victr.widgets.auth('#auth', '#register', Victr.url.register_modal);
+        self.widgets.auth('#auth', '#register', self.url.register_modal);
     }
    
 }
@@ -44,6 +43,15 @@ Victr.archive = function() {
 }
 
 /* WiDgEtS oMg! */
+    
+Victr.widgets.onHashMatch = function(match, fn, args) {
+    $(w).bind('hashchange', function() {
+        var hash = w.location.hash;
+        if (hash == match) {
+            fn.apply(Victr, args);
+        }
+    });
+}
 
 Victr.widgets.scroller = function($nav,$page) {
     var data, $w = $(window);
