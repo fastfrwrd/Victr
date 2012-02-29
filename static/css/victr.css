@@ -305,13 +305,23 @@
     }
     
 .project.small {
-    margin-top: 10px;
+    min-height: 160px;
+    width: 350px;
+    padding: 10px 10px 0 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid whiteSmoke;
+    border-right: 1px solid whiteSmoke;
 }
 
     .project.small h3 {
         line-height: 14px;
         margin-bottom: 10px;
+        text-shadow: 1px 1px 3px #dcdcdc;
     }
+        
+        .project.small h3 small {
+            text-shadow: none;
+        }
     
 /* project_all */
 #project_all .project {

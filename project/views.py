@@ -12,7 +12,8 @@ def project(request, slug, default_template="project/view.html"):
 
     if request.method == 'GET':
         project = get_object_or_404(Project, slug=slug)
-        current_user = UserProfile.objects.get(user=request.user)
+        if request.user.is_authenticated() :
+            current_user = UserProfile.objects.get(user=request.user)
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
     return HttpResponseNotAllowed(['GET'])
