@@ -10,8 +10,4 @@ urlpatterns = patterns('',
     
     #todo: move below patterns into subapp
     url(r'archive/$', 'victr.views.archive'),
-    url(r'user/account$', 'victr.views.account'),
-    url(r'user/(?P<id>.+)/account$', 'victr.views.account'),
-    url(r'user/projects$', 'victr.views.projects'),
-    url(r'user/(?P<id>.+)/projects$', 'victr.views.projects'),
 )

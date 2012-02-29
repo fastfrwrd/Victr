@@ -1,7 +1,24 @@
 {% extends "main_layout.html" %}
 
 {% block page_id %}user_account{% endblock %}
+{% block page_class %}user{% endblock %}
 
 {% block content %}
-<p>We haven't implemented this yet! Come back later, or <a href="http://www.github.com/fastfrwrd/Victr">fork us</a> and get this party started.</p>
+<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+<div class="row">
+    <section class="profile span8">
+    {% for key, value in user.userprofile_set.get.profile %}
+    {& if value %}
+    <div class="row">
+        <div class="label span2">{{ key }}</label>
+        <div class="span6">{{ value }}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </section>
+    <section class="projects span4">
+    {% for project in user.userprofile_set.get.project_set.all.select_related %}
+    {% endfor %}
+    </section>
+</div>
 {% endblock %}

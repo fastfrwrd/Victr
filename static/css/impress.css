@@ -113,8 +113,8 @@ body     { pointer-events: none; }
 .slide {
     display: block;
 
-    width: 900px;
-    height: 700px;
+    width: 800px;
+    height: 600px;
 
     padding: 40px 60px;
 

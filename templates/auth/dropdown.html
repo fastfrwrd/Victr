@@ -15,9 +15,14 @@ Login
 
 {% if user.is_authenticated %}
 
-<li><a href="{% victr_base %}user/projects">My Projects</a></li>
-<li><a href="{% victr_base %}user/account">My Account</a></li>
+<li class="nav-header">My Projects</li>
+{% for project in user.userprofile_set.get.project_set.all.select_related %}
+<li><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></li>
+{% empty %}
+<li>no projects</li>
+{% endfor %}
 <li class="divider"></li>
+<li><a href="{% victr_base %}auth/user/">My Account</a></li>
 <li><a href="{% url logout %}">Logout</a></li>
 
 {% else %}

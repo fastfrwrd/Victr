@@ -9,7 +9,7 @@ from victr.util import *
 # Create your models here.
 
 class Discipline(models.Model):
-    name = models.CharField(max_length=40)
+    name          = models.CharField(max_length=40)
     
     def save(self):
         if not self.id:
@@ -20,30 +20,30 @@ class Discipline(models.Model):
         return self.name
 
 class Event(models.Model):
-	slug = models.SlugField()
-	name = models.CharField(max_length=50)
-	description = models.TextField(blank=True)
-	show_results = models.BooleanField()
-	rsvp = models.URLField(
-			blank=True,		
-			verbose_name=string.capwords(config.keyword('Event.RSVP')),
-			help_text = "A URL to the event RSVP (Eventbrite, etc.)", )
-	scheduled = models.DateTimeField(
-			blank=True, 
-			null=True,
-			help_text = "When your contest will appear publicly as a simple page \
-					     with an RSVP link. Leaving this blank means that your event \
-					     will appear as soon as it is saved.", )
-	open = models.DateTimeField(
-			help_text = "When your participants can start submitting their projects.", )
-	close = models.DateTimeField(
-			help_text = "When submissions will close.", )
-	hidden = models.DateTimeField(			
-			blank=True,
-			null=True,
-			help_text = "When the event, results, and hacks will go into hidden mode. \
-						 Leaving this off will leave all portions of this event accessible on \
-						 the \"Events\" section of the site.", )
+	slug          = models.SlugField()
+	name          = models.CharField(max_length=50)
+	description   = models.TextField(blank=True)
+	show_results  = models.BooleanField()
+	rsvp          = models.URLField(
+			            blank=True,		
+			            verbose_name=string.capwords(config.keyword('Event.RSVP')),
+			            help_text = "A URL to the event RSVP (Eventbrite, etc.)", )
+	scheduled     = models.DateTimeField(
+			            blank=True, 
+			            null=True,
+			            help_text = "When your contest will appear publicly as a simple page \
+					      with an RSVP link. Leaving this blank means that your event \
+					      will appear as soon as it is saved.", )
+	open          = models.DateTimeField(
+			            help_text = "When your participants can start submitting their projects.", )
+	close         = models.DateTimeField(
+			            help_text = "When submissions will close.", )
+	hidden        = models.DateTimeField(			
+			            blank=True,
+			            null=True,
+			            help_text = "When the event, results, and hacks will go into hidden mode. \
+						  Leaving this off will leave all portions of this event accessible on \
+						  the \"Events\" section of the site.", )
 
 	def __unicode__(self):
 		return self.name;
@@ -62,12 +62,18 @@ class Event(models.Model):
 		super(self.__class__, self).save()
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-    company = models.CharField(blank=True, max_length=40)
-    bio = models.TextField(blank=True)
-    skills = models.ManyToManyField(Discipline, blank=True)
+    user          = models.ForeignKey(User, unique=True)
+    company       = models.CharField(blank=True, max_length=40)
+    bio           = models.TextField(blank=True)
+    skills        = models.ManyToManyField(Discipline, blank=True)
+    
     def __unicode__(self):
         return str(self.pk)
+        
+    def profile(self):
+        """ list of the profile items that should show up on the User Profile page """
+        return [self.company, self.skills, self.bio]
+        
 
 class Project(models.Model):
     slug          = models.SlugField()
@@ -91,7 +97,12 @@ class Project(models.Model):
     # screenshot = models.ImageField(upload_to="images/screenshot")
 
     def __unicode__(self):
-		return self.title
+        return self.title
+		
+    def save(self):
+        if not self.id:
+            self.slug = SlugifyUniquely(self.title, self.__class__)
+        super(self.__class__, self).save()
 	
     def award_text(self):
         """ generate award text for display on various pages """
@@ -111,8 +122,3 @@ class Project(models.Model):
         if self.rank and self.rank > 0 and self.rank < 4 :
             return classes[self.rank-1]
         return ''
-	
-    def save(self):
-        if not self.id:
-            self.slug = SlugifyUniquely(self.title, self.__class__)
-        super(self.__class__, self).save()
