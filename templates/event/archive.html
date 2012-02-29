@@ -1,10 +1,10 @@
 {% load victr_tags %}
 
 <div class="row info" {% if event.is_open %}id="now"{% endif %}>
-    <div class="span9">
+    <div class="span8">
         <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a></h2>
     </div>
-    <div class="span3">
+    <div class="span4">
         <h4 class="date">{% if event.is_open %}<small>Happening Now! -</small> {% endif %}{{ event.open|date:"l \t\he\ jS @ P" }}</h4>
     </div>
 </div>
