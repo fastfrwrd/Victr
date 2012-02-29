@@ -13,8 +13,11 @@ Victr.init = function() {
         self[self.page_id]();
     }
     
-    Victr.widgets.scroller(self.$nav,self.$page);
-    Victr.widgets.auth('#auth', '#register', Victr.url.register_modal);
+    if(self.page_id.indexOf('impress') === -1) {
+        Victr.widgets.scroller(self.$nav,self.$page);
+        Victr.widgets.auth('#auth', '#register', Victr.url.register_modal);
+    }
+   
 }
 
 Victr.project_new = function() {

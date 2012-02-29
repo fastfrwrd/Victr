@@ -25,7 +25,6 @@ def home(request, default_template="event/view.html"):
 def archive(request, default_template="archive.html"):
     eq = EventQuery()
     events = eq.visible()
-    
     grouped_events = {}
     
     for event in events:
@@ -42,20 +41,3 @@ def archive(request, default_template="archive.html"):
     print grouped_events
         
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-
-
-@login_required
-def projects(request, default_template="auth/projects.html"):
-    """
-    Grab all projects associated with a user, list them with their event
-    """
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-    
-@login_required
-def account(request, default_template="auth/account.html"):
-    """
-    the account of a user. if user is currently logged in user, should return
-    a form. should respond to POST and GET.
-    """
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-    

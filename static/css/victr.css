@@ -19,14 +19,14 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.55), 0 -1px 0 rgba(0, 0, 0, 0.5) inset;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top:10px;
+    padding-top: 10px;
     background-image: none;
 }
 
 .navbar .nav > li > a {
-    color:#000000;
-    position:relative;
-    top:11px;
+    color: #000000;
+    position: relative;
+    top: 11px;
     text-shadow: none;
 }
 
@@ -36,17 +36,21 @@
 }   
 
 .navbar .brand {
-    padding-top:0px;
+    padding-top: 0px;
 }
 .navbar .nav > li > a:hover {
-    color:#858585;
+    color: #858585;
 }
 .navbar #auth {
 
 }
 
-    .navbar #auth a {
+    .navbar #user_nav * {
         text-align: right;
+    }
+    
+    .navbar #user_nav input{
+        text-align: left;
     }
     
         .navbar #auth a.register {
@@ -60,7 +64,7 @@
     
     .navbar #auth .dropdown-menu {
         background-color: whiteSmoke;
-        width:300px;
+        width: 300px;
         margin-top: 8px;
     }
     
@@ -87,7 +91,7 @@
 }
 
 .navbar ul.nav a.login-collapse {
-    display:none;
+    display: none;
 }
 
 #auth_login_page a.register {
@@ -96,13 +100,13 @@
 }
 
 #modals form {
-    margin:0;
+    margin: 0;
 }
 #modals .form-actions {
-    padding-top:0;
-    margin-top:0;
-    border-top:0;
-    margin-bottom:0;
+    padding-top: 0;
+    margin-top: 0;
+    border-top: 0;
+    margin-bottom: 0;
 }
 
 /* general styles and bootstrap overrides */
@@ -122,7 +126,7 @@
 }
 
     .hero-unit * {
-        color:#ffffff;
+        color: #ffffff;
     }
 
     .hero-unit.active {
@@ -175,6 +179,14 @@
         background-image: -webkit-linear-gradient(top, #f7e421, #fcc316);
         background-image: -o-linear-gradient(top, #f7e421, #fcc316);
         background-image: linear-gradient(top, #f7e421, #fcc316);
+    }
+    
+    .hero-unit .btn:hover,
+    .hero-unit .btn:active,
+    .hero-unit .btn.active,
+    .hero-unit .btn.disabled,
+    .hero-unit .btn[disabled] {
+        color: black;
     }
     
     .hero-unit .btn-primary:hover,
@@ -292,7 +304,7 @@
     }
     
 .project.small {
-    
+    margin-top: 10px;
 }
 
     .project.small h3 {
@@ -384,7 +396,7 @@
 
 /* general form styles */
 #submit  .icon-refresh {
-    display:none;
+    display: none;
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
@@ -397,10 +409,10 @@
     -o-transition: rotate(3600deg);
 }
 #submit[disabled] :not(.icon-refresh) {
-    display:none
+    display: none
 }
 #submit[disabled] .icon-refresh {
-    display:inline-block;
+    display: inline-block;
     -webkit-animation-name: spin;
     -moz-animation-name: spin;
     -ms-animation-name: spin;
@@ -409,7 +421,7 @@
 
 /* Archive Widgets */
 #archive {
-    border-right:1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
     box-sizing: border-box;
 }
     #archive .year > .row {
@@ -479,33 +491,6 @@
                         #archive .year .month .event.hide .projects {
                             display:none
                         }
-
-        
-/*
-#archive .event {
-    margin-top:40px;
-}
-    #archive .event .info {
-        background: #F5F5F5 url(../img/marker.png) no-repeat right center;
-    }
-    #archive .event .timeline {
-        text-align: right;
-        padding-right: 30px;
-        box-sizing: border-box;
-        position:relative;
-    }
-        #archive .event .marker {
-            width: 10px;
-            height: 20px;
-            position: absolute;
-            right:0;
-            top: 7px;
-        }
-    .event .row {
-        margin-top:20px
-    }
-*/
-
 
 /* Victr Widgets */
 .tagger ul {

@@ -65,3 +65,10 @@ def logout(request):
     auth.logout(request)
     # todo: add a message object to display as a notification of logout on the top part of the page
     return redirect(reverse('victr.views.home'))
+
+def profile(request, default_template="auth/account.html"):
+    """
+    the account of a user. if user is currently logged in user, should return
+    a form. should respond to POST and GET.
+    """
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
