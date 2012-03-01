@@ -7,3 +7,6 @@
 {% block sub_section_text %}
 <p>Tell us a little bit about your {% victr_keyword "project" %}.</p>
 {% endblock %}
+
+{% block extra_css %}<link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">{% endblock %}
+{% block script %}<script type="text/javascript" src="{{ STATIC_URL }}js/chosen.pull230.jquery.min.js"></script>{% endblock %}

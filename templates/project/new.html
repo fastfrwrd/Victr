@@ -12,6 +12,3 @@ Submit a {% filter capfirst %}{% victr_keyword "project" %}{% endfilter %} <smal
 {% block actions %}
 {% include "form/actions.html" with submit_text="Submit Project"  submit_icon="icon-gift" %}
 {% endblock %}
-
-{% block extra_css %}<link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">{% endblock %}
-{% block script %}<script type="text/javascript" src="{{ STATIC_URL }}js/chosen.jquery.min.js"></script>{% endblock %}

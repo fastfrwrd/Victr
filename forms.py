@@ -3,7 +3,7 @@ from django.forms import ModelForm, Form
 from django.contrib import auth
 from django.db import models
 from victr import config
-from victr.models import UserProfile, Project, Event
+from victr.models import UserProfile, Project, Event, Discipline
 from victr.event.util import EventQuery
 import string
 
@@ -67,10 +67,11 @@ class ProjectForm(ModelForm):
     if event :
         # eventually, we shall iterate over all current events. today, we simply pass the single current.
         events = [(event.pk, event)]
-    users = []
-    user_results = UserProfile.objects.filter()
-    for userprofile in user_results : 
-        users.append( (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email)) )
+
+    users = map((lambda userprofile: 
+                    (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email))),
+                UserProfile.objects.filter())
+#    disciplines = Discipline.objects.filter()
     
     title       = forms.fields.CharField(
                     label = string.capwords(config.keyword('Project.title')),
@@ -89,12 +90,36 @@ class ProjectForm(ModelForm):
                     label = string.capwords(config.keyword('Users')),
                     choices = users,
                     widget = forms.SelectMultiple(attrs={ 'data-placeholder': 'search for %s by name or email' % (config.keyword('Users'),) }), )
+#    disciplines = forms.fields.MultipleChoiceField(
+#                    label = string.capwords(config.keyword('Disciplines')),
+#                    choices = disciplines,
+#                    widget = forms.SelectMultiple(attrs={ 'class': 'tagger',
+#                                                          'data-placeholder': 'search for %s' % (config.keyword('Disciplines'),) }), )
     
     def __init__(self, *args, **kwargs):
         """ loads current_user """
         self.current_user = kwargs.pop('current_user', None)
         super(ProjectForm, self).__init__(*args, **kwargs)
-    
+
+    # needed to add functionality for adding disciplines
+#    def is_valid(self, *args, **kwargs):
+#        disciplines = self.data.getlist('disciplines')
+#        for disc in disciplines:
+##            disc_obj = Discipline.objects.filter(pk=disc)
+##            if not disc_obj:
+#            disc_obj = Discipline.objects.filter(title=disc)
+#            if not disc_obj:
+#                disc_obj = Discipline(title=disc)
+#                disc_obj.save()
+#                print disc_obj
+#                #
+#                #disc = disc_obj.id
+#        print disciplines
+#        super(ProjectForm, self).is_valid(*args, **kwargs)
+        
+#    def clean_disciplines(self):
+#        pass
+        
     def clean_event(self):
         """ turns int into Event entity for ze processing """
         return Event.objects.get(pk=int(self.cleaned_data['event']))

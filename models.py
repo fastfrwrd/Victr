@@ -8,17 +8,21 @@ from victr.util import *
 
 # Create your models here.
 
-class Discipline(models.Model):
-    name          = models.CharField(max_length=40)
-    
+class Tag(models.Model):
+    title = models.CharField(max_length=40)
+
     def save(self):
         if not self.id:
-            self.name = SlugifyUniquely(self.name, self.__class__, 'name')
+            self.title = SlugifyUniquely(self.title, self.__class__, 'title')
         super(self.__class__, self).save()
 
     def __str__(self):
-        return self.name
+        return self.title
 
+
+class Discipline(Tag):
+    pass
+    
 class Event(models.Model):
 	slug          = models.SlugField()
 	name          = models.CharField(max_length=50)
@@ -61,6 +65,7 @@ class Event(models.Model):
 			self.slug = SlugifyUniquely(self.name, self.__class__)
 		super(self.__class__, self).save()
 
+        
 class UserProfile(models.Model):
     user          = models.ForeignKey(User, unique=True)
     company       = models.CharField(blank=True, max_length=40, verbose_name="Company")
@@ -76,8 +81,10 @@ class UserProfile(models.Model):
 
     def full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
-        
 
+    
+
+    
 class Project(models.Model):
     slug          = models.SlugField()
     title         = models.CharField(max_length=50, verbose_name=string.capwords(config.keyword('Project.title')))
@@ -85,6 +92,7 @@ class Project(models.Model):
     url           = models.URLField(blank=True, verbose_name=string.capwords(config.keyword('Project.url')))
     event         = models.ForeignKey(Event, verbose_name=string.capwords(config.keyword('Event')))
     users         = models.ManyToManyField(UserProfile)
+#    disciplines   = models.ManyToManyField(Discipline, blank=True)
     rank          = models.IntegerField(
     		            blank=True,	
     		            null=True,

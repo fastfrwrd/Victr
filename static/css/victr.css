@@ -400,6 +400,13 @@ div.label  {
     height: 100px;
     width: 480px
 }
+.form_page input, .form_page select {
+    width: 270px;
+}
+.chzn-container {
+    width: 280px !important;
+}
+
 
 .form_page .form-horizontal .form-actions .btn {
     margin-right: 30px
