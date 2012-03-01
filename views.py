@@ -8,7 +8,6 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from victr.models import *
 from victr.event.util import EventQuery
-from victr.forms import RegistrationForm, LoginForm
 import calendar
 
 def home(request, default_template="event/view.html"):
