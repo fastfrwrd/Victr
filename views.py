@@ -37,7 +37,5 @@ def archive(request, default_template="archive.html"):
             grouped_events[year][month] = { 'month': calendar.month_name[month], 'events': [] }
         print grouped_events[year][month]
         grouped_events[year][month]['events'].append(event)
-    
-    print grouped_events
         
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
