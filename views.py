@@ -1,11 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
-from django.utils import simplejson as json
 from django.core import serializers
-from django.core.urlresolvers import reverse
-from django.contrib import auth
-from django.contrib.auth.decorators import login_required
 from victr.models import *
 from victr.event.util import EventQuery
 import calendar
@@ -17,7 +13,7 @@ def home(request, default_template="event/view.html"):
     eq = EventQuery()
     event = eq.current()
     projects = []
-    if(event):
+    if event :
         projects = Project.objects.filter(event=event)
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
