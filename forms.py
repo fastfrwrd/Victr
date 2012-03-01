@@ -63,8 +63,10 @@ class LoginForm(ModelForm):
 class ProjectForm(ModelForm):
     eq = EventQuery()
     event = eq.current()
-    # eventually, we shall iterate over all current events. today, we simply pass the single current.
-    events = [(event.pk, event)]
+    events = []
+    if event :
+        # eventually, we shall iterate over all current events. today, we simply pass the single current.
+        events = [(event.pk, event)]
     users = []
     user_results = UserProfile.objects.filter()
     for userprofile in user_results : 
