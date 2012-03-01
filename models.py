@@ -71,13 +71,10 @@ class UserProfile(models.Model):
     company       = models.CharField(blank=True, max_length=40, verbose_name="Company")
     bio           = models.TextField(blank=True, verbose_name="Bio")
     skills        = models.ManyToManyField(Discipline, blank=True)
+    profile       = ('company', 'skills', 'bio') #fields to display in profile.
     
     def __unicode__(self):
         return str(self.pk)
-        
-    def profile(self):
-        """ list of the profile items that should show up on the User Profile page """
-        return [self.company, self.user.email, self.bio]
 
     def full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)

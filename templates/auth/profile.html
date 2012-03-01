@@ -13,24 +13,31 @@
 </header>
 <div class="row">
     <section class="profile span8">
-    {% for value in userprofile.profile %}
-        <div class="row">
-            <div class="label span2">{{ value|verbose_name }}</div>
-            <div class="span6">{{ value }}</div>
-        </div>
-    {% endfor %}
-    </section>
-    <section class="projects span4">
-    <h3>Projects</h3>
-    <div class="row">
-        {% for project in userprofile.project_set.all %}
-            <div class="span4">
-                <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+        <h3>Profile</h3>
+        {% for item in profile %}
+            <div class="row">
+                <div class="label span1">{{ item.label }}</div>
+                <div class="value span6">{{ item.value|safe }}</div>
             </div>
         {% empty %}
-            <div class="span4"><em>{{ userprofile.full_name }} currently has no projects.</em></div>
+            <div class="row">
+                <div class="span8">
+                    <em>{{ userprofile.full_name }} doesn't have profile information filled out yet.</em>
+                </div>
+            </div>
         {% endfor %}
-    </div>
+    </section>
+    <section class="projects span4">
+        <h3>Projects</h3>
+        <div class="row">
+            {% for project in userprofile.project_set.all %}
+                <div class="span4">
+                    <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+                </div>
+            {% empty %}
+                <div class="span4"><em>{{ userprofile.full_name }} currently has no projects.</em></div>
+            {% endfor %}
+        </div>
     </section>
 </div>
 {% endblock %}

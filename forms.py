@@ -5,6 +5,7 @@ from django.db import models
 from victr import config
 from victr.models import UserProfile, Project, Event, Discipline
 from victr.event.util import EventQuery
+from victr.widgets import SelectWithDisabled
 import string
 
 class RegistrationForm(ModelForm):
@@ -61,16 +62,23 @@ class LoginForm(ModelForm):
         fields = ['email']
 
 class ProjectForm(ModelForm):
+    #event choices
     eq = EventQuery()
-    event = eq.current()
+    visible_events = eq.visible()
     events = []
-    if event :
-        # eventually, we shall iterate over all current events. today, we simply pass the single current.
-        events = [(event.pk, event)]
 
+    if visible_events :
+        for e in visible_events :
+            label = e
+            if not e.is_open() :
+                label = "%s (CLOSED)" % e
+            events.append( (e.pk, { 'label': label, 'disabled': not e.is_open() }) )
+
+    #user choices
     users = map((lambda userprofile: 
                     (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email))),
                 UserProfile.objects.filter())
+    
 #    disciplines = Discipline.objects.filter()
     
     title       = forms.fields.CharField(
@@ -85,7 +93,8 @@ class ProjectForm(ModelForm):
                     widget = forms.TextInput(attrs={ 'placeholder': 'http://hacks4you.com'}), )
     event       = forms.fields.ChoiceField(
                     label = string.capwords(config.keyword('Event')),
-                    choices = events, )
+                    choices = events,
+                    widget = SelectWithDisabled(), )
     users       = forms.fields.MultipleChoiceField(
                     label = string.capwords(config.keyword('Users')),
                     choices = users,
@@ -97,7 +106,7 @@ class ProjectForm(ModelForm):
 #                                                          'data-placeholder': 'search for %s' % (config.keyword('Disciplines'),) }), )
     
     def __init__(self, *args, **kwargs):
-        """ loads current_user """
+        # load current user
         self.current_user = kwargs.pop('current_user', None)
         super(ProjectForm, self).__init__(*args, **kwargs)
 
