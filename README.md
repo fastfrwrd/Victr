@@ -36,6 +36,11 @@ _this needs to map to your the url you set in urls.py_
         'django.contrib.admin', #to edit and add events
         ... #other apps, your victr extension
     )
+        
+    import django.conf.global_settings as DEFAULT_SETTINGS
+    TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+        'django.core.context_processors.request',
+    )
 
 #### urls.py ####
 
