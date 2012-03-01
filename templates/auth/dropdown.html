@@ -19,7 +19,7 @@ Login
 {% for project in user.userprofile_set.get.project_set.all.select_related %}
 <li><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></li>
 {% empty %}
-<li>no projects</li>
+<li><em style="color:#aaa;">no projects</em></li>
 {% endfor %}
 <li class="divider"></li>
 <li><a href="{% victr_base %}auth/user/edit/">My Account</a></li>

@@ -47,6 +47,7 @@
 
     .navbar #user_nav * {
         text-align: right;
+        text-shadow: none;
     }
     
     .navbar #user_nav input{
@@ -110,7 +111,7 @@
 }
 
 /* general styles and bootstrap overrides */
-div.label  {
+div.label, span.label  {
     background: none;
     color: #999;
     text-align: right;
@@ -268,7 +269,18 @@ div.label  {
        font-size: 15px;
     }
 
-/* project_view */
+/* profile styles */
+
+.user .profile .row {
+    margin-bottom: 10px;
+}
+
+.user .profile .label {
+    padding-right: 10px;
+    background: whiteSmoke;
+}
+
+/* project styles */
 .project header {
     margin-bottom: 0.5em;
 }

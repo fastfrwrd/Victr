@@ -6,11 +6,13 @@ from django.core import serializers
 from django.core.urlresolvers import reverse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.forms.models import model_to_dict
 from victr.models import *
 from victr.event.util import EventQuery
 from victr.forms import RegistrationForm, LoginForm, UserProfileForm
+from victr.templatetags.victr_tags import joinand
 from urllib import quote, unquote
-
+import string
 
 def register(request, default_template="auth/register.html"):
     form = RegistrationForm()
@@ -18,8 +20,8 @@ def register(request, default_template="auth/register.html"):
         form = RegistrationForm(request.POST)
         if form.is_valid() :
             try :
-                form.save()    #user registered
-            except : #IntegrityError as detail :
+                form.save()
+            except :
                 messages = { 'error' : "Whoops! The email address %s is already registered. Try logging in or resetting your password." % (form.cleaned_data['email'],) }
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))
             current_user = auth.authenticate(username=form.cleaned_data['email'],
@@ -64,13 +66,23 @@ def logout(request):
     return redirect(reverse('victr.views.home'))
 
 def profile(request, id=None, default_template="auth/profile.html"):
+    #grab the appropriate user profile
     userprofile = False
     if id :
         print id
         userprofile = UserProfile.objects.get(pk=id)
     elif request.user.is_authenticated() :
-        userprofile = UserProfile.objects.get(user=request.user) 
-    if userprofile :   
+        userprofile = UserProfile.objects.get(user=request.user)
+        
+    #building the displayed profile values
+    if userprofile :
+        dict = model_to_dict(userprofile)
+        profile = []
+        for key in UserProfile.profile :
+            if key in dict.keys() and dict[key] :
+                if isinstance(dict[key], list): #check for array values, turn into strings
+                    dict[key] = joinand(dict[key], ", ")
+                profile.append({'label' : string.capwords(key), 'value' : dict[key]})
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
     return redirect(reverse('victr.auth.views.login'))
 

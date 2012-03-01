@@ -1,7 +1,7 @@
 {% extends "auth/form_page.html" %}
 {% load victr_tags %}
 
-{% block action %}register{% endblock %}
+{% block action %}{% url register %}{% endblock %}
 
 {% block page_id %}auth_register{% endblock %}
 {% block page_class %}{{ block.super }} register{% endblock %}
