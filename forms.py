@@ -108,7 +108,6 @@ class ProjectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         # load current user
         self.current_user = kwargs.pop('current_user', None)
-        print self.current_user
         super(ProjectForm, self).__init__(*args, **kwargs)
         
     def clean_event(self):
