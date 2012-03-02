@@ -70,7 +70,6 @@ def profile(request, id=None, default_template="auth/profile.html"):
     #grab the appropriate user profile
     userprofile = False
     if id :
-        print id
         userprofile = UserProfile.objects.get(pk=id)
     elif request.user.is_authenticated() :
         userprofile = UserProfile.objects.get(user=request.user)
@@ -87,13 +86,30 @@ def profile(request, id=None, default_template="auth/profile.html"):
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
     return redirect(reverse('victr.auth.views.login'))
 
+@login_required
 def edit(request, default_template="auth/edit.html"):
-    if request.user.is_authenticated() :    
-        userprofile = UserProfile.objects.get(user=request.user)
-        passwordchange = PasswordChangeForm(request.user)
-        if userprofile:
-            forms = [passwordchange]
-            return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-    return redirect(reverse('victr.auth.views.login'))
+    userprofile = UserProfile.objects.get(user=request.user)
+    
+    if userprofile and request.method == "GET" :
+        userprofile_form = UserProfileForm(instance=userprofile)
+        passwordchange_form = PasswordChangeForm(request.user)
+        
+    elif userprofile and request.method == "POST" :
+        userprofile_form = UserProfileForm(instance=userprofile)
+        passwordchange_form = PasswordChangeForm(request.user)
+        #userprofile_form = UserProfileForm()
+        #passwordchange_form = PasswordChangeForm(request.user)
+        #if userprofile_form.is_valid() :
+        #    try :
+        #        userprofile = userprofile_form.save()
+        #    except :
+        #        messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
+        #        return render_to_response(default_template, locals(), context_instance=RequestContext(request)) 
+            
+    else :
+        return redirect(reverse('victr.auth.views.login'))
+        
+    forms = [userprofile_form, passwordchange_form]
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
     
     

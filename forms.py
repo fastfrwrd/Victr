@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.db import models
 from django.core.urlresolvers import reverse
 from victr import config
-from victr.models import UserProfile, Project, Event, Discipline
+from victr.models import *
 from victr.event.util import EventQuery
 from victr.widgets import SelectWithDisabled
 import string
@@ -73,9 +73,7 @@ class ProjectForm(ModelForm):
     events = [(event.pk, event)]
 
     #user choices
-    users = map((lambda userprofile: 
-                    (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email))),
-                UserProfile.objects.filter())
+    users = map(lambda userprofile: (userprofile.pk, userprofile),UserProfile.objects.filter())
     
 #    disciplines = Discipline.objects.filter()
     
@@ -106,6 +104,7 @@ class ProjectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         # load current user
         self.current_user = kwargs.pop('current_user', None)
+        print self.current_user
         super(ProjectForm, self).__init__(*args, **kwargs)
 
     # needed to add functionality for adding disciplines
@@ -148,3 +147,10 @@ class PasswordChangeForm(auth.forms.PasswordChangeForm):
     class Meta:
         title = "Password Change"
         description = "Change your password."
+        
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        title = "Profile Information"
+        description = "Tell us a little more about yourself."
+        exclude = ('user',)

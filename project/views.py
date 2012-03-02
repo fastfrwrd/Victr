@@ -22,7 +22,7 @@ def project(request, slug, default_template="project/view.html"):
 def edit(request, slug, default_template="project/edit.html"):
 
     project = get_object_or_404(Project, slug=slug)
-    current_user = UserProfile.objects.get(user = request.user)
+    current_user = UserProfile.objects.get(user = request.user).pk
     
     if((current_user not in project.users.all() and not request.user.is_staff) or not project.event.is_open()):
         messages = { 'warning' : 'Access denied: you do not have permission to view this form.' }
@@ -33,9 +33,9 @@ def edit(request, slug, default_template="project/edit.html"):
 
     elif request.method == 'POST':
         project_form = ProjectForm(request.POST, instance = project, current_user=current_user)
-        if form.is_valid() :
+        if project_form.is_valid() :
             try :
-                project = form.save()
+                project = project_form.save()
             except :
                 messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))
@@ -61,16 +61,16 @@ def new(request, default_template="project/new.html"):
         messages = { 'warning' : 'There is currently no event open for submission.' }
         return redirect(reverse('victr.views.home'), locals())
     
-    current_user = UserProfile.objects.get(user=request.user)
+    current_user = UserProfile.objects.get(user=request.user).pk
     
     if request.method == 'GET':
       project_form = ProjectForm(initial = {'event' : event, 'users' : [current_user]}) # the current event is preselected.
     
     elif request.method == 'POST':
         project_form = ProjectForm(request.POST, current_user=current_user)
-        if form.is_valid() :
+        if project_form.is_valid() :
             try :
-                proj = form.save()
+                proj = project_form.save()
             except :
                 messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))
