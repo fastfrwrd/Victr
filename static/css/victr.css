@@ -115,11 +115,13 @@
     background: none;
     color: #999;
     text-align: right;
-    width: 7em;
     margin-right: 0.5em;
+    padding: 0px;
+    width: 20%;
     display: block;
     float: left;
     line-height: 1.7em;
+    text-shadow: none;
 }
 
 .hero-unit {
@@ -268,6 +270,10 @@
     #impress #first-slide a,{
        font-size: 15px;
     }
+
+#impress .project .label {
+    width: 30%;
+}
 
 /* profile styles */
 
