@@ -1,0 +1,28 @@
+{% load victr_tags %}
+<footer class="page-footer hero-unit">
+    <div class="container">
+        <div class="row">
+            <div class="span5">
+                <span class="tagline">{% victr_keyword "tagline" %}</span>
+            </div>
+            <ul class="span2">
+                {% for event in visible_events %}
+                <li><a href="{% url victr.event.views.view event.slug %}">{{ event.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <ul class="span2">
+                <li><a href="{% url victr.views.home %}">Current Event</a></li>
+                <li><a href="{% url victr.views.archive %}">Archive</a></li>
+            </ul>
+            <ul class="span2">
+                {% if user.is_authenticated %}
+                <li><a href="{% url victr.auth.views.edit %}">My Account</a></li>
+                <li><a href="{% url victr.auth.views.logout %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url victr.auth.views.register %}">Register</a></li>
+                <li><a href="{% url victr.auth.views.login %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</footer>

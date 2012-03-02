@@ -4,11 +4,11 @@ from django.template import RequestContext
 from django.core import serializers
 from victr.models import *
 from victr.event.util import EventQuery
-from victr.event.views import view
+from victr.event.views import view as event_view
 import calendar
 
 def home(request, default_template="event/view.html"):
-    return view(request)
+    return event_view(request)
 
 def archive(request, default_template="archive.html"):
     eq = EventQuery()

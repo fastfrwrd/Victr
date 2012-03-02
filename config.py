@@ -14,6 +14,7 @@ keywords = {
     'users' : 'users',
     'discipline' : 'discipline',
     'disciplines' : 'disciplines',
+    'tagline' : 'to the victr go the spoils..'
 }
 
 def keyword(key):
