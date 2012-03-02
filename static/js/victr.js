@@ -25,7 +25,8 @@ Victr.project_new = function() {
     self.widgets.form($form);
     self.widgets.tagger(self.$page);
     self.widgets.autocomplete(self.$page);
-    $("select").chosen({no_results_text: "No results matched"});
+    $("select:not(.tagger)").chosen({no_results_text: "No results matched"});
+    $("select.tagger").chosen({allow_option_creation: true});
 }
 Victr.project_edit = Victr.project_new;
 

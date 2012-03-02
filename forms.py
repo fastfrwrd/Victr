@@ -4,7 +4,7 @@ from django.contrib import auth
 from django.db import models
 from django.core.urlresolvers import reverse
 from victr import config
-from victr.models import UserProfile, Project, Event
+from victr.models import UserProfile, Project, Event, Discipline
 from victr.event.util import EventQuery
 from victr.widgets import SelectWithDisabled
 import string
@@ -71,18 +71,20 @@ class ProjectForm(ModelForm):
     eq = EventQuery()
     visible_events = eq.visible()
     events = []
+
     if visible_events :
         for e in visible_events :
             label = e
             if not e.is_open() :
                 label = "%s (CLOSED)" % e
             events.append( (e.pk, { 'label': label, 'disabled': not e.is_open() }) )
-    
+
     #user choices
-    users = []
-    user_results = UserProfile.objects.filter()
-    for userprofile in user_results : 
-        users.append( (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email)) )
+    users = map((lambda userprofile: 
+                    (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email))),
+                UserProfile.objects.filter())
+    
+#    disciplines = Discipline.objects.filter()
     
     title       = forms.fields.CharField(
                     label = string.capwords(config.keyword('Project.title')),
@@ -102,12 +104,36 @@ class ProjectForm(ModelForm):
                     label = string.capwords(config.keyword('Users')),
                     choices = users,
                     widget = forms.SelectMultiple(attrs={ 'data-placeholder': 'search for %s by name or email' % (config.keyword('Users'),) }), )
+#    disciplines = forms.fields.MultipleChoiceField(
+#                    label = string.capwords(config.keyword('Disciplines')),
+#                    choices = disciplines,
+#                    widget = forms.SelectMultiple(attrs={ 'class': 'tagger',
+#                                                          'data-placeholder': 'search for %s' % (config.keyword('Disciplines'),) }), )
     
     def __init__(self, *args, **kwargs):
         # load current user
         self.current_user = kwargs.pop('current_user', None)
         super(ProjectForm, self).__init__(*args, **kwargs)
-    
+
+    # needed to add functionality for adding disciplines
+#    def is_valid(self, *args, **kwargs):
+#        disciplines = self.data.getlist('disciplines')
+#        for disc in disciplines:
+##            disc_obj = Discipline.objects.filter(pk=disc)
+##            if not disc_obj:
+#            disc_obj = Discipline.objects.filter(title=disc)
+#            if not disc_obj:
+#                disc_obj = Discipline(title=disc)
+#                disc_obj.save()
+#                print disc_obj
+#                #
+#                #disc = disc_obj.id
+#        print disciplines
+#        super(ProjectForm, self).is_valid(*args, **kwargs)
+        
+#    def clean_disciplines(self):
+#        pass
+        
     def clean_event(self):
         """ turns int into Event entity for ze processing """
         return Event.objects.get(pk=int(self.cleaned_data['event']))

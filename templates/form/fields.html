@@ -4,7 +4,7 @@
     <div class="control-group field-{{ field.html_name }} {% if field.errors %}error{% endif %}">
         {{ field.label_tag|add_class:"control-label" }}
         <div class="controls">
-            {{ field|add_class:"input-xlarge" }}
+            {{ field }}
             {% for error in field.errors %}
             <span class="help-inline">{{ error }}</span>
             {% endfor %}
