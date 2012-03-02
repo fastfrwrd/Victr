@@ -9,7 +9,9 @@
 
 {% block content %}
 {% block fields %}
-{% include "form/fields.html" %}
+{% for form in forms %}
+    {% include "form/fields.html" %}
+{% endfor %}
 {% endblock %}
 {% endblock %}
 

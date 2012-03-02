@@ -1,5 +1,5 @@
 {% load victr_tags %}
 <form action="{% url login %}" method="post">
-    {% include "form/fields.html" %}
+    {% for form in forms %}{% include "form/fields.html" %}{% endfor %}
     {% include "auth/actions_login.html" %}
 </form>

@@ -5,7 +5,7 @@ from django.template import RequestContext
 from django.utils import simplejson as json
 from django.contrib.auth.decorators import login_required
 from victr.event.util import EventQuery
-from victr.forms import ProjectForm
+from victr.forms import *
 from victr.models import *
 
 def project(request, slug, default_template="project/view.html"):
@@ -26,14 +26,12 @@ def edit(request, slug, default_template="project/edit.html"):
     
     if(current_user not in project.users.all() and not request.user.is_staff):
         messages = { 'warning' : 'Access denied: you do not have permission to view this form.' }
-        return redirect(reverse('victr.project.views.project', args=[slug]))
     
     if request.method == 'GET':
-        form = ProjectForm(instance = project)
-        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+        project_form = ProjectForm(instance = project)
 
-    if request.method == 'POST':
-        form = ProjectForm(request.POST, instance = project, current_user=current_user)
+    elif request.method == 'POST':
+        project_form = ProjectForm(request.POST, instance = project, current_user=current_user)
         if form.is_valid() :
             try :
                 project = form.save()
@@ -42,9 +40,14 @@ def edit(request, slug, default_template="project/edit.html"):
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))
             return redirect('project', project.slug)
         messages = { 'error': 'Invalid form submission. Please correct the indicated fields below before proceeding.' }
-        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+ 
+    else:
+        return HttpResponseNotAllowed(['GET','POST'])
+    
+    forms = [project_form]
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-    return HttpResponseNotAllowed(['GET','POST'])
+    
 
 @login_required
 def new(request, default_template="project/new.html"):
@@ -60,11 +63,10 @@ def new(request, default_template="project/new.html"):
     current_user = UserProfile.objects.get(user=request.user)
     
     if request.method == 'GET':
-      form = ProjectForm(initial = {'event' : event, 'users' : [current_user]}) # the current event is preselected.
-      return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+      project_form = ProjectForm(initial = {'event' : event, 'users' : [current_user]}) # the current event is preselected.
     
-    if request.method == 'POST':
-        form = ProjectForm(request.POST, current_user=current_user)
+    elif request.method == 'POST':
+        project_form = ProjectForm(request.POST, current_user=current_user)
         if form.is_valid() :
             try :
                 proj = form.save()
@@ -73,10 +75,12 @@ def new(request, default_template="project/new.html"):
                 return render_to_response(default_template, locals(), context_instance=RequestContext(request))
             return redirect('project', proj.slug)
         messages = { 'error': 'Invalid form submission. Please correct the indicated fields below before proceeding.' }
-        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
-    return HttpResponseNotAllowed(['GET', 'POST'])
-
+    else:
+        return HttpResponseNotAllowed(['GET', 'POST'])
+    
+    forms = [project_form]
+    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
 
 def all(request, default_template="project/all.html"):
 

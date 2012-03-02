@@ -2,6 +2,7 @@ from django import forms
 from django.forms import ModelForm, Form
 from django.contrib import auth
 from django.db import models
+from django.core.urlresolvers import reverse
 from victr import config
 from victr.models import UserProfile, Project, Event
 from victr.event.util import EventQuery
@@ -32,6 +33,8 @@ class RegistrationForm(ModelForm):
         
     class Meta:
         model = UserProfile
+        title = "Register"
+        description = "Registration is required for at least one team member for entry into the contest. All team members are encouraged to sign up, however, so they can be attributed and show off their work."
         fields = ('first_name', 'last_name', 'email')
         
     def save(self):
@@ -59,6 +62,8 @@ class LoginForm(ModelForm):
         
     class Meta:
         model = UserProfile
+        title = "Login"
+        description = "Login to add or edit projects."
         fields = ['email']
 
 class ProjectForm(ModelForm):
@@ -116,7 +121,11 @@ class ProjectForm(ModelForm):
     
     class Meta:
         model = Project
+        title = "%s Information" % string.capwords(config.keyword('Project'))
+        description = "Basic info about your %s, such as title, description, and the involved %s." % (config.keyword('Project'), config.keyword('Users'))
         exclude = ('slug', 'rank', 'award')
         
-class UserProfileForm(auth.forms.PasswordChangeForm):
-    pass
+class PasswordChangeForm(auth.forms.PasswordChangeForm):
+    class Meta:
+        title = "Password Change"
+        description = "Change your password."
