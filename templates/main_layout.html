@@ -8,11 +8,11 @@
 
 <!-- Le styles -->
 {% block extra_css %}{% endblock %}
+<link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
 <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
 <style type="text/css">
     body {
         padding-top: 80px;
-        padding-bottom: 40px;
     }
     .sidebar-nav {
         padding: 9px 0;
@@ -37,11 +37,11 @@
       {% block content %}
       {% endblock %}
       
-      {% block footer %}
-      {% endblock %}
   </div>
 
-    <div id="modals"></div>
+  {% block footer %}{% include "footer.html" %}{% endblock %}
+
+  <div id="modals"></div>
 {% endblock %}
 
 {% block js %}

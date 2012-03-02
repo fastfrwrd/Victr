@@ -7,8 +7,9 @@ from victr.event.util import EventQuery
 from datetime import datetime
     
 def view(request, slug="", default_template="event/view.html"):
+    eq = EventQuery()
+    visible_events = eq.visible()
     if(slug is "") :
-        eq = EventQuery()
         event = eq.current()
     else :
         event = get_object_or_404(Event, slug=slug)

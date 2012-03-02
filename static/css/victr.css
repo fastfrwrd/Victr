@@ -229,6 +229,33 @@ header.hero-unit {
         color: #383030 !important;
     }
 
+.container.main {
+    padding-bottom: 125px
+}
+    
+footer.page-footer.hero-unit {
+    margin-bottom: 0;
+    padding: 60px 0px 50px;
+}
+    footer ul {
+        list-style: none;
+    }
+    footer a {
+        color: #999999;
+    }
+    footer a:hover {
+        color: #005580;
+    }
+    footer .tagline {
+        color: #666;
+        font-size: 32px;
+        line-height: 60px;
+        font-family: 'Satisfy', cursive;
+        text-shadow: 1px 1px 0px #CCC, -1px -1px 0 white;
+        font-weight: bold;
+        margin-left: 20px
+    }
+
 .btn-primary {
     background-color: #6F5099;
     background-image: -moz-linear-gradient(top, #C6B4DE, #9C7BC7, #6F5099);
@@ -576,7 +603,7 @@ header.hero-unit {
 }
     .tags li {
         float:left;
-        margin-left:5px;
+        margin-right:5px;
         margin-bottom: 5px;
     }
         .tags li a {
