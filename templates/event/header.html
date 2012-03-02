@@ -18,11 +18,11 @@
                 <h1>{{ event.name }}</h1>
                 <h2><small>submission deadline:</small> {{ event.close|date:"l, F j, Y - P" }}</h2>
                 <a class="btn btn-primary" href="{% url victr.project.views.new %}">Submit your project</a>
-            {% elif event.rsvp %}
+            {% else %}
                 <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
                 <h1>{{ event.name }}</h1>
                 <h3>{{ event.open|date:"l, F j, Y - P" }}</h3>
-                <a class="btn" href="{{ event.rsvp }}">RSVP</a>
+                {% if event.rsvp %}<a class="btn" href="{{ event.rsvp }}">RSVP</a>{% endif %}
             {% endif %}
         {% else %}
             <h1>victr</h1>
