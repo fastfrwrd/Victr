@@ -1,0 +1,11 @@
+<h3>{% block heading %}{{ form.Meta.title }}{% endblock %}</h3>
+<section class="row">
+    <div class="span3">
+        {{ form.Meta.description|safe }}
+    </div>
+    <div class="span9">
+        <div class="well">
+            {% block fields %}{% include "form/fields.html" %}{% endblock %}
+        </div>
+    </div>
+</section>

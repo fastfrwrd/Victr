@@ -8,17 +8,16 @@ from victr.util import *
 
 # Create your models here.
 
-class Tag(models.Model):
-    title = models.CharField(max_length=40)
+#class Tag(models.Model):
+#    title = models.CharField(max_length=40)
 
-    def save(self):
-        if not self.id:
-            self.title = SlugifyUniquely(self.title, self.__class__, 'title')
-        super(self.__class__, self).save()
+#    def save(self):
+#        if not self.id:
+#            self.title = SlugifyUniquely(self.title, self.__class__, 'title')
+#        super(self.__class__, self).save()
 
-    def __str__(self):
-        return self.title
-
+#    def __str__(self):
+#        return self.title
 
 class Discipline(models.Model):
     title = models.CharField(max_length=40)
@@ -78,18 +77,16 @@ class UserProfile(models.Model):
     user          = models.ForeignKey(User, unique=True)
     company       = models.CharField(blank=True, max_length=40, verbose_name="Company")
     bio           = models.TextField(blank=True, verbose_name="Bio")
-    skills        = models.ManyToManyField(Discipline, blank=True)
+    #skills        = models.ManyToManyField(Discipline, blank=True)
     profile       = ('company', 'skills', 'bio') #fields to display in profile.
     
-    def __unicode__(self):
-        return str(self.pk)
-
+    
     def full_name(self):
         return "%s %s" % (self.user.first_name, self.user.last_name)
+        
+    def __unicode__(self):
+        return "%s %s - %s" % (self.user.first_name, self.user.last_name, self.user.email)
 
-    
-
-    
 class Project(models.Model):
     slug          = models.SlugField()
     title         = models.CharField(max_length=50, verbose_name=string.capwords(config.keyword('Project.title')))

@@ -2,8 +2,9 @@ from django import forms
 from django.forms import ModelForm, Form
 from django.contrib import auth
 from django.db import models
+from django.core.urlresolvers import reverse
 from victr import config
-from victr.models import UserProfile, Project, Event, Discipline
+from victr.models import *
 from victr.event.util import EventQuery
 from victr.widgets import SelectWithDisabled, Tagger
 from django.db.models import Q
@@ -33,6 +34,8 @@ class RegistrationForm(ModelForm):
         
     class Meta:
         model = UserProfile
+        title = "Register"
+        description = "Registration is required for at least one team member for entry into the contest. All team members are encouraged to sign up, however, so they can be attributed and show off their work."
         fields = ('first_name', 'last_name', 'email')
         
     def save(self):
@@ -60,6 +63,8 @@ class LoginForm(ModelForm):
         
     class Meta:
         model = UserProfile
+        title = "Login"
+        description = "Login to add or edit projects."
         fields = ['email']
 
 class ProjectForm(ModelForm):
@@ -69,9 +74,7 @@ class ProjectForm(ModelForm):
     events = [(event.pk, event)]
 
     #user choices
-    users = map((lambda userprofile: 
-                        (userprofile, "%s %s - %s" % (userprofile.user.first_name, userprofile.user.last_name, userprofile.user.email))),
-                UserProfile.objects.filter())
+    users = map(lambda userprofile: (userprofile.pk, userprofile), UserProfile.objects.filter())
     
     disciplines = map((lambda discipline:
                        (discipline.pk, discipline)),
@@ -105,6 +108,7 @@ class ProjectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         # load current user
         self.current_user = kwargs.pop('current_user', None)
+        print self.current_user
         super(ProjectForm, self).__init__(*args, **kwargs)
         
     def clean_event(self):
@@ -120,7 +124,18 @@ class ProjectForm(ModelForm):
     
     class Meta:
         model = Project
+        title = "%s Information" % string.capwords(config.keyword('Project'))
+        description = "Basic info about your %s, such as title, description, and the involved %s." % (config.keyword('Project'), config.keyword('Users'))
         exclude = ('slug', 'rank', 'award')
         
-class UserProfileForm(auth.forms.PasswordChangeForm):
-    pass
+class PasswordChangeForm(auth.forms.PasswordChangeForm):
+    class Meta:
+        title = "Password Change"
+        description = "Change your password."
+        
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        title = "Profile Information"
+        description = "Tell us a little more about yourself."
+        exclude = ('user',)

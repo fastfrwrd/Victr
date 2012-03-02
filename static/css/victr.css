@@ -65,7 +65,7 @@
     
     .navbar #auth .dropdown-menu {
         background-color: whiteSmoke;
-        width: 300px;
+        width: 210px;
         margin-top: 8px;
     }
     
@@ -111,7 +111,7 @@
 }
 
 /* general styles and bootstrap overrides */
-div.label, span.label  {
+.project .label  {
     background: none;
     color: #999;
     text-align: right;
@@ -271,14 +271,24 @@ div.label, span.label  {
 
 /* profile styles */
 
-.user .profile .row {
-    margin-bottom: 10px;
+.user .profile {
+    margin-top: 10px;
 }
 
-.user .profile .label {
-    padding-right: 10px;
-    background: whiteSmoke;
-}
+    .user .profile .row {
+        margin-bottom: 10px;
+    }
+    
+    .user .profile .label {
+        padding-right: 10px;
+        background: whiteSmoke;
+        color: #999;
+        text-align: right;
+    }
+    
+    .user .profile .value {
+        margin-left: 10px;
+    }
 
 /* project styles */
 .project header {
@@ -426,7 +436,7 @@ div.label, span.label  {
 
 
 /* general form styles */
-#submit  .icon-refresh {
+#submit .icon-refresh {
     display: none;
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
@@ -611,9 +621,6 @@ div.label, span.label  {
 @media only screen and (min-width: 980px) {
     .form_page textarea {
         width: 480px;
-    }
-    .span4 {
-        width: 360px;
     }
 }
 
