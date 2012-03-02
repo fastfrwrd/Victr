@@ -60,7 +60,7 @@ def new(request, default_template="project/new.html"):
     current_user = UserProfile.objects.get(user=request.user)
     
     if request.method == 'GET':
-      form = ProjectForm(initial = {'event' : event, 'users' : [current_user]}) # the current event is preselected.
+      form = ProjectForm(initial = {'event' : event, 'users' : [current_user] }) # the current event is preselected.
       return render_to_response(default_template, locals(), context_instance=RequestContext(request))
     
     if request.method == 'POST':

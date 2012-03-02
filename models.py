@@ -20,8 +20,16 @@ class Tag(models.Model):
         return self.title
 
 
-class Discipline(Tag):
-    pass
+class Discipline(models.Model):
+    title = models.CharField(max_length=40)
+
+    def save(self):
+        if not self.id:
+            self.title = SlugifyUniquely(self.title, self.__class__, 'title')
+        super(self.__class__, self).save()
+
+    def __str__(self):
+        return self.title
     
 class Event(models.Model):
 	slug          = models.SlugField()
@@ -89,7 +97,7 @@ class Project(models.Model):
     url           = models.URLField(blank=True, verbose_name=string.capwords(config.keyword('Project.url')))
     event         = models.ForeignKey(Event, verbose_name=string.capwords(config.keyword('Event')))
     users         = models.ManyToManyField(UserProfile)
-#    disciplines   = models.ManyToManyField(Discipline, blank=True)
+    disciplines   = models.ManyToManyField(Discipline, blank=True)
     rank          = models.IntegerField(
     		            blank=True,	
     		            null=True,
@@ -130,3 +138,8 @@ class Project(models.Model):
         if self.rank and self.rank > 0 and self.rank < 4 :
             return classes[self.rank-1]
         return ''
+
+#    def clean(self):
+#        print 'cleaning'
+#        print type(self), self.__dict__
+#        super(Project, self).clean()

@@ -19,3 +19,4 @@ class ProjectAdmin(admin.ModelAdmin):
 admin.site.register(Event, EventAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(UserProfile)
+admin.site.register(Discipline)
