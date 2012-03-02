@@ -2,19 +2,26 @@
 <header class="page-header hero-unit">
     <div class="container">
         {% if event %}
-            <h2>Optaros presents</h2>
-            <h1>{{ event.name }}</h1>
-            <h3>{{ event.open|date:"l, F j, Y - P" }}</h3>
-            {% if event.close|past %}
-                {% if event.show_results %}
-                <p>This will be the winner.</p>
-                {% else %}
+            {% if event.show_results and event.close|past and winner %}
+                <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a> <small>congratulates</small></h2>
+                <h1><a href="{% victr_base %}project/{{ winner.slug }}">{{ winner.title }}</a><small>, first place winner</small></h1>
+                <h3>{{ event.open|date:"F j, P" }} - {{ event.close|date:"F j, P, Y" }}</h3>
+                <a class="btn" href="{% victr_base %}impress/present/{{ event.slug }}">Demo {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</a>
+            {% elif event.close|past %}
+                <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
+                <h1>{{ event.name }}</h1>
+                <h3>{{ event.open|date:"F j, P" }} - {{ event.close|date:"F j, P, Y" }}</h3>
                 <p class="center closed">Submissions are now closed.</p>
-                {% endif %}
                 <a class="btn" href="{% victr_base %}impress/present/{{ event.slug }}">Demo</a>
             {% elif event.open|past %}
+                <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
+                <h1>{{ event.name }}</h1>
+                <h2><small>submission deadline:</small> {{ event.close|date:"l, F j, Y - P" }}</h2>
                 <a class="btn btn-primary" href="{% victr_base %}project/new">Submit your project</a>
             {% elif event.rsvp %}
+                <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
+                <h1>{{ event.name }}</h1>
+                <h3>{{ event.open|date:"l, F j, Y - P" }}</h3>
                 <a class="btn" href="{{ event.rsvp }}">RSVP</a>
             {% endif %}
         {% else %}

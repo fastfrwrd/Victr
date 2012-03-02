@@ -1,35 +1,37 @@
-{% extends "main_layout.html" %}
-{% load victr_tags %}
-
-{% block page_id %}event_results{% endblock %}
-
-{% block header %}
-<header class="page-header hero-unit">
-    <div class="container">
-        <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a> <small>congratulates</small></h2>
-        <h1><a href="{% victr_base %}project/{{ winner.slug }}">{{ winner.title }}</a></h1>
-        <h3>Top Hacks</h3>
-        <ol class="results">
-        {% for project in top_projects %}
-            {% if forloop.counter0 < 5 %}
-            <li><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></li>
-            {% endif %}
-        {% endfor %}
-        </ol>
-    </div>
-</header>
-{% endblock %}
-
-{% block content %}
+{% load victr_tags do_if %}
+<div class="awards">
 <h2>Awards</h2>
-{% for project in projects %}
-{% if project.award %}
+{% for project in awards %}
+{% if forloop.counter == 2 and top_projects %}
+    <section class="top-projects span6">
+        <div class="well">
+            <h3>Top {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</h3>
+            <ol>
+            {% for top in top_projects %}
+                <li><a href="{% victr_base %}project/{{ top.slug }}">{{ top.title }}</a></li>
+            {% endfor %}
+            </ol>
+        </div>
+    </section>
+    <article class="award-item span3">
+        <h3>{{ project.award }}</h3>
+        <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+    </article>
+    </div>
+{% elif top_projects %}
+    {% cycle '<div class="row">' '' %}
+        <article class="award-item span3 {% cycle '' 'offset6' %}">
+            <h3>{{ project.award }}</h3>
+            <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+        </article>
+    {% if forloop.last %}</div>{% else %}{% cycle '' '</div>' %}{% endif %}
+{% else %}
     {% cycle '<div class="row">' '' '' '' %}
         <article class="award-item span3">
             <h3>{{ project.award }}</h3>
             <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
         </article>
-    {% cycle '' '' '' '</div>' %}
+    {% if forloop.last %}</div>{% else %}{% cycle '' '' '' '</div>' %}{% endif %}
 {% endif %}
 {% endfor %}
-{% endblock %}
+</div>

@@ -4,18 +4,11 @@ from django.template import RequestContext
 from django.core import serializers
 from victr.models import *
 from victr.event.util import EventQuery
+from victr.event.views import view
 import calendar
 
 def home(request, default_template="event/view.html"):
-    """
-    very similar to victr.event.views.view, but we need this to reverse back properly to use {% victr_base %}
-    """
-    eq = EventQuery()
-    event = eq.current()
-    projects = []
-    if event :
-        projects = Project.objects.filter(event=event)
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+    return view(request)
 
 def archive(request, default_template="archive.html"):
     eq = EventQuery()
