@@ -4,7 +4,7 @@
     <div class="span8">
         <span class="switch open"><i class="icon-chevron-down"></i></span>
         <span class="switch closed"><i class="icon-chevron-right"></i></span>
-        <h2><a href="{% victr_base %}event/{{ event.slug }}">{{ event.name }}</a></h2>
+        <h2><a href="{% url victr.event.views.view event.slug %}">{{ event.name }}</a></h2>
     </div>
     <div class="span4">
         <h4 class="date">{% if event.is_open %}<small>Happening Now! -</small> {% endif %}{{ event.open|date:"l \t\he\ jS @ P" }}</h4>

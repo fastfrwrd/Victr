@@ -5,11 +5,6 @@ from django.template import RequestContext
 from victr.models import Event, Project
 from victr.event.util import EventQuery
 from datetime import datetime
-
-def all(request, default_template="event/all.html"):
-    eq = EventQuery()
-    events = eq.visible()
-    return render_to_response(default_template, locals(), context_instance=RequestContext(request))
     
 def view(request, slug="", default_template="event/view.html"):
     if(slug is "") :

@@ -1,6 +1,6 @@
 {% extends "form/modal.html" %}
 
-{% block action %}{% url register %}{% endblock %}
+{% block action %}{% url victr.auth.views.register %}{% endblock %}
 
 {% block id %}register{% endblock %}
 {% block modal_class %}{{ super.block }} register{% endblock %}

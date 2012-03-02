@@ -3,7 +3,7 @@
 
 {% block page_id %}project_new{% endblock %}
 
-{% block action %}{% victr_base %}project/new/{% endblock %}
+{% block action %}{% url victr.project.views.new %}{% endblock %}
 
 {% block heading %}
 Submit a {% filter capfirst %}{% victr_keyword "project" %}{% endfilter %} <small>just fill out the form!</small>

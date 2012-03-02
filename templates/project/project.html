@@ -4,7 +4,7 @@
         <h1 class="pull-left">{{ project.title }}</h1>
         <a class="btn btn-primary" href="{{ project.url }}">view project <i class="icon-arrow-right icon-white"></i></a>
         {% if current_user in project.users.all.select_related and project.event.is_open %}
-        <a class="btn" href="{% victr_base %}project/{{ project.slug }}/edit">edit <i class="icon-pencil"></i></a>
+        <a class="btn" href="{% url victr.project.views.edit project.slug %}">edit <i class="icon-pencil"></i></a>
         {% endif %}
     </div>
 </header>

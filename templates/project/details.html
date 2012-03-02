@@ -6,7 +6,14 @@
             <span class="award{{ project.rank_class }}">{{ project.award_text }}</span>
         {% endif %}
         <div class="field"><span class="label">created by:</span>{% include "project/user_list.html" with users=project.users.all.select_related %}</div>
-        <!--<div class="field"><span class="label">tech:</span>{{ project.tags.all|join:', ' }}</div>
-        <div class="field"><span class="label">github:</span><a class="btn btn-small btn-success" href="https://github.com/twitter/bootstrap/">browse code</a></div>-->
+        <div class="field">
+                <span class="label">disciplines:</span>
+                <ul class="tags">
+                    {% for tag in disciplines %}
+                    <li><a href="{% url victr.discipline.views.view tag %}">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+        </div>
+        <!--<div class="field"><span class="label">github:</span><a class="btn btn-small btn-success" href="https://github.com/twitter/bootstrap/">browse code</a></div>-->
     </div>
 </section>

@@ -1,13 +1,13 @@
 {% extends "auth/form_page.html" %}
 {% load victr_tags %}
 
-{% block action %}{% victr_base %}auth/user/edit/{% endblock %}
+{% block action %}{% url victr.auth.views.edit %}{% endblock %}
 
 {% block page_id %}auth_edit{% endblock %}
 {% block page_class %}{{ block.super }} login{% endblock %}
 
 {% block actions %}
-{% include "form/actions.html" with submit_text="Update Project"  submit_icon="icon-arrow-up" %}
+{% include "form/actions.html" with submit_text="Update Account"  submit_icon="icon-arrow-up" %}
 {% endblock %}
 
 {% block extra_css %}<link href="{{ STATIC_URL }}css/chosen.css" rel="stylesheet">{% endblock %}

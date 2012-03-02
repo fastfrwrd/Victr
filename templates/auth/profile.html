@@ -8,7 +8,7 @@
 <header class="container">
     <h1 class="pull-left">{{ userprofile.full_name }}</h1>
     {% if userprofile.user.pk == user.pk or user.is_staff %}
-    <a class="btn" href="{% victr_base %}auth/user/edit">edit <i class="icon-pencil"></i></a>
+    <a class="btn" href="{% url victr.auth.views.edit %}">edit <i class="icon-pencil"></i></a>
     {% endif %}
 </header>
 <div class="row">
@@ -31,7 +31,7 @@
             <ul class="nav-list nav">
                 <li class="nav-header">Projects</li>
                 {% for project in userprofile.project_set.all %}
-                    <li><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+                    <li><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></h4>
                 {% empty %}
                     <li><em>{{ userprofile.full_name }} currently has no projects.</em></li>
                 {% endfor %}
