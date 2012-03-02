@@ -8,6 +8,7 @@
 
 {% block header %}
 {% include "event/header.html" %}
+{% if event.show_results %}{% include "event/results.html" %}{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -15,7 +16,6 @@
 <div class="row">
     <section class="main span12">
         {% if event %}
-            {% if event.show_results %}{% include "event/results.html" %}{% endif %}
             {% if event.description %}
             <div id="About" class="description">
                 <h2>About</h2>

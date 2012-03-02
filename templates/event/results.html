@@ -1,37 +1,40 @@
 {% load victr_tags do_if %}
-<div class="awards">
-<h2>Awards</h2>
-{% for project in awards %}
-{% if forloop.counter == 2 and top_projects %}
-    <section class="top-projects span6">
-        <div class="well">
-            <h3>Top {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</h3>
-            <ol>
-            {% for top in top_projects %}
-                <li><a href="{% victr_base %}project/{{ top.slug }}">{{ top.title }}</a></li>
-            {% endfor %}
-            </ol>
+<section class="awards hero-unit">
+    <div class="container">
+        <h2>Results <small>and the winners are...</small></h2>
+        <div class="row">
+        {% if top_projects %}
+        <section class="top-projects span6">
+            <div class="well">
+                <h2>Top {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</h2>
+                <ol>
+                {% for top in top_projects %}
+                    <li><a href="{% victr_base %}project/{{ top.slug }}">{{ top.title }}</a></li>
+                {% endfor %}
+                </ol>
+            </div>
+        </section>
+        <section class="span6">
+        {% endif %}
+        
+        {% for project in awards %}
+        {% if top_projects and forloop.counter < 5 %}
+            {% cycle '<div class="row">' '' %}
+                <article class="award-item span3">
+                    <h3>{{ project.award }}</h3>
+                    <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+                </article>
+            {% cycle '' '</div>' %}
+            {% if forloop.counter == 4 or forloop.last %}</section></div>{% endif %}
+        {% else %}
+            {% cycle '<div class="row">' '' '' '' %}
+            <article class="award-item span3">
+                <h3>{{ project.award }}</h3>
+                <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+            </article>
+            {% if forloop.last %}</div>{% else %}{% cycle '' '' '' '</div>' %}{% endif %}
+        {% endif %}
+        {% endfor %}
         </div>
-    </section>
-    <article class="award-item span3">
-        <h3>{{ project.award }}</h3>
-        <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
-    </article>
     </div>
-{% elif top_projects %}
-    {% cycle '<div class="row">' '' %}
-        <article class="award-item span3 {% cycle '' 'offset6' %}">
-            <h3>{{ project.award }}</h3>
-            <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
-        </article>
-    {% if forloop.last %}</div>{% else %}{% cycle '' '</div>' %}{% endif %}
-{% else %}
-    {% cycle '<div class="row">' '' '' '' %}
-        <article class="award-item span3">
-            <h3>{{ project.award }}</h3>
-            <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
-        </article>
-    {% if forloop.last %}</div>{% else %}{% cycle '' '' '' '</div>' %}{% endif %}
-{% endif %}
-{% endfor %}
-</div>
+</section>
