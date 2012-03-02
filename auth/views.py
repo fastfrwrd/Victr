@@ -89,25 +89,33 @@ def profile(request, id=None, default_template="auth/profile.html"):
 @login_required
 def edit(request, default_template="auth/edit.html"):
     userprofile = UserProfile.objects.get(user=request.user)
+    messages = {}
     
     if userprofile and request.method == "GET" :
-        userprofile_form = UserProfileForm(instance=userprofile)
-        passwordchange_form = PasswordChangeForm(request.user)
+        userprofile_form = UserProfileForm(instance=userprofile, prefix="userprofile")
+        passwordchange_form = PasswordChangeForm(request.user, prefix="passwordchange")
         
     elif userprofile and request.method == "POST" :
-        userprofile_form = UserProfileForm(instance=userprofile)
-        passwordchange_form = PasswordChangeForm(request.user)
-        #userprofile_form = UserProfileForm()
-        #passwordchange_form = PasswordChangeForm(request.user)
-        #if userprofile_form.is_valid() :
-        #    try :
-        #        userprofile = userprofile_form.save()
-        #    except :
-        #        messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
-        #        return render_to_response(default_template, locals(), context_instance=RequestContext(request)) 
-            
+        userprofile_form = UserProfileForm(request.POST, instance=userprofile, prefix='userprofile')
+        if userprofile_form.is_valid() and userprofile_form.has_changed() :
+            userprofile_form.cleaned_data['user'] = request.user
+            try :
+                userprofile = userprofile_form.save()
+                messages['info'] = 'Profile information saved.'
+            except :
+                messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
+                return render_to_response(default_template, locals(), context_instance=RequestContext(request))
+        # check to see if it's empty...
+        if request.POST['passwordchange-old_password'] or request.POST['passwordchange-new_password1'] or request.POST['passwordchange-new_password2'] :
+            passwordchange_form = PasswordChangeForm(user=request.user, data=request.POST, prefix="passwordchange")
+            if passwordchange_form.is_valid() :
+                passwordchange_form.save()
+                messages['success'] = 'Password successfully changed.'
+        else :
+            passwordchange_form = PasswordChangeForm(request.user, prefix="passwordchange")
+
     else :
-        return redirect(reverse('victr.auth.views.login'))
+        return redirect(reverse('victr.views.home'))
         
     forms = [userprofile_form, passwordchange_form]
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
