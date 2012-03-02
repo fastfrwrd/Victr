@@ -69,15 +69,8 @@ class LoginForm(ModelForm):
 class ProjectForm(ModelForm):
     #event choices
     eq = EventQuery()
-    visible_events = eq.visible()
-    events = []
-
-    if visible_events :
-        for e in visible_events :
-            label = e
-            if not e.is_open() :
-                label = "%s (CLOSED)" % e
-            events.append( (e.pk, { 'label': label, 'disabled': not e.is_open() }) )
+    event = eq.current()
+    events = [(event.pk, event)]
 
     #user choices
     users = map((lambda userprofile: 

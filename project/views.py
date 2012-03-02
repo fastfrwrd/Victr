@@ -24,8 +24,9 @@ def edit(request, slug, default_template="project/edit.html"):
     project = get_object_or_404(Project, slug=slug)
     current_user = UserProfile.objects.get(user = request.user)
     
-    if(current_user not in project.users.all() and not request.user.is_staff):
+    if((current_user not in project.users.all() and not request.user.is_staff) or not project.event.is_open()):
         messages = { 'warning' : 'Access denied: you do not have permission to view this form.' }
+        return redirect(reverse('victr.project.views.project', args=[slug]))
     
     if request.method == 'GET':
         project_form = ProjectForm(instance = project)
