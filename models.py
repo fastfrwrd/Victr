@@ -27,7 +27,7 @@ class Discipline(models.Model):
             self.title = SlugifyUniquely(self.title, self.__class__, 'title')
         super(self.__class__, self).save()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
     
 class Event(models.Model):
@@ -86,6 +86,9 @@ class UserProfile(models.Model):
         
     def __unicode__(self):
         return "%s %s - %s" % (self.user.first_name, self.user.last_name, self.user.email)
+        
+    def __eq__(self, other) : 
+        return self.__dict__ == other.__dict__
 
 class Project(models.Model):
     slug          = models.SlugField()

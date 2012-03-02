@@ -8,7 +8,7 @@
 
 {% block header %}
 {% include "event/header.html" %}
-{% if event.show_results %}{% include "event/results.html" %}{% endif %}
+{% if event.close|past and event.show_results %}{% include "event/results.html" %}{% endif %}
 {% endblock %}
 
 {% block content %}
