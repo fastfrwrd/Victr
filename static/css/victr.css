@@ -125,29 +125,50 @@
 }
 
 .hero-unit {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    margin: -30px auto 30px;                                                                
+    padding: 90px 0px;
+}
+
+    .hero-unit h1 {
+        margin-bottom: 10px;
+    }
+    
+    .hero-unit .well {
+        background-color: white;
+        border: 1px solid silver;
+    }
+    
+.awards.hero-unit {
+    padding: 90px 0px 0;
+}
+
+    .awards.hero-unit .container {
+        top: -70px;
+        position: relative;
+    }
+
+header.hero-unit {
+    margin: -20px auto 30px; 
     background: -moz-linear-gradient(center top , #522A87, #6F5099) repeat scroll 0 0 transparent;
     background-image: -ms-linear-gradient(center top , #522A87, #6F5099);
     background-image: -webkit-gradient(linear, top, bottom, from(#522A87), to(#6F5099));
     background-image: -webkit-linear-gradient(top, #522A87, #6F5099);
     background-image: -o-linear-gradient(top, #522A87, #6F5099);
     background-image: linear-gradient(top, #522A87, #6F5099);
-
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
-    margin: -20px auto 30px;                                                                
-    padding: 90px 0px;
 }
 
-    .hero-unit * {
+    header.hero-unit * {
         color: #ffffff;
     }
 
-    .hero-unit.active {
+    header.hero-unit.active {
         padding: 90px 0px 30px;
     }
 
-    .hero-unit .btn {
+    header.hero-unit .btn {
         margin: 30px auto 0;
         padding: 20px;
         display: block;
@@ -164,7 +185,7 @@
         box-shadow: 2px 2px 5px #666;
     }
     
-    .hero-unit .btn-primary {
+    header.hero-unit .btn-primary {
         background: -moz-linear-gradient(center top, #f7e421, #fcc316) repeat scroll 0 0 transparent;
         background-image: -ms-linear-gradient(center top, #f7e421, #fcc316);
         background-image: -webkit-gradient(linear, top, bottom, from(#f7e421), to(#fcc316));
@@ -173,20 +194,16 @@
         background-image: linear-gradient(top, #f7e421, #fcc316);
     }
     
-    .hero-unit .btn-primary:hover {
+    header.hero-unit .btn-primary:hover {
         background-color: #fcc316;
     }
     
-    .hero-unit a:active,
-    .hero-unit a:hover {
+    header.hero-unit a:active,
+    header.hero-unit a:hover {
         color: #fcc316;
     }
     
-    .hero-unit h1 {
-        margin-bottom: 10px;
-    }
-    
-    .hero-unit .btn-primary {
+    header.hero-unit .btn-primary {
         background: -moz-linear-gradient(center top, #f7e421, #fcc316) repeat scroll 0 0 transparent;
         background-image: -ms-linear-gradient(center top, #f7e421, #fcc316);
         background-image: -webkit-gradient(linear, top, bottom, from(#f7e421), to(#fcc316));
@@ -195,19 +212,19 @@
         background-image: linear-gradient(top, #f7e421, #fcc316);
     }
     
-    .hero-unit .btn:hover,
-    .hero-unit .btn:active,
-    .hero-unit .btn.active,
-    .hero-unit .btn.disabled,
-    .hero-unit .btn[disabled] {
+    header.hero-unit .btn:hover,
+    header.hero-unit .btn:active,
+    header.hero-unit .btn.active,
+    header.hero-unit .btn.disabled,
+    header.hero-unit .btn[disabled] {
         color: black;
     }
     
-    .hero-unit .btn-primary:hover,
-    .hero-unit .btn-primary:active,
-    .hero-unit .btn-primary.active,
-    .hero-unit .btn-primary.disabled,
-    .hero-unit .btn-primary[disabled] {
+    header.hero-unit .btn-primary:hover,
+    header.hero-unit .btn-primary:active,
+    header.hero-unit .btn-primary.active,
+    header.hero-unit .btn-primary.disabled,
+    header.hero-unit .btn-primary[disabled] {
         background-color: #fcc316;
         color: #383030 !important;
     }
@@ -413,6 +430,30 @@
         background-image: linear-gradient(#E69E2F, #CC6E0E);
         background-repeat: no-repeat;
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E69E2F', endColorstr='#CC6E0E', GradientType=0);
+    }
+
+.award-item {
+    margin-bottom: 1.5em;
+}
+
+    .award-item h3 {
+        line-height: 18px;
+    }
+
+.top-projects {
+
+}
+    
+    .top-projects ol {
+        font-size: 1.2em;
+    }
+    
+        .top-projects ol li {
+            padding-bottom: 0.2em;
+        }
+        
+    .top-projects .well {
+        padding: 5px 20px;
     }
 
 /* general form styles */

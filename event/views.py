@@ -15,7 +15,10 @@ def view(request, slug="", default_template="event/view.html"):
     if not event.is_visible :
         raise Http404
     if event.show_results :
-        top_projects = Project.objects.filter(event=event, rank__isnull=False).order_by('rank')
+        try: 
+            top_projects = Project.objects.filter(event=event, rank__isnull=False).order_by('rank')[:3]
+        except IndexError :
+            top_projects = False
         try:
             winner = Project.objects.filter(event=event, rank__isnull=False).order_by('rank')[0]
         except IndexError:
