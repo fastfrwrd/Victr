@@ -13,11 +13,10 @@
 </header>
 <div class="row">
     <section class="profile span8">
-        <h3>Profile</h3>
         {% for item in profile %}
             <div class="row">
-                <div class="label span1">{{ item.label }}</div>
-                <div class="value span6">{{ item.value|safe }}</div>
+                <div class="span2"><div class="label">{{ item.label }}</div></div>
+                <div class="span6">{{ item.value|safe }}</div>
             </div>
         {% empty %}
             <div class="row">
@@ -27,16 +26,16 @@
             </div>
         {% endfor %}
     </section>
-    <section class="projects span4">
-        <h3>Projects</h3>
-        <div class="row">
-            {% for project in userprofile.project_set.all %}
-                <div class="span4">
-                    <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
-                </div>
-            {% empty %}
-                <div class="span4"><em>{{ userprofile.full_name }} currently has no projects.</em></div>
-            {% endfor %}
+    <section class="span4">
+        <div class="well">
+            <ul class="nav-list nav">
+                <li class="nav-header">Projects</li>
+                {% for project in userprofile.project_set.all %}
+                    <li><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+                {% empty %}
+                    <li><em>{{ userprofile.full_name }} currently has no projects.</em></li>
+                {% endfor %}
+            </ul>
         </div>
     </section>
 </div>
