@@ -21,7 +21,7 @@
                 <h2>About</h2>
                 <p>{{ event.description }}</p>
             </div>
-            {% endif %}    
+            {% endif %}
             <div id="{% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}" class="projects">
                 <h2>Contenders</h2>
                 {% for project in event.project_set.all %}
