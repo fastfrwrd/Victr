@@ -1,6 +1,6 @@
 {% load victr_tags %}
 
-<div class="row info" {% if event.is_open %}id="now"{% endif %}>
+<div class="row info" {% if event.is_open %}data-label="now"{% endif %}>
     <div class="span8">
         <span class="switch open"><i class="icon-chevron-down"></i></span>
         <span class="switch closed"><i class="icon-chevron-right"></i></span>
