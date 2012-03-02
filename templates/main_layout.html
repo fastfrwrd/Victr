@@ -56,11 +56,11 @@
             Victr.url = {
                 'current'  : "{% path request %}",
                 'next'     : "{% next request %}",
-                'register' : "{% url register %}",
-                'register_modal': "{% url register_modal %}",
-                'login'    : "{% url login %}",
-                'login_nav': "{% url login_nav %}",
-                'base'     : "{% victr_base %}"
+                'register' : "{% url victr.auth.views.register %}",
+                'register_modal': "{% url victr.auth.views.register_modal %}",
+                'login'    : "{% url victr.auth.views.login %}",
+                'login_nav': "{% url victr.auth.views.login_nav %}",
+                'base'     : "{% url victr.views.home %}"
             }
             Victr.init();
             {% block inline_scripts %}{% endblock %}

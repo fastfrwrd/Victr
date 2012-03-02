@@ -8,28 +8,28 @@
             <h3>Top {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</h3>
             <ol>
             {% for top in top_projects %}
-                <li><a href="{% victr_base %}project/{{ top.slug }}">{{ top.title }}</a></li>
+                <li><a href="{% url victr.project.views.project top.slug %}">{{ top.title }}</a></li>
             {% endfor %}
             </ol>
         </div>
     </section>
     <article class="award-item span3">
         <h3>{{ project.award }}</h3>
-        <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+        <h4><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></h4>
     </article>
     </div>
 {% elif top_projects %}
     {% cycle '<div class="row">' '' %}
         <article class="award-item span3 {% cycle '' 'offset6' %}">
             <h3>{{ project.award }}</h3>
-            <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+            <h4><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></h4>
         </article>
     {% if forloop.last %}</div>{% else %}{% cycle '' '</div>' %}{% endif %}
 {% else %}
     {% cycle '<div class="row">' '' '' '' %}
         <article class="award-item span3">
             <h3>{{ project.award }}</h3>
-            <h4><a href="{% victr_base %}project/{{ project.slug }}">{{ project.title }}</a></h4>
+            <h4><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></h4>
         </article>
     {% if forloop.last %}</div>{% else %}{% cycle '' '' '' '</div>' %}{% endif %}
 {% endif %}

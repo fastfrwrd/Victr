@@ -2,5 +2,5 @@
 <div class="form-actions">
     {% csrf_token %}
     <button type="submit" id="submit" class="btn btn-primary"><i class="{{ submit_icon|default:"icon-lock" }} icon-white"></i><i class="icon-refresh icon-white"></i> {{ submit_text|default:"Login" }}</button>
-    <a href="{% url register %}" class="btn register">{{ register_text|default:"Register" }}</a>
+    <a href="{% url victr.auth.views.register %}" class="btn register">{{ register_text|default:"Register" }}</a>
 </div>

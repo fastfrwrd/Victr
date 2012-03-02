@@ -12,6 +12,7 @@ def project(request, slug, default_template="project/view.html"):
 
     if request.method == 'GET':
         project = get_object_or_404(Project, slug=slug)
+        disciplines = project.disciplines.all
         if request.user.is_authenticated() :
             current_user = UserProfile.objects.get(user=request.user)
         return render_to_response(default_template, locals(), context_instance=RequestContext(request))
@@ -82,11 +83,3 @@ def new(request, default_template="project/new.html"):
     
     forms = [project_form]
     return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-
-def all(request, default_template="project/all.html"):
-
-    if request.method == 'GET':
-        projects = Project.objects.all()
-        return render_to_response(default_template, locals(), context_instance=RequestContext(request))
-
-    return HttpResponseNotAllowed(['GET'])
