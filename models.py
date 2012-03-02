@@ -86,9 +86,6 @@ class UserProfile(models.Model):
         
     def __unicode__(self):
         return "%s %s - %s" % (self.user.first_name, self.user.last_name, self.user.email)
-        
-    def __eq__(self, other) : 
-        return self.__dict__ == other.__dict__
 
 class Project(models.Model):
     slug          = models.SlugField()
