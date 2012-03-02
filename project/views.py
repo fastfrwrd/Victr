@@ -64,7 +64,7 @@ def new(request, default_template="project/new.html"):
     current_user = UserProfile.objects.get(user=request.user).pk
     
     if request.method == 'GET':
-      project_form = ProjectForm(initial = {'event' : event, 'users' : [current_user]}) # the current event is preselected.
+      project_form = ProjectForm(initial = {'event' : event, 'users' : [current_user] }) # the current event is preselected.
     
     elif request.method == 'POST':
         project_form = ProjectForm(request.POST, current_user=current_user)
