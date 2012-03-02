@@ -40,32 +40,44 @@ Victr.impress_present = function() {
 Victr.archive = function() {
     var self = this;
     self.widgets.expand(self.$page, '.event .info', '.projects');
-    self.widgets.goTo(self.$page, '#now', $('.navbar').height());
+    self.widgets.goTo(self.$page, self.$nav, 'now', $('.navbar').height());
 }
 
 /* WiDgEtS oMg! */
     
-Victr.widgets.goTo = function($page, id, padding) {
-    var $w = $(window), $el, offset, duration;
+Victr.widgets.goTo = function($page, $nav, label, padding) {
+    var $w = $(window), $body = $('body'), $el, offset, duration;
     
     var getItem = function() {
-        $el = $($page.find(id).get(0));
+        $el = $($page.find('[data-label]="'+label+'"').get(0));
     },
     getOffset = function() {
-        offset = Math.floor($el.offset().top) - padding;
+        offset = Math.floor($el.offset().top) - padding
         duration = offset/2;
     },
-    scrollTo = function() {
-        $('body').animate({
+    scrollTo = function(e) {
+        $body.animate({
             scrollTop: offset
         }, duration, function() {
-            window.location.hash = id;
+            window.location.hash = label;
         });
-    }
+        if (e)
+            e.preventDefault();
+    },
+    attachToLink = function() {
+        $nav.find('a[data-goto]').each(function() {
+            var $this = $(this),
+                data = $this.data('goto');
+            if (data === label) {
+                $this.on('click', scrollTo);
+            }
+        })
+    };
     
     $(function() {
         getItem();
         getOffset();
+        attachToLink();
         $w.on('resize', getOffset);
         $('a.btn-navbar').on('click',function() {
             setTimeout(function() {
