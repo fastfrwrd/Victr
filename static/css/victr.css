@@ -663,7 +663,7 @@ footer.page-footer.hero-unit {
 
 /* media queries - need to stay at bottom */
 @media only screen and (max-width: 320px) {
-    .project_form input, .project_form textarea {
+    .form_page input, .form_page textarea {
         width: 230px;
     }
 }
