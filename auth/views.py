@@ -91,21 +91,21 @@ def edit(request, default_template="auth/edit.html"):
     userprofile = UserProfile.objects.get(user=request.user)
     
     if userprofile and request.method == "GET" :
-        userprofile_form = UserProfileForm(instance=userprofile)
-        passwordchange_form = PasswordChangeForm(request.user)
+        userprofile_form = UserProfileForm(instance=userprofile, prefix="userprofile")
+        passwordchange_form = PasswordChangeForm(request.user, prefix="passwordchange")
         
     elif userprofile and request.method == "POST" :
-        userprofile_form = UserProfileForm(instance=userprofile)
-        passwordchange_form = PasswordChangeForm(request.user)
-        #userprofile_form = UserProfileForm()
-        #passwordchange_form = PasswordChangeForm(request.user)
-        #if userprofile_form.is_valid() :
-        #    try :
-        #        userprofile = userprofile_form.save()
-        #    except :
-        #        messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
-        #        return render_to_response(default_template, locals(), context_instance=RequestContext(request)) 
-            
+        userprofile_form = UserProfileForm(request.POST, instance=userprofile, prefix='userprofile')
+        if userprofile_form.is_valid() :
+            userprofile_form.cleaned_data['user'] = request.user
+            try :
+                userprofile = userprofile_form.save()
+                messages = { 'info' : 'Profile information saved.' }
+            except Exception as inst :
+                messages = { 'error' : 'Invalid form submission. Please contact your site administrator.' }
+                return render_to_response(default_template, locals(), context_instance=RequestContext(request)) 
+        passwordchange_form = PasswordChangeForm(request.POST, prefix="passwordchange")
+ 
     else :
         return redirect(reverse('victr.auth.views.login'))
         
