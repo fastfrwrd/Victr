@@ -706,7 +706,7 @@ footer.page-footer.hero-unit {
         width: auto;
     }
 }
-@media screen and (min-width: 981px) {
+@media screen and (min-width: 980px) {
     .navbar #auth-wrapper {
         display:block;
     }
