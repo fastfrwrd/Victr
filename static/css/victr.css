@@ -379,12 +379,12 @@ footer.page-footer.hero-unit {
     
 .project.small {
     min-height: 160px;
-    width: 350px;
     padding: 10px 10px 0 0;
     margin-bottom: 20px;
     border-bottom: 1px solid whiteSmoke;
     border-right: 1px solid whiteSmoke;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
     .project.small h3 {
@@ -506,7 +506,10 @@ footer.page-footer.hero-unit {
 
 
 .form_page .form-horizontal .form-actions .btn {
-    margin-right: 30px
+    margin-left: 30px
+}
+.form_page .form-horizontal .form-actions .btn-primary {
+    margin-left: 0
 }
 
 
@@ -662,7 +665,7 @@ footer.page-footer.hero-unit {
 
 
 /* media queries - need to stay at bottom */
-@media only screen and (max-width: 320px) {
+/*@media only screen and (max-width: 320px) {
     .form_page input, .form_page textarea {
         width: 230px;
     }
@@ -710,4 +713,130 @@ footer.page-footer.hero-unit {
     .navbar #auth-wrapper {
         display:block;
     }
+}*/
+
+
+
+
+
+/* new media queries. keep in this order */
+
+/* iPhone [portrait + landscape] */
+@media only screen and (max-device-width: 480px) {
+
+    /* general */
+    body, p, label, input, button, select, textarea, .btn, * {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 1.25em;
+    }
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h2 small {
+        display:block;
+        clear:both;
+    }
+    .main.span12 > * {
+        margin-top: 30px
+    }
+    .main.span12 > *:first-child {
+        margin-top: 0
+    }
+
+    /* whole */
+    .container.main {
+        padding-bottom: 80px;
+    }
+        .container.main [class^="icon-"], [class*=" icon-"] {
+            display:none !important;
+        }
+
+    /* top nav */
+    .navbar #auth-wrapper {
+        display:none;
+    }
+    .navbar ul.nav a.login-collapse {
+        display:block;
+    }
+    .hero-unit .btn {
+        margin: 30px 0;
+        width: auto;
+    }
+
+    /* forms */
+    .form_page input, .form_page textarea {
+        width: 97%;
+    }
+    .form_page .form-horizontal .form-actions {
+        padding-left: 19px;
+    }
+    .form_page .span9 {
+        margin-top: 10px
+    }
+    .form_page .chzn-container {
+        width: 99% !important;
+    }
+        .form_page .chzn-container .search-choice {
+            max-width: 85%;
+        }
+        .form_page .chzn-drop {
+            width: 99.5% !important;
+        }
+        .form_page .chzn-search input {
+            width: 88% !important;
+        }
+
+    /* header */
+    header.hero-unit {
+        padding: 30px 0;
+    }
+        header.hero-unit h1 {
+            font-size: 36px;
+        }
+        header.hero-unit h2 {
+            font-size: 20px;
+        }
+        header.hero-unit .btn {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 24px;
+            width: 90%;
+        }
+
+    /* footer */
+    footer.page-footer.hero-unit {
+        padding:30px 0;
+    }
+        footer .tagline {
+            font-size: 24px;
+            line-height: 30px;
+            margin: 10px 0 30px 10px;
+            display:block;
+        }
+        footer li {
+            margin-bottom: 10px
+        }
+
+    /* project */
+    .project.small {
+        min-height: inherit;
+        margin-bottom: 10px;
+        border: 0
+    }
+
+}
+
+
+/* iPad [portrait + landscape] */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+
+
 }
