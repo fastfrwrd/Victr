@@ -546,15 +546,15 @@ footer.page-footer.hero-unit {
     #archive .year {
         margin-bottom: 10px;
     }
-    #archive .year > .row {
+    #archive .year > .row > * {
         margin-bottom: 20px;
         text-align: right;
-        font-size:28px;
         font-weight:bold;
     }
         #archive .year > .row div {
             padding-right: 30px;
             box-sizing: border-box;
+            font-size:28px;
         }
             #archive .year .months {
                 margin-bottom: 20px;
@@ -562,11 +562,11 @@ footer.page-footer.hero-unit {
                 #archive .year .month > .row {
                     margin-bottom: 10px;
                     text-align: right;
-                    font-size:20px;
                 }
                 #archive .year .month > .row div {
                     padding-right: 30px;
                     box-sizing: border-box;
+                    font-size:20px;
                 }
                     #archive .year .month .events {
                         margin-bottom: 20px;
@@ -722,7 +722,7 @@ footer.page-footer.hero-unit {
 /* new media queries. keep in this order */
 
 /* iPhone [portrait + landscape] */
-@media only screen and (max-device-width: 480px) {
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
 
     /* general */
     body, p, label, input, button, select, textarea, .btn, * {
@@ -831,11 +831,39 @@ footer.page-footer.hero-unit {
         border: 0
     }
 
+    /* archive */
+    #archive {
+        border: 0
+    }
+        #archive > .row {
+            border-right: 1px solid #DDD;
+            box-sizing: border-box;
+        }
+        #archive .year > .row > *, #archive .month > .row > * {
+            border-bottom: 1px #DDD solid;
+            width: auto;
+            float: right;
+            text-align: right;
+        }
+            #archive .year .month .event .info {
+                background-image:none;
+                padding: 0 0.5em;
+            }
+            #archive .year .month .event .info .date {
+                text-align: left
+            }
+                #archive .year .month .event .info .date small {
+                    display:none
+                }
+                #archive .project.small {
+                    padding-left: 0.5em;
+                }
+
 }
 
 
 /* iPad [portrait + landscape] */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px), only screen and (min-width: 768px) and (max-width: 1024px) {
 
 
 
