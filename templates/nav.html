@@ -11,13 +11,13 @@
       <div class="nav-collapse">
         <ul class="nav">
           {% if user.is_authenticated %}
-          <li><a href="{% url victr.auth.views.edit %}" class="login-collapse"><i class="icon-user"></i> My Account</a></li>
-          <li><a href="{% url victr.auth.views.logout %}" class="login-collapse"><i class="icon-off"></i> Logout</a></li>
+          <li><a href="{% url victr.auth.views.edit %}" class="login-collapse"><i class="icon-user"></i><i class="icon-user icon-white"></i> My Account</a></li>
+          <li><a href="{% url victr.auth.views.logout %}" class="login-collapse"><i class="icon-off"></i><i class="icon-off icon-white"></i> Logout</a></li>
           {% else %}
-          <li><a href="{% url login %}" class="login-collapse"><i class="icon-home"></i> Login</a></li>
+          <li><a href="{% url login %}" class="login-collapse"><i class="icon-home"></i><i class="icon-home icon-white"></i> Login</a></li>
           {% endif %}
-          <li><a href="{% url victr.views.home %}"><i class="icon-calendar"></i> Current {% filter capfirst %}{% victr_keyword "event" %}{% endfilter %}</a></li>
-          <li><a href="{% url victr.views.archive %}" data-goto="now"><i class="{% active request 'victr.views.archive' 'icon-folder-open' 'icon-folder-close' %}"></i> {% filter capfirst %}{% victr_keyword "archive" %}{% endfilter %}</a></li>
+          <li><a href="{% url victr.views.home %}"><i class="icon-calendar"></i><i class="icon-calendar icon-white"></i> Current {% filter capfirst %}{% victr_keyword "event" %}{% endfilter %}</a></li>
+          <li><a href="{% url victr.views.archive %}" data-goto="now"><i class="{% active request 'victr.views.archive' 'icon-folder-open' 'icon-folder-close' %}"></i><i class="{% active request 'victr.views.archive' 'icon-folder-open' 'icon-folder-close' %} icon-white"></i> {% filter capfirst %}{% victr_keyword "archive" %}{% endfilter %}</a></li>
         </ul>
       </div>
       <ul id="auth-wrapper" class="nav pull-right">
