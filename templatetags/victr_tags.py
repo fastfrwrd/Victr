@@ -32,6 +32,10 @@ def victr_stylesheet():
     return ''.join([ '<link href="'+url+'" rel="stylesheet">\n' for url in config.stylesheet()])
 
 @register.simple_tag
+def victr_brand():
+    return '<img src="'+config.brand()+'" />'
+
+@register.simple_tag
 def active(request, view, class1, class2=None):
     if path(request) == reverse(view):
         return class1
@@ -92,32 +96,3 @@ def multiply(value, multiplier):
 def past(value):
     """returns true if scheduled event is in the past."""
     return value <= datetime.now()
-
- 
- 
-def _get_template_vars(template_name):
-    app_name, template_name = template_name.split(":", 1)
-    try:
-        template_dir = abspath(join(dirname(get_app(app_name).__file__), 'templates'))
-    except ImproperlyConfigured:
-        raise TemplateDoesNotExist()
-    
-    return template_name, template_dir
- 
-def load_template_from_app(template_name, template_dirs=None):
-    """ 
-    Template loader that only serves templates from specific app's template directory.
- 
-    Works for template_names in format app_label:some/template/name.html
-    """
-    if ":" not in template_name:
-        raise TemplateDoesNotExist()
- 
-    template_name, template_dir = _get_template_vars(template_name)
- 
-    if not isdir(template_dir):
-        raise TemplateDoesNotExist()
-    
-    return load_template_source(template_name, template_dirs=[template_dir])
- 
-load_template_from_app.is_usable = True

@@ -390,6 +390,8 @@ footer.page-footer.hero-unit {
     border-right: 1px solid whiteSmoke;
     border-radius: 5px;
     box-sizing: border-box;
+    z-index: -1;
+    position: relative;
 }
 
     .project.small h3 {

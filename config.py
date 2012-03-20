@@ -2,6 +2,8 @@ from django.conf import settings
 
 class Config:
 
+    brand_img = settings.STATIC_URL + 'img/logo.png'
+
     keywords = {
         'archive' : 'archive',
         'contender' : 'contender',
@@ -22,6 +24,13 @@ class Config:
     }
 
     stylesheets = []
+
+    @classmethod
+    def brand(self, url=None):
+        if isinstance(url, str):
+            self.brand_img = settings.STATIC_URL + url
+        else:
+            return self.brand_img
 
     @classmethod
     def keyword(self, arg1, replace=None):
@@ -57,7 +66,7 @@ class Config:
 
     @classmethod
     def stylesheet(self, arg=None, styles=None):
-        
+
         # prefix, styles list
         if isinstance(styles, list):
             for style in styles:
