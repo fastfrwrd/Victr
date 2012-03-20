@@ -1,3 +1,5 @@
+from django.conf import settings
+
 class Config:
 
     keywords = {
@@ -18,6 +20,8 @@ class Config:
         'disciplines' : 'disciplines',
         'tagline' : 'to the victr go the spoils..'
     }
+
+    stylesheets = []
 
     @classmethod
     def keyword(self, arg1, replace=None):
@@ -49,3 +53,23 @@ class Config:
 
         # return the found keyword
         return self.keywords[key_lower]
+
+
+    @classmethod
+    def stylesheet(self, arg=None, styles=None):
+        
+        # prefix, styles list
+        if isinstance(styles, list):
+            for style in styles:
+                style = settings.STATIC_URL + arg + '/' + style
+                if style not in self.stylesheets:
+                    self.stylesheets.append(style)
+
+        # style
+        elif isinstance(arg, str) and styles is None:
+            arg = settings.STATIC_URL + arg;
+            self.stylesheets.append(arg)
+
+        # none. just returns list of stylesheets
+        elif arg is None and styles is None:
+            return self.stylesheets

@@ -1,9 +1,17 @@
+from os.path import dirname, join, abspath, isdir
+from django.db.models import get_app
 from django import template
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from datetime import datetime
 from victr.config import Config as config
 import re
+
+ 
+# from django.template import TemplateDoesNotExist
+# from django.template.loaders.filesystem import load_template_source
 
 register = template.Library()
 
@@ -18,6 +26,10 @@ def victr_base():
 def victr_keyword(key):
     """ returns language set in config.py """
     return config.keyword(key)
+
+@register.simple_tag
+def victr_stylesheet():
+    return ''.join([ '<link href="'+url+'" rel="stylesheet">\n' for url in config.stylesheet()])
 
 @register.simple_tag
 def active(request, view, class1, class2=None):
@@ -80,3 +92,32 @@ def multiply(value, multiplier):
 def past(value):
     """returns true if scheduled event is in the past."""
     return value <= datetime.now()
+
+ 
+ 
+def _get_template_vars(template_name):
+    app_name, template_name = template_name.split(":", 1)
+    try:
+        template_dir = abspath(join(dirname(get_app(app_name).__file__), 'templates'))
+    except ImproperlyConfigured:
+        raise TemplateDoesNotExist()
+    
+    return template_name, template_dir
+ 
+def load_template_from_app(template_name, template_dirs=None):
+    """ 
+    Template loader that only serves templates from specific app's template directory.
+ 
+    Works for template_names in format app_label:some/template/name.html
+    """
+    if ":" not in template_name:
+        raise TemplateDoesNotExist()
+ 
+    template_name, template_dir = _get_template_vars(template_name)
+ 
+    if not isdir(template_dir):
+        raise TemplateDoesNotExist()
+    
+    return load_template_source(template_name, template_dirs=[template_dir])
+ 
+load_template_from_app.is_usable = True
