@@ -10,7 +10,7 @@
                 <span class="label">disciplines:</span>
                 <ul class="tags">
                     {% for tag in disciplines %}
-                    <li><a href="{% url victr.discipline.views.view tag %}">{{ tag }}</a></li>
+                    <li><a href="{% url victr_discipline_view tag %}">{{ tag }}</a></li>
                     {% endfor %}
                 </ul>
         </div>

@@ -23,7 +23,7 @@
             </div>
             {% endif %}
             <div id="{% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}" class="projects">
-                <h2>Contenders</h2>
+                <h2>{% filter capfirst %}{% victr_keyword "contenders" %}{% endfilter %}</h2>
                 {% for project in event.project_set.all %}
                     {% cycle '<div class="row">' '' '' %}
                     {% include "project/small.html" %}

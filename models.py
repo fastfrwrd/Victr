@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
-from victr import config
+from victr.config import Config as config
 import string
 
 from victr.util import *

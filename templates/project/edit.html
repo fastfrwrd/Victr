@@ -3,7 +3,7 @@
 
 {% block page_id %}project_edit{% endblock %}
 
-{% block action %}{% url victr.project.views.edit project.slug %}{% endblock %}
+{% block action %}{% url victr_project_edit project.slug %}{% endblock %}
 
 {% block heading %}
 Edit Your {% filter capfirst %}{% victr_keyword "project" %}{% endfilter %} <small>edit all the things!</small>

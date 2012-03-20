@@ -3,7 +3,7 @@ from django.forms import ModelForm, Form
 from django.contrib import auth
 from django.db import models
 from django.core.urlresolvers import reverse
-from victr import config
+from victr.config import Config as config
 from victr.models import *
 from victr.event.util import EventQuery
 from victr.widgets import SelectWithDisabled, Tagger

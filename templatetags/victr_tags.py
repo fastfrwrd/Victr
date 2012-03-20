@@ -2,7 +2,7 @@ from django import template
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from datetime import datetime
-from victr import config
+from victr.config import Config as config
 import re
 
 register = template.Library()

@@ -3,21 +3,21 @@
     <div class="container">
         {% if event %}
             {% if event.show_results and event.close|past and winner %}
-                <h2><a href="{% url victr.event.views.view event.slug %}">{{ event.name }}</a> <small>congratulates</small></h2>
-                <h1><a href="{% url victr.project.views.project winner.slug %}">{{ winner.title }}</a><small>, first place winner</small></h1>
+                <h2><a href="{% url victr_event_view event.slug %}">{{ event.name }}</a> <small>congratulates</small></h2>
+                <h1><a href="{% url victr_project_project winner.slug %}">{{ winner.title }}</a><small>, first place winner</small></h1>
                 <h3>{{ event.open|date:"F j, P" }} - {{ event.close|date:"F j, P, Y" }}</h3>
-                <a class="btn" href="{% url victr.impress.views.present event.slug %}">Demo {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</a>
+                <a class="btn" href="{% url victr_impress_present event.slug %}">Demo {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</a>
             {% elif event.close|past %}
                 <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
                 <h1>{{ event.name }}</h1>
                 <h3>{{ event.open|date:"F j, P" }} - {{ event.close|date:"F j, P, Y" }}</h3>
                 <p class="center closed">Submissions are now closed.</p>
-                <a class="btn" href="{% url victr.impress.views.present event.slug %}">Demo</a>
+                <a class="btn" href="{% url victr_impress_present event.slug %}">Demo</a>
             {% elif event.open|past %}
                 <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
                 <h1>{{ event.name }}</h1>
                 <h2><small>submission deadline:</small> {{ event.close|date:"l, F j, Y - P" }}</h2>
-                <a class="btn btn-primary" href="{% url victr.project.views.new %}">Submit your project</a>
+                <a class="btn btn-primary" href="{% url victr_project_new %}">Submit your project</a>
             {% else %}
                 <h2>{% filter capfirst %}{% victr_keyword "host_name" %}{% endfilter %} presents</h2>
                 <h1>{{ event.name }}</h1>

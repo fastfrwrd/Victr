@@ -9,7 +9,7 @@
                 <h2>Top {% filter capfirst %}{% victr_keyword "projects" %}{% endfilter %}</h2>
                 <ol>
                 {% for top in top_projects %}
-                    <li><a href="{% url victr.project.views.project top.slug %}">{{ top.title }}</a></li>
+                    <li><a href="{% url victr_project_project top.slug %}">{{ top.title }}</a></li>
                 {% endfor %}
                 </ol>
             </div>
@@ -22,7 +22,7 @@
             {% cycle '<div class="row">' '' %}
                 <article class="award-item span3">
                     <h3>{{ project.award }}</h3>
-                    <h4><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></h4>
+                    <h4><a href="{% url victr_project_project project.slug %}">{{ project.title }}</a></h4>
                 </article>
             {% cycle '' '</div>' %}
             {% if forloop.counter == 4 or forloop.last %}</section></div>{% endif %}
@@ -30,7 +30,7 @@
             {% cycle '<div class="row">' '' '' '' %}
             <article class="award-item span3">
                 <h3>{{ project.award }}</h3>
-                <h4><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></h4>
+                <h4><a href="{% url victr_project_project project.slug %}">{{ project.title }}</a></h4>
             </article>
             {% if forloop.last %}</div>{% else %}{% cycle '' '' '' '</div>' %}{% endif %}
         {% endif %}

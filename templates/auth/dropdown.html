@@ -1,7 +1,7 @@
 {% extends "dropdown_layout.html" %}
 {% load victr_tags %}
 
-{% block url %}{% url victr.auth.views.login %}{% endblock %}
+{% block url %}{% url victr_auth_login %}{% endblock %}
 
 {% block title %}
 {% if user.is_authenticated %}
@@ -17,13 +17,13 @@ Login
 
 <li class="nav-header">My Projects</li>
 {% for project in user.userprofile_set.get.project_set.all.select_related %}
-<li><a href="{% url victr.project.views.project project.slug %}">{{ project.title }}</a></li>
+<li><a href="{% url victr_project_project project.slug %}">{{ project.title }}</a></li>
 {% empty %}
 <li><em style="color:#aaa;">no projects</em></li>
 {% endfor %}
 <li class="divider"></li>
-<li><a href="{% url victr.auth.views.edit %}"><i class="icon-user pull-left"></i> My Account</a></li>
-<li><a href="{% url victr.auth.views.logout %}"><i class="icon-off pull-left"></i> Logout</a></li>
+<li><a href="{% url victr_auth_edit %}"><i class="icon-user pull-left"></i> My Account</a></li>
+<li><a href="{% url victr_auth_logout %}"><i class="icon-off pull-left"></i> Logout</a></li>
 
 {% else %}
 

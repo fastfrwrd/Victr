@@ -1,5 +1,5 @@
 {% load victr_tags %}
-<form action="{% url victr.auth.views.login %}" method="post">
+<form action="{% url victr_auth_login %}" method="post">
     {% for form in forms %}{% include "form/fields.html" %}{% endfor %}
     {% include "auth/actions_login.html" %}
 </form>
