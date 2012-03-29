@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
-from datetime import datetime
+from django.utils.timezone import now
 from victr.config import Config as config
 import re
 
@@ -95,4 +95,4 @@ def multiply(value, multiplier):
 @register.filter
 def past(value):
     """returns true if scheduled event is in the past."""
-    return value <= datetime.now()
+    return value <= now()
